@@ -1,0 +1,88 @@
+.grid-offset2
+  grid-column-start: 2
+.grid-offset3
+  grid-column-start: 3
+.grid-offset4
+  grid-column-start: 4
+
+@media screen and (max-width: 1199px)
+  .grid-offset2
+    grid-column-start: 2
+  .grid-offset3
+    grid-column-start: 3
+  .grid-offset4
+    grid-column-start: 4
+
+@media (max-width: 991px)
+  .grid-offset2
+    grid-column-start: 2
+  .grid-offset3
+    grid-column-start: 3
+  .grid-offset4
+    grid-column-start: 4
+
+@media (max-width: 767px)
+  .grid-offset2
+    grid-column-start: 1
+  .grid-offset3
+    grid-column-start: 2
+  .grid-offset4
+    grid-column-start: 2
+
+@media (max-width: 575px)
+  .grid-offset2
+    grid-column-start: 1
+  .grid-offset3
+    grid-column-start: 1
+  .grid-offset4
+    grid-column-start: 1
+
+/* COL-4*/
+.grid-col4
+  display: grid
+  grid-template-columns: repeat(4, 1fr)
+  grid-gap: 15px
+
+@media screen and (max-width: 1199px )
+  .grid-col4
+    grid-template-columns: repeat(4, 1fr)
+
+@media (max-width: 991px)
+  .grid-col4
+    grid-template-columns: repeat(4, 1fr)
+
+@media (max-width: 767px)
+ .grid-col4
+    grid-template-columns: repeat(2, 1fr)
+
+@media (max-width: 575px)
+  .grid-col4
+    grid-template-columns: repeat(1, 1fr)
+/* COL-4*/
+
+/* COL-3*/
+.grid-col3
+  display: grid
+  grid-template-columns: repeat(auto-fit, minmax(360px, auto))
+  grid-gap: 15px
+
+@media screen and (max-width: 1199px)
+  .grid-col3
+    grid-template-columns: repeat(3, 1fr)
+
+@media (max-width: 991px)
+  .grid-col3
+    grid-template-columns: repeat(3, 1fr)
+
+@media (max-width: 767px)
+ .grid-col3
+    grid-template-columns: repeat(2, 1fr)
+
+@media (max-width: 575px)
+  .grid-col3
+    grid-template-columns: repeat(1, 1fr)
+/* COL-3*/
+
+.grid-item
+  border: 1px solid green
+
