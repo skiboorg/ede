@@ -1,0 +1,318 @@
+.header
+  background: url(../img/header_bg.jpg) no-repeat 70% 0
+  height: 100vh
+  padding-top: 30px
+
+@media (max-width: 575px)
+  .header
+    background: url(../img/header_mobile.jpg) no-repeat 100% 0
+
+
+.header-logo
+  color: $color_grey
+  display: flex
+  align-items: flex-start
+  //justify-content: space-between
+
+  p
+    font-family: "Gotham Pro Bold", sans-serif
+    font-size: 48px
+  span
+    font-family: 'Circe-Regular', sans-serif
+    font-size: 16px
+    width: 50%
+    margin-left: 35px
+    margin-top: -3px
+
+.header-statistic
+ a
+  text-transform: uppercase
+  font-family: 'MuseoSansCyrl-700',sans-serif
+  font-size: 12px
+  color: $color_blue
+
+
+.header-statistic-wrapper
+  display: flex
+  align-items: flex-start
+  //background: url(../img/header_books.png) no-repeat
+
+  p
+    font-family: 'MuseoSansCyrl-700',sans-serif
+    font-size: 18px
+    color: $color_text
+
+    span
+      display: block
+      font-family: 'MuseoSansCyrl-300',sans-serif
+      font-size: 14px
+
+.header-phones
+  display: flex
+  justify-content: space-between
+
+.header-phones-inner
+  p:first-child
+    font-family: 'MuseoSansCyrl-300',sans-serif
+    font-size: 13px
+    color: $color_grey
+
+  span
+    display: block
+    font-family: 'MuseoSansCyrl-700',sans-serif
+    font-size: 21px
+    color: $color_grey
+    margin-bottom: 20px
+
+//mobile menu
+
+.mobile-menu-wrapper
+  display: none
+  cursor: pointer
+  align-items: center
+  height: 20px
+  justify-content: space-between
+  margin-bottom: 20px
+
+.mobile-menu-phohe
+  a
+    font-family: 'MuseoSansCyrl-700', sans-serif
+    font-size: 16px
+    color: $color_blue
+
+
+@media (max-width: 991px)
+  .mobile-menu-wrapper
+    display: flex
+  .header-wrapper
+    display: none
+
+
+.mobile-toggle
+  width: 35px
+  position: relative
+  height: 3px
+  background: $color_yellow
+  &::before
+    position: absolute
+    content: ''
+    width: 30px
+    height: 3px
+    background: $color_yellow
+    top: -7px
+    right: 0
+    transition: transform 0.2s ease-in, top 0.2s linear 0.2s
+  &::after
+    position: absolute
+    background: $color_yellow
+    content: ''
+    width: 35px
+    height: 3px
+    top: 7px
+    transition: transform 0.2s ease-in, top 0.2s linear 0.2s
+
+.mobile-toggle.mobile-toggle-active
+  background-color: transparent
+  &::before
+    width: 35px
+    transform: rotate(45deg)
+    top: 0
+    transition: top 0.2s linear, transform 0.2s ease-in 0.2s
+  &::after
+    transform: rotate(-45deg)
+    top: 0
+    transition: top 0.2s linear, transform 0.2s ease-in 0.2s
+
+.mobile-menu-panel
+  position: absolute
+  width: 100%
+  height: 100vh
+  transition: background-color 0.5s ease-in
+
+.mobile-menu-panel-active
+  z-index: 11
+  background: rgba(76, 76, 76, 0.84)
+  transition: background-color 0.2s ease-in
+
+.mobile-menu-panel-inner
+  transform: translate(-100%,0)
+  background: #ffffff
+  width: 50%
+  height: 100vh
+  padding: 15px 15px
+  transition: all .3s
+
+.mobile-menu-panel-inner-active
+  transform: translate(0,0)
+
+
+.mobile-nav
+  margin-top: 30px
+  li
+    margin-bottom: 30px
+    &:last-child
+      margin: 0
+    &.active
+      a
+        font-family: 'MuseoSansCyrl-700', sans-serif
+    a
+      text-decoration: none
+      font-family: 'MuseoSansCyrl-300', sans-serif
+      font-size: 16px
+      color: $color_text
+    &:focus
+      outline-width: 0
+
+
+//dropdown menu
+
+.header-dropdown
+  position: fixed
+  width: 100%
+  justify-content: space-evenly
+  align-items: center
+  height: 120px
+  border-bottom: 1px solid #e5e5e5
+  background: #ffffff
+  display: none
+  z-index: 1000
+  top: 0
+
+.nav
+  display: inline-flex
+
+  li
+    margin-right: 3vw
+    &:last-child
+      margin: 0
+    &.active
+      a
+        font-family: 'MuseoSansCyrl-700', sans-serif
+    a
+      text-decoration: none
+      font-family: 'MuseoSansCyrl-300', sans-serif
+      font-size: 16px
+      color: $color_text
+
+@media screen and (max-width: 1199px)
+  .nav
+    li
+      margin-right: 1vw
+
+.header-dropdown-user
+  display: flex
+  align-items: center
+  img
+    border-radius: 50%
+    width: 40px
+    height: 40px
+    margin-right: 10px
+
+
+@keyframes slide-bottom
+  0%
+    transform: translateY(-120px)
+
+  100%
+    transform: translateY(0px)
+
+@keyframes slide-top
+  0%
+    transform: translateY(0px)
+
+  100%
+    transform: translateY(-120px)
+
+
+.header-slide-bottom
+  animation: slide-bottom 0.2s ease-in both
+.header-slide-top
+  animation: slide-top 0.4s ease-in both
+
+//header inner
+.header-inner
+  h1
+    font-family: 'MuseoSansCyrl-300',sans-serif
+    font-size: 36px
+    color: $color_grey
+    margin-top: 100px
+    margin-bottom: 45px
+    span
+      font-family: 'MuseoSansCyrl-700',sans-serif
+  p
+    margin-left: 20px
+    position: relative
+    font-family: 'MuseoSansCyrl-100',sans-serif
+    color: $color_grey
+    font-size: 18px
+    margin-bottom: 60px
+    span
+      font-family: "MuseoSansCyrl-500",sans-serif
+    &:before
+      content: ''
+      position: absolute
+      width: 20px
+      height: 6px
+      transform: skewX(-25deg) rotate(-89deg)
+      left: -20px
+      background: $color_yellow
+  a
+    margin-bottom: 150px
+
+  .header-feature
+    background: url(../img/feat.svg) no-repeat
+    height: 170px
+    background-position-x: center
+    background-position-y: center
+    position: relative
+    p
+      position: absolute
+      bottom: 40px
+      left: 50px
+      max-width: 60%
+      font-family: 'MuseoSansCyrl-300',sans-serif
+      color: $color_text
+      font-size: 14px
+      margin: 0
+      &:before
+        content: none
+    span
+      font-family: "MuseoSansCyrl-700",sans-serif
+  //  padding: 5px
+
+  //  width: 100%
+  //  height: 150px
+  //  position: relative
+  //  border-bottom-left-radius: 10px
+  //  border-bottom-right-radius: 10px
+  //  &:before
+  //    padding: 5px
+  //    content: ''
+  //    width: 97%
+  //    height: 49px
+  //    position: absolute
+  //    top: -31px
+  //    transform: rotate(4deg)
+  //    border-top-left-radius: 10px
+  //    border-top-right-radius: 10px
+  //
+  //.header-feature-inner
+  //  height: 100%
+  //  border-left: 1px dashed $color_border
+  //  border-right: 1px dashed $color_border
+  //  border-bottom: 1px dashed $color_border
+  //  border-bottom-left-radius: 10px
+  //  border-bottom-right-radius: 10px
+  //  &:before
+  //    content: ''
+  //    width: 97%
+  //    height: 34px
+  //    position: absolute
+  //    top: -15px
+  //    left: 5px
+  //    transform: rotate(4deg)
+  //    border-top-left-radius: 10px
+  //    border-top-right-radius: 10px
+  //    border-left: 1px dashed $color_border
+  //    border-top: 1px dashed $color_border
+

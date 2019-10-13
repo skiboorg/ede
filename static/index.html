@@ -8,14 +8,136 @@
 </head>
 <body>
 
-<div class="container">
-    <div class="grid-col4">
-        <div class="grid-item grid-offset2">1fgfdg<br>dsfdsfds<br>dsfdsfds<br>dsfdsfds</div>
-         <div class="grid-item grid-offset4">1fgfdg<br>dsfdsfds<br>dsfdsfds<br>dsfdsfds</div>
-
-
+<header class="header">
+    <div class="container header-wrapper grid-col3">
+        <div class="grid-item header-logo">
+            <img src="img/icons/ede.png">
+            <span>Заказать диплом или курсовую у реальных практиков</span>
+        </div>
+        <div class="grid-item header-statistic">
+            <div class="header-statistic-wrapper">
+                <img src="img/header_books.png" alt="">
+                <p>47,470<span>работ выполнено</span></p>
+            </div>
+            <a href="#">посмотреть работы</a>
+        </div>
+        <div class="grid-item header-phones">
+            <div class="header-phones-inner">
+                <p>Есть вопрос? Звоните</p>
+                <span>+7 (351) 230 80 40</span>
+                <a href="#" class="btn btn-callback">перезвоните мне</a>
+            </div>
+        </div>
+    </div><!-- end header-wrapper -->
+    <div class="container mobile-menu-wrapper">
+        <div class="mobile-toggle"></div>
+        <div class="mobile-menu-phohe">
+            <a href="tel:+73512308040">+7 (351) 230 80 40</a>
+        </div>
     </div>
-</div>
+    <div class="mobile-menu-panel">
+        <div class="mobile-menu-panel-inner">
+            <div class="header-dropdown-user" >
+                <!-- <a class="link" href="#">Зарегистрироваться</a> -->
+                <img src="img/icons/EDE.png" alt="">
+                <a class="link" href="#">Анастатися</a>
+            </div>
+            <ul class="mobile-nav">
+                <li class="active"><a href="#">Главная</a></li>
+                <li><a href="#">Цены и сроки</a></li>
+                <li><a href="#">Способы оплаты</a></li>
+                <li><a href="#">Отзывы</a></li>
+                <li><a href="#">О нас</a></li>
+                <li><a href="#">Конакты</a></li>
+            </ul>
+        </div>
+    </div><!-- end mobile-menu-panel -->
+    <div class="header-dropdown">
+    <img src="img/icons/EDE.png">
+    <ul class="nav">
+        <li class="active"><a href="#">Главная</a></li>
+        <li><a href="#">Цены и сроки</a></li>
+        <li><a href="#">Способы оплаты</a></li>
+        <li><a href="#">Отзывы</a></li>
+        <li><a href="#">О нас</a></li>
+        <li><a href="#">Конакты</a></li>
+    </ul>
+    <a href="#" class="btn ">оформить заявку</a>
+    <div class="header-dropdown-user" >
+        <!-- <a class="link" href="#">Зарегистрироваться</a> -->
+        <img src="img/icons/EDE.png" alt="">
+        <a class="link" href="#">Анастатися</a>
+    </div>
+</div><!-- end header-dropdown -->
+    <div class="container  header-inner">
 
+        <h1>Вашу работу выполнит <span>настоящий практик</span><br/>менее чем за 1 неделю</h1>
+        <p><span>Узнайте стоимость</span> своей работы прямо на сайте с<br/>помощью нашей формы</p>
+
+        <a href="#" class="btn btn-lg">Узнать цену своей работы</a>
+
+        <div class="grid-col3">
+            <div>
+                <div class="grid-item header-feature">
+                <div class="header-feature-inner">
+                  <p>Вместе с выполненной работой, вы получите <span>результат проверки её на анти-плагиат</span></p>
+                </div>
+
+            </div>
+            </div>
+
+             <div class="grid-item header-feature">
+                <div class="header-feature-inner">
+                  <p>Вместе с выполненной работой, вы получите <span>результат проверки её на анти-плагиат</span></p>
+                </div>
+
+            </div>
+             <div class="grid-item header-feature">
+                <div class="header-feature-inner">
+                  <p>Вместе с выполненной работой, вы получите <span>результат проверки её на анти-плагиат</span></p>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+
+    </div><!-- end header-inner -->
+
+
+
+</header>
+
+
+<script>
+    let mobile_button = document.getElementsByClassName('mobile-toggle')[0]
+    let mobile_menu_panel = document.getElementsByClassName('mobile-menu-panel')[0]
+    let mobile_menu = document.getElementsByClassName('mobile-menu-panel-inner')[0]
+
+    mobile_button.onclick = function () {
+        this.classList.toggle('mobile-toggle-active')
+        mobile_menu_panel.classList.toggle('mobile-menu-panel-active')
+        mobile_menu.classList.toggle('mobile-menu-panel-inner-active')
+    }
+    window.addEventListener('scroll', function() {
+        console.log(window.innerWidth)
+
+        if (window.innerWidth >991 && pageYOffset > 200){
+            document.getElementsByClassName('header-dropdown')[0].style.display = 'flex'
+            document.getElementsByClassName('header-dropdown')[0].classList.add('header-slide-bottom')
+            document.getElementsByClassName('header-dropdown')[0].classList.remove('header-slide-top')
+
+        }else{
+            document.getElementsByClassName('header-dropdown')[0].classList.remove('header-slide-bottom')
+            document.getElementsByClassName('header-dropdown')[0].classList.add('header-slide-top')
+        }
+
+
+    });
+
+
+</script>
 </body>
 </html>

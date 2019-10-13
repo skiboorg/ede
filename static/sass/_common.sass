@@ -1,8 +1,54 @@
+$color_grey: #737995
+$color_text: #151515
+$color_blue: #4b5c9d
+$color_yellow: #ffd05d
+$color_border: #dddde0
+body
+  height: 9000px
 .container
   max-width: 1140px
   padding: 0 15px
-  border: 1px solid red
   margin: 0 auto
+.is_visible
+  display: block
+.link
+  font-family: 'MuseoSansCyrl-500',sans-serif
+  font-size: 16px
+  color: $color_blue
+
+.btn
+  display: inline-block
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.67)
+  text-transform: uppercase
+  text-decoration: none
+  cursor: pointer
+  text-align: center
+  width: 10vw
+  background: linear-gradient(#ffeead, #ffda70, #ffdd84)
+  padding: 10px
+  font-family: 'Circe-Bold', sans-serif
+  font-size: .8vw
+  color: $color_text
+  border-radius: 20px 20px 20px 20px / 40px 40px 40px 40px
+
+  box-shadow: 0 2px 0 0 #f7bf70
+
+.btn-lg
+  padding: 25px 85px
+  width: 15vw
+  cursor: pointer
+  z-index: 10
+  position: relative
+
+.btn-callback::before
+  content: url(../img/icons/callback_icon.png)
+  margin-right: 10px
+  position: relative
+  top: 3px
+
+@media screen and (max-width: 1199px)
+  .btn-callback::before
+    content: ''
 
 .d-flex-jc-sb
   display: flex

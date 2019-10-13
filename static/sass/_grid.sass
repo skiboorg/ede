@@ -63,26 +63,27 @@
 /* COL-3*/
 .grid-col3
   display: grid
-  grid-template-columns: repeat(auto-fit, minmax(360px, auto))
+  grid-template-columns: repeat(auto-fill, minmax(340px, 360px))
   grid-gap: 15px
+  justify-content: center
 
-@media screen and (max-width: 1199px)
-  .grid-col3
-    grid-template-columns: repeat(3, 1fr)
-
-@media (max-width: 991px)
-  .grid-col3
-    grid-template-columns: repeat(3, 1fr)
-
-@media (max-width: 767px)
- .grid-col3
-    grid-template-columns: repeat(2, 1fr)
-
-@media (max-width: 575px)
-  .grid-col3
-    grid-template-columns: repeat(1, 1fr)
+//@media screen and (max-width: 1199px)
+//  .grid-col3
+//    grid-template-columns: repeat(auto-fill, minmax(360px, auto))
+//
+//@media (max-width: 991px)
+//  .grid-col3
+//    grid-template-columns: repeat(auto-fill, minmax(360px, auto))
+//
+//@media (max-width: 767px)
+// .grid-col3
+//    grid-template-columns: repeat(auto-fill, minmax(360px, auto))
+//
+//@media (max-width: 575px)
+//  .grid-col3
+//    grid-template-columns: repeat(auto-fill, minmax(360px, auto))
 /* COL-3*/
 
 .grid-item
-  border: 1px solid green
+
 
