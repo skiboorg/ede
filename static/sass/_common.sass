@@ -3,24 +3,25 @@ $color_text: #151515
 $color_blue: #4b5c9d
 $color_yellow: #ffd05d
 $color_border: #dddde0
-body
-  background: #cecece
+$color_l_blue: #009cff
 
 .container
   max-width: 1140px
   padding: 0 15px
   margin: 0 auto
-  border: 1px solid green
+
 
 .container-sm
   max-width: 810px
   margin: 0 auto
-  border: 1px solid red
+
 
 h3
   font-family: 'MuseoSansCyrl-100', sans-Serif
   font-size: 45px
   color: $color_grey
+  line-height: 1.2
+  margin-bottom: 30px
 h4
   @extend h3
   font-size: 18px
@@ -28,67 +29,56 @@ h4
 .is_visible
   display: block
 
-.form-control
-  border: none
-  background: #f9f4f8
-  border-radius: 20px
-
-  padding: 15px
-  box-shadow: inset 2px 2px 5px 1px #0000000d
-  &::placeholder
-      font-family: "MuseoSansCyrl-300",sans-serif
-      font-size: 14px
-  &:focus
-    outline-width: 0
-select
-  font-family: "MuseoSansCyrl-300",sans-serif
+.text-block
+  font-family: 'MuseoSansCyrl-300',sans-serif
   font-size: 14px
-  appearance: none
-  width: 100%
+  color: $color_text
+  span
+    font-family: 'MuseoSansCyrl-700',sans-serif
 
-.select-wrapper
 
-   position: relative
-   &::after
-     content: "\2023"
-     position: absolute
-     right: 30px
-     font-size: 30px
-     transform: rotate(90deg)
-     color: $color_text
-
-.form-control-sm
-  width: 33%
-.form-control-lg
-  grid-column: span 2
-@media (max-width: 556px)
-  .form-control-lg
-    grid-column: span 1
 .link
   font-family: 'MuseoSansCyrl-500',sans-serif
   font-size: 16px
   color: $color_blue
+  text-decoration: underline
 
-.btn
+.btn, button
+  border: none
   display: inline-block
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.67)
   text-transform: uppercase
   text-decoration: none
   cursor: pointer
   text-align: center
-  width: 10vw
+  width: 260px
   background: linear-gradient(#ffeead, #ffda70, #ffdd84)
   padding: 10px
   font-family: 'Circe-Bold', sans-serif
   font-size: .8vw
   color: $color_text
   border-radius: 20px 20px 20px 20px / 40px 40px 40px 40px
-
   box-shadow: 0 2px 0 0 #f7bf70
+
+  span
+    font-family: 'MuseoSansCyrl-300', sans-serif
+    font-size: 14px
+    text-transform: none
+
+  &:focus
+    outline-width: 0
+
 
 .btn-lg
   padding: 25px 85px
-  width: 15vw
+  width: 470px
+  cursor: pointer
+  z-index: 10
+  position: relative
+
+.btn-md
+  padding: 25px 85px
+  width: 300px
   cursor: pointer
   z-index: 10
   position: relative

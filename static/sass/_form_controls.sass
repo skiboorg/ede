@@ -1,0 +1,37 @@
+.form-control
+  border: none
+  background: #f9f4f8
+  border-radius: 20px
+  padding: 15px
+  box-shadow: inset 2px 2px 5px 1px rgba(0, 0, 0, 0.04)
+  &::placeholder
+      font-family: "MuseoSansCyrl-300",sans-serif
+      font-size: 14px
+  &:focus
+    outline-width: 0
+
+select
+  font-family: "MuseoSansCyrl-300",sans-serif
+  font-size: 14px
+  appearance: none
+  width: 100%
+
+.select-wrapper
+   position: relative
+   &::after
+     content: "\2023"
+     position: absolute
+     right: 30px
+     font-size: 30px
+     transform: rotate(90deg)
+     color: $color_text
+
+.form-control-sm
+  width: 33%
+
+.form-control-lg
+  grid-column: span 2
+
+@media (max-width: 556px)
+  .form-control-lg
+    grid-column: span 1

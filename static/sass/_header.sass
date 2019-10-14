@@ -259,6 +259,7 @@
       background: $color_yellow
   a
     margin-bottom: 150px
+    width: 270px
 
   .header-features-grid
     display: grid
@@ -305,7 +306,7 @@
 // features
 
 .features
-  margin-bottom: 140px
+
 
   .feature-item
     p
@@ -333,12 +334,20 @@
 //calculation form
 
 .calculation-form
+  background: url(../img/index_form_bg.png) no-repeat
+  background-position-y: -110px
+  background-position-x: 50%
+  height: 1000px
+  h4
+    margin-bottom: 70px
+
 
 .calculation-form-wrapper
   width: 100%
   border-radius: 8px
   background: #ffffff
   padding: 50px 0
+
 .calculation-form-inner
   max-width: 615px
   margin: 0 auto
@@ -370,3 +379,225 @@
   display: grid
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr))
   grid-gap: 30px
+
+
+//about-man
+.about-man
+  background: url(../img/index_bg2.jpg) no-repeat
+  height: 512px
+  margin-bottom: 130px
+
+  h3
+    max-width: 550px
+    span
+      text-decoration: underline
+      text-decoration-color: $color_yellow
+
+  p
+    max-width: 450px
+
+//prices
+
+.prices
+  margin-bottom: 140px
+  h3
+    margin-bottom: 70px
+
+.prices-wrapper
+  display: grid
+  grid-template-columns: repeat(auto-fill, minmax(340px, 360px))
+  grid-gap: 15px
+  justify-content: center
+  margin-bottom: 70px
+
+.price-item
+  height: 238px
+  padding: 30px
+
+  p
+    font-family: 'MuseoSansCyrl-100', sans-serif
+    font-size: 14px
+    color: $color_grey
+    margin-left: 20px
+    position: relative
+    span
+      font-family: 'MuseoSansCyrl-500', sans-serif
+      font-size: 16px
+      display: block
+
+    &::before
+        content: "\22C5"
+        position: absolute
+        color: #ffd05d
+        left: -25px
+        font-size: 50px
+        top: -30px
+
+  h5
+    font-family: 'MuseoSansCyrl-700', sans-serif
+    font-size: 21px
+    color: $color_text
+    margin-bottom: 30px
+
+.bg-1
+  background: url(../img/price1.png) no-repeat
+.bg-2
+  background: url(../img/price2.png) no-repeat
+.bg-3
+  background: url(../img/price3.png) no-repeat
+
+// how-it-works
+
+.how-it-works
+  overflow: hidden
+  h4
+    margin-bottom: 90px
+.how-it-works-numbers
+  background: url(../img/hw.jpg) no-repeat 50% 0
+  position: relative
+  height: 140px
+
+
+.how-it-works-step
+  display: inline-block
+  position: absolute
+  width: 50px
+  height: 50px
+  border-radius: 50%
+  padding: 4px
+  box-sizing: border-box
+  transition: background-color 0.3s ease-in
+
+  span
+    background: #ffffff
+    border: 1px solid #bebebe
+    width: 40px
+    height: 40px
+    border-radius: 50%
+    color: #bebebe
+    display: flex
+    align-items: center
+    justify-content: center
+    font-family: 'MuseoSansCyrl-500', sans-serif
+    font-size: 16px
+
+
+.how-it-works-step.step-active
+  border: 1px solid $color_yellow
+  transition: background-color 0.3s ease-in
+  span
+    background: $color_yellow
+    border: none
+    color: #ffffff
+
+
+#step_1
+  left: 32%
+  top: -15px
+#step_2
+  left: 43%
+  top: -23px
+#step_3
+  right: 43%
+  top: -23px
+#step_4
+  right: 32%
+  top: -15px
+.how-it-works-slider
+  position: relative
+
+.how-it-works-slide
+  display: none
+
+.how-it-works-slide.slide-active
+  display: grid
+
+  grid-template-columns: 50% 50%
+  transition: all 1s ease-in
+
+.slide-text
+  h5
+    font-family: 'MuseoSansCyrl-100', sans-serif
+    font-size: 36px
+    color: $color_grey
+    position: relative
+    z-index: 1
+
+    &:before
+      content: attr(data-number)
+      position: absolute
+      font-size: 100px
+      font-family: 'MuseoSansCyrl-900Italic', sans-serif
+      color: #e5e5e5
+      z-index: -1
+      top: -50px
+      left: -65px
+  p
+    font-family: 'MuseoSansCyrl-500', sans-serif
+    font-size: 16px
+    color: $color_text
+    a
+      color: $color_l_blue
+
+.slider-arrows
+  position: absolute
+  width: 360px
+  display: inline-flex
+  justify-content: space-between
+  bottom: 3px
+
+
+.slider-arrow-left, .slider-arrow-right
+  color: $color_yellow
+  a
+    span
+      display: block
+      color: $color_yellow
+      font-size: 50px
+      line-height: 50px
+
+  p
+    font-family: 'Circe-Regular', sans-serif
+    font-size: 14px
+    line-height: 13px
+
+.slider-arrow-left.arrow-not-active, .slider-arrow-right.arrow-not-active
+  color: #bebebe
+  a
+    cursor: context-menu
+    pointer-events: none
+    span
+      color: #bebebe
+
+
+.slide-out
+  transform: translate(200%,0)
+
+
+.slide-in
+  transform: translate(0,0)
+
+
+@keyframes puff-out-center
+  0%
+    transform: scale(1)
+    filter: blur(0px)
+    opacity: 1
+
+  100%
+    transform: scale(2)
+    filter: blur(2px)
+    opacity: 0
+
+@keyframes puff-in-center
+  0%
+    transform: scale(2)
+    filter: blur(2px)
+    opacity: 0
+
+  100%
+    transform: scale(1)
+    filter: blur(0px)
+    opacity: 1
+
+
