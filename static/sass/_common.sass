@@ -4,13 +4,66 @@ $color_blue: #4b5c9d
 $color_yellow: #ffd05d
 $color_border: #dddde0
 body
-  height: 9000px
+  background: #cecece
+
 .container
   max-width: 1140px
   padding: 0 15px
   margin: 0 auto
+  border: 1px solid green
+
+.container-sm
+  max-width: 810px
+  margin: 0 auto
+  border: 1px solid red
+
+h3
+  font-family: 'MuseoSansCyrl-100', sans-Serif
+  font-size: 45px
+  color: $color_grey
+h4
+  @extend h3
+  font-size: 18px
+
 .is_visible
   display: block
+
+.form-control
+  border: none
+  background: #f9f4f8
+  border-radius: 20px
+
+  padding: 15px
+  box-shadow: inset 2px 2px 5px 1px #0000000d
+  &::placeholder
+      font-family: "MuseoSansCyrl-300",sans-serif
+      font-size: 14px
+  &:focus
+    outline-width: 0
+select
+  font-family: "MuseoSansCyrl-300",sans-serif
+  font-size: 14px
+  appearance: none
+  width: 100%
+
+.select-wrapper
+
+   position: relative
+   &::after
+     content: "\2023"
+     position: absolute
+     right: 30px
+     font-size: 30px
+     transform: rotate(90deg)
+     color: $color_text
+
+.form-control-sm
+  width: 33%
+.form-control-lg
+  grid-column: span 2
+@media (max-width: 556px)
+  .form-control-lg
+    grid-column: span 1
 .link
   font-family: 'MuseoSansCyrl-500',sans-serif
   font-size: 16px
@@ -70,7 +123,9 @@ body
 .mw100
   max-width: 100%
 
-
+.m-a
+  display: block
+  margin:  0 auto
 
 .mb10
   margin-bottom: 10px

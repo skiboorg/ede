@@ -1,7 +1,8 @@
 .header
   background: url(../img/header_bg.jpg) no-repeat 70% 0
-  height: 100vh
+  //height: 100vh
   padding-top: 30px
+  margin-bottom: 70px
 
 @media (max-width: 575px)
   .header
@@ -259,6 +260,12 @@
   a
     margin-bottom: 150px
 
+  .header-features-grid
+    display: grid
+    grid-template-columns: repeat(auto-fill, minmax(340px, 360px))
+    grid-gap: 15px
+    justify-content: center
+
   .header-feature
     background: url(../img/feat.svg) no-repeat
     height: 170px
@@ -269,7 +276,7 @@
       position: absolute
       bottom: 40px
       left: 50px
-      max-width: 60%
+      max-width: 65%
       font-family: 'MuseoSansCyrl-300',sans-serif
       color: $color_text
       font-size: 14px
@@ -278,41 +285,88 @@
         content: none
     span
       font-family: "MuseoSansCyrl-700",sans-serif
-  //  padding: 5px
 
-  //  width: 100%
-  //  height: 150px
-  //  position: relative
-  //  border-bottom-left-radius: 10px
-  //  border-bottom-right-radius: 10px
-  //  &:before
-  //    padding: 5px
-  //    content: ''
-  //    width: 97%
-  //    height: 49px
-  //    position: absolute
-  //    top: -31px
-  //    transform: rotate(4deg)
-  //    border-top-left-radius: 10px
-  //    border-top-right-radius: 10px
-  //
-  //.header-feature-inner
-  //  height: 100%
-  //  border-left: 1px dashed $color_border
-  //  border-right: 1px dashed $color_border
-  //  border-bottom: 1px dashed $color_border
-  //  border-bottom-left-radius: 10px
-  //  border-bottom-right-radius: 10px
-  //  &:before
-  //    content: ''
-  //    width: 97%
-  //    height: 34px
-  //    position: absolute
-  //    top: -15px
-  //    left: 5px
-  //    transform: rotate(4deg)
-  //    border-top-left-radius: 10px
-  //    border-top-right-radius: 10px
-  //    border-left: 1px dashed $color_border
-  //    border-top: 1px dashed $color_border
+.header-feature-icon
+  position: absolute
+  top: -75px
+  left: 60px
 
+.header-feature-1::before
+  content: url(../img/icons/feature-1.png)
+  @extend .header-feature-icon
+.header-feature-2::before
+  content: url(../img/icons/feature-2.png)
+  @extend .header-feature-icon
+.header-feature-3::before
+  content: url(../img/icons/feature-3.png)
+  @extend .header-feature-icon
+
+
+// features
+
+.features
+  margin-bottom: 140px
+
+  .feature-item
+    p
+      position: relative
+      font-family: 'MuseoSansCyrl-700', sans-Serif
+      font-size: 60px
+      color: $color_yellow
+      margin-bottom: 25px
+      &::after
+        content: ''
+        position: absolute
+        width: 90px
+        height: 2px
+        bottom: -5px
+        left: 145px
+        background: #000
+    span
+      display: block
+      margin: 0 auto
+      font-family: 'MuseoSansCyrl-300', sans-Serif
+      font-size: 14px
+      color: $color_text
+      max-width: 70%
+
+//calculation form
+
+.calculation-form
+
+.calculation-form-wrapper
+  width: 100%
+  border-radius: 8px
+  background: #ffffff
+  padding: 50px 0
+.calculation-form-inner
+  max-width: 615px
+  margin: 0 auto
+  padding: 0 15px
+  margin-bottom: 60px
+
+.calculation-form-footer
+  position: relative
+  max-width: 700px
+  margin: 0 auto
+  padding: 0 15px
+  display: grid
+  grid-template-columns: repeat(auto-fill, minmax(200px,223px))
+  grid-gap: 15px
+  &::before
+    content: ''
+    width: 700px
+    height: 1px
+    background: #cecece
+    position: absolute
+    top: -30px
+    left: 14px
+
+@media (max-width: 556px)
+  .calculation-form-footer
+    grid-template-columns: repeat(auto-fill, minmax(200px,1fr))
+    grid-gap: 30px
+.form-row
+  display: grid
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr))
+  grid-gap: 30px
