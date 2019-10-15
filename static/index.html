@@ -367,9 +367,9 @@
         <div class="container">
             <h3>Почему работу лучше купить,<br>чем делать самому?</h3>
             <p class="mb40">Дипломная работа - это самое сложное и ответственное <span>задание за весь учебный срок</span></p>
-                <p class="mb40"><span>Риск получить низкий балл</span> из-за преподавателей и сложности оформления</p>
-                <p class="mb40">Лучше <span>положиться на профессионалов,</span> чем ошибиться самому</p>
-                <p>Написание дипломных работ – практически всегда <span>нервотрепка и стресс</span></p>
+            <p class="mb40"><span>Риск получить низкий балл</span> из-за преподавателей и сложности оформления</p>
+            <p class="mb40">Лучше <span>положиться на профессионалов,</span> чем ошибиться самому</p>
+            <p>Написание дипломных работ – практически всегда <span>нервотрепка и стресс</span></p>
 
 
 
@@ -399,18 +399,27 @@
                     </ul>
                 </div>
 
-                 <div class="footer-top-phones text-right">
-                <p>+7 (351) 230 80 40</p>
-                <a href="#" class="btn ">заказать звонок</a>
-            </div>
+                <div class="footer-top-phones text-right">
+                    <p>+7 (351) 230 80 40</p>
+                    <a href="#" class="btn ">заказать звонок</a>
+                </div>
 
 
             </div>
             <div class="footer-bottom">
-                 <div class="header-logo">
-            <img src="img/icons/ede.png" alt="">
-            <span>Заказать диплом или курсовую у реальных практиков</span>
-        </div>
+                <div class="header-logo">
+                    <img src="img/icons/ede.png" alt="">
+                    <span>Заказать диплом или курсовую у реальных практиков</span>
+                </div>
+                <div class="footer-social">
+                    <a class="link" href="#">политика конфидициальности</a>
+
+                    <ul>
+                        <li><a href="#" rel="nofollow"><span class="vk_icon"></span></a></li>
+                        <li><a href="#" rel="nofollow"><span class="fb_icon"></span></a></li>
+                        <li><a href="#" rel="nofollow"><span class="inst_icon"></span></a></li>
+                    </ul>
+                </div>
             </div>
 
         </div>
@@ -470,17 +479,6 @@
             // call test functions
             if (isTestPage && initFns[i]) { initFns[i](); }
 
-            // insert code
-            if (isDemoPage) {
-                doc.querySelector('#' + i + '_wrapper').insertAdjacentHTML('beforeend', '<pre><code class="language-javascript">' + JSON.stringify(item, function (key, value) {
-                    if (typeof value === 'object') {
-                        if (value.id) {
-                            return "document.querySelector('#" + value.id + "')";
-                        }
-                    }
-                    return value;
-                }, '  ') + '<\/code><\/pre>');
-            }
 
             // test responsive pages
         } else if (i.indexOf('responsive') >= 0) {
