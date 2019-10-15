@@ -3,6 +3,7 @@ var gulp = require('gulp');
     browserSync = require('browser-sync');
     autoprefixer = require('gulp-autoprefixer');
     mq = require('gulp-group-css-media-queries');
+    image = require('gulp-image');
 gulp.task('sass', function(){
     return gulp.src('static/sass/**/*.sass')
         .pipe(sass())
@@ -22,6 +23,18 @@ gulp.task('browser-sync', function() {
         },
         notify: false
     });
+})
+
+gulp.task('image', function () {
+  gulp.src('static/img/*')
+    .pipe(image())
+    .pipe(gulp.dest('static/images'));
+});
+
+gulp.task('icons', function () {
+  gulp.src('static/img/icons/*')
+    .pipe(image())
+    .pipe(gulp.dest('static/images/icons'));
 });
 
 gulp.task('scripts', function() {
@@ -40,5 +53,5 @@ gulp.task('watch', function() {
     gulp.watch(['static/js/main.js', 'html/libs/**/*.js'], gulp.parallel('scripts'));
 });
 
-gulp.task('default', gulp.parallel('sass', 'browser-sync', 'watch'));
+gulp.task('default', gulp.parallel('sass','image','icons', 'browser-sync', 'watch'));
 

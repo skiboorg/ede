@@ -35,3 +35,52 @@ select
 @media (max-width: 556px)
   .form-control-lg
     grid-column: span 1
+
+
+.custom-checkbox
+  padding: 6px 35px
+  font-size: 12px
+  font-family: 'MuseoSansCyrl-300', sans-serif
+  color: #bfc0c5
+  position: relative
+  user-select: none
+
+  input
+    position: absolute
+    opacity: 0
+    cursor: pointer
+    height: 0
+    width: 0
+
+.checkmark
+  position: absolute
+  top: 0
+  left: 0
+  height: 20px
+  width: 20px
+  border-radius: 5px
+  background-color: #ffffff
+  border: 1px solid #bfc0c5
+  &:after
+    content: ""
+    position: absolute
+    display: none
+
+.custom-checkbox:hover input ~ .checkmark
+  background-color: #ccc
+
+.custom-checkbox input:checked ~ .checkmark
+  background-color: #ffffff
+  border: 1px solid #bebebe
+
+.custom-checkbox input:checked ~ .checkmark:after
+  display: block
+
+.custom-checkbox .checkmark:after
+  left: 8px
+  top: 4px
+  width: 6px
+  height: 10px
+  border: solid $color_yellow
+  border-width: 0 3px 2px 0
+  transform: rotate(45deg)

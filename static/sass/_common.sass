@@ -4,6 +4,12 @@ $color_blue: #4b5c9d
 $color_yellow: #ffd05d
 $color_border: #dddde0
 $color_l_blue: #009cff
+
+body
+  font-size: 14px
+  font-family: 'MuseoSansCyrl-300', sans-serif
+  color: $color_text
+
 button[type='button']
   display: none
 .container
@@ -30,6 +36,14 @@ h5
   font-family: 'MuseoSansCyrl-700', sans-serif
   font-size: 16px
   color: $color_text
+
+@media (max-width: 575px)
+  h3
+    font-size: 24px
+  h4
+    display: none
+
+
 .is_visible
   display: block
 
@@ -59,7 +73,7 @@ h5
   background: linear-gradient(#ffeead, #ffda70, #ffdd84)
   padding: 10px
   font-family: 'Circe-Bold', sans-serif
-  font-size: .8vw
+  font-size: 16px
   color: $color_text
   border-radius: 20px 20px 20px 20px / 40px 40px 40px 40px
   box-shadow: 0 2px 0 0 #f7bf70
@@ -87,8 +101,15 @@ h5
   z-index: 10
   position: relative
 
+@media (max-width: 575px)
+  .btn-lg, .btn-md
+    padding: 15px 0
+    width: 100% !important
+
+
+
 .btn-callback::before
-  content: url(../img/icons/callback_icon.png)
+  content: url(../images/icons/callback_icon.png)
   margin-right: 10px
   position: relative
   top: 3px

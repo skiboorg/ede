@@ -1,12 +1,15 @@
 .header
-  background: url(../img/header_bg.jpg) no-repeat 70% 0
+  background: url(../images/header_bg.jpg) no-repeat 70% 0
   //height: 100vh
   padding-top: 30px
   margin-bottom: 70px
-
+.header.header-alt
+  padding: 0
+  margin: 0
+  background: none
 @media (max-width: 575px)
   .header
-    background: url(../img/header_mobile.jpg) no-repeat 100% 0
+    background: url(../images/header_mobile.jpg) no-repeat 100% 0
 
 
 .header-logo
@@ -37,7 +40,7 @@
 .header-statistic-wrapper
   display: flex
   align-items: flex-start
-  //background: url(../img/header_books.png) no-repeat
+  //background: url(../images/header_books.png) no-repeat
 
   p
     font-family: 'MuseoSansCyrl-700',sans-serif
@@ -70,7 +73,7 @@
 
 .mobile-menu-wrapper
   display: none
-  cursor: pointer
+  //cursor: pointer
   align-items: center
   height: 20px
   justify-content: space-between
@@ -167,6 +170,15 @@
 
 
 //dropdown menu
+//.header-alt
+//  width: 100%
+//  justify-content: space-evenly
+//  align-items: center
+//  height: 120px
+//  border-bottom: 1px solid #e5e5e5
+//  background: #ffffff
+//  display: none
+
 
 .header-dropdown
   position: fixed
@@ -179,6 +191,10 @@
   display: none
   z-index: 1000
   top: 0
+.header-dropdown.fixed
+  position: unset
+  display: flex
+  z-index: 0
 
 .nav
   display: inline-flex
@@ -241,6 +257,7 @@
     margin-bottom: 45px
     span
       font-family: 'MuseoSansCyrl-700',sans-serif
+
   p
     margin-left: 20px
     position: relative
@@ -269,7 +286,7 @@
     justify-content: center
 
   .header-feature
-    background: url(../img/feat.svg) no-repeat
+    background: url(../images/feat.svg) no-repeat
     height: 170px
     background-position-x: center
     background-position-y: center
@@ -287,6 +304,12 @@
         content: none
     span
       font-family: "MuseoSansCyrl-700",sans-serif
+@media (max-width: 575px)
+  .header-features-grid
+    grid-gap: 100px !important
+  .header-inner
+    h1
+      font-size: 24px
 
 .header-feature-icon
   position: absolute
@@ -294,13 +317,13 @@
   left: 60px
 
 .header-feature-1::before
-  content: url(../img/icons/feature-1.png)
+  content: url(../images/icons/feature-1.png)
   @extend .header-feature-icon
 .header-feature-2::before
-  content: url(../img/icons/feature-2.png)
+  content: url(../images/icons/feature-2.png)
   @extend .header-feature-icon
 .header-feature-3::before
-  content: url(../img/icons/feature-3.png)
+  content: url(../images/icons/feature-3.png)
   @extend .header-feature-icon
 
 
@@ -312,7 +335,7 @@
   .feature-item
     p
       position: relative
-      font-family: 'MuseoSansCyrl-700', sans-Serif
+      font-family: 'MuseoSansCyrl-700', sans-serif
       font-size: 60px
       color: $color_yellow
       margin-bottom: 25px
@@ -327,7 +350,7 @@
     span
       display: block
       margin: 0 auto
-      font-family: 'MuseoSansCyrl-300', sans-Serif
+      font-family: 'MuseoSansCyrl-300', sans-serif
       font-size: 14px
       color: $color_text
       max-width: 70%
@@ -335,7 +358,7 @@
 //calculation form
 
 .calculation-form
-  background: url(../img/index_form_bg.png) no-repeat
+  background: url(../images/index_form_bg.png) no-repeat
   background-position-y: -110px
   background-position-x: 50%
   height: 1000px
@@ -348,6 +371,7 @@
   border-radius: 8px
   background: #ffffff
   padding: 50px 0
+  text-align: center
 
 .calculation-form-inner
   max-width: 615px
@@ -365,7 +389,7 @@
   grid-gap: 15px
   &::before
     content: ''
-    width: 700px
+    width: calc(100% - 30px)
     height: 1px
     background: #cecece
     position: absolute
@@ -384,9 +408,11 @@
 
 //about-man
 .about-man
-  background: url(../img/index_bg2.jpg) no-repeat
+  background: url(../images/index_bg2.jpg) no-repeat
   height: 512px
   margin-bottom: 130px
+  background-position-x: 60%
+  background-position-y: 100%
 
   h3
     max-width: 550px
@@ -441,11 +467,11 @@
     margin-bottom: 30px
 
 .bg-1
-  background: url(../img/price1.png) no-repeat
+  background: url(../images/price1.png) no-repeat
 .bg-2
-  background: url(../img/price2.png) no-repeat
+  background: url(../images/price2.png) no-repeat
 .bg-3
-  background: url(../img/price3.png) no-repeat
+  background: url(../images/price3.png) no-repeat
 
 // how-it-works
 
@@ -455,7 +481,7 @@
   h4
     margin-bottom: 90px
 .how-it-works-numbers
-  background: url(../img/hw.jpg) no-repeat 50% 0
+  background: url(../images/hw.jpg) no-repeat 50% 0
   position: relative
   height: 140px
 
@@ -541,12 +567,34 @@
     a
       color: $color_l_blue
 
+
+
+
+
 .slider-arrows
   position: absolute
   width: 360px
   display: inline-flex
   justify-content: space-between
   bottom: 3px
+
+@media (max-width: 575px)
+  .slide-text
+    h5:before
+      left: -5px
+      font-size: 90px
+      top: -33px
+
+  .slider-arrows
+    width: 100%
+    bottom: -70px
+
+  .how-it-works-slide.slide-active
+    grid-template-columns: 1fr
+
+  .how-it-works
+    height: 360px
+
 
 
 .slider-arrow-left, .slider-arrow-right
@@ -581,7 +629,7 @@
 
 // lets-meet
 .lets-meet
-  background: url(../img/bg3.jpg) no-repeat 15% 0
+  background: url(../images/bg3.jpg) no-repeat 15% 0
   height: 953px
   margin-bottom: 140px
 
@@ -598,7 +646,7 @@
 
 
   p.info-text
-    font-family: 'MuseoSansCyrl-300', sans-Serif
+    font-family: 'MuseoSansCyrl-300', sans-serif
     font-size: 16px
     line-height: 24px
     width: 530px
@@ -608,7 +656,7 @@
   margin-bottom: 80px
   p
     width: 550px
-  font-family: 'MuseoSansCyrl-500', sans-Serif
+  font-family: 'MuseoSansCyrl-500', sans-serif
   width: 590px
   align-self: flex-end
   font-size: 21px
@@ -625,7 +673,7 @@
   &::after
     position: absolute
     content: '"'
-    font-family: 'BerlingskeSerif-Blk', Sans-Serif
+    font-family: 'BerlingskeSerif-Blk', sans-serif
     font-size: 400px
     color: #f1f2f3
     line-height: 0
@@ -637,7 +685,7 @@
   margin-left: 330px
 
   p
-    font-family: 'MuseoSansCyrl-700', sans-Serif
+    font-family: 'MuseoSansCyrl-700', sans-serif
     font-size: 19px
   span:first-child
     position: relative
@@ -651,7 +699,7 @@
       bottom: 4px
       left: 0
   span:last-child
-    font-family: 'MuseoSansCyrl-300', sans-Serif
+    font-family: 'MuseoSansCyrl-300', sans-serif
 
 
 //our help
@@ -733,6 +781,9 @@
 //why our work
 
 .why-our-work
+  background: url(../images/why_bg.jpg) no-repeat center
+  height: 900px
+
   p
     position: relative
     width: 33.33%
@@ -751,3 +802,9 @@
       border: 3px solid $color_l_blue
       left: -30px
       top: 12px
+
+@media (max-width: 767px)
+  .why-our-work
+    background: none
+    p
+      width: 90%
