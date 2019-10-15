@@ -13,6 +13,7 @@
   color: $color_grey
   display: flex
   align-items: flex-start
+  width: 305px
   //justify-content: space-between
 
   p
@@ -450,6 +451,7 @@
 
 .how-it-works
   overflow: hidden
+  margin-bottom: 150px
   h4
     margin-bottom: 90px
 .how-it-works-numbers
@@ -577,27 +579,175 @@
 .slide-in
   transform: translate(0,0)
 
+// lets-meet
+.lets-meet
+  background: url(../img/bg3.jpg) no-repeat 15% 0
+  height: 953px
+  margin-bottom: 140px
 
-@keyframes puff-out-center
-  0%
-    transform: scale(1)
-    filter: blur(0px)
-    opacity: 1
+  h3
+    width: 700px
+    align-self: flex-end
+    margin-bottom: 110px
 
-  100%
-    transform: scale(2)
-    filter: blur(2px)
-    opacity: 0
-
-@keyframes puff-in-center
-  0%
-    transform: scale(2)
-    filter: blur(2px)
-    opacity: 0
-
-  100%
-    transform: scale(1)
-    filter: blur(0px)
-    opacity: 1
+.lets-meet-inner
+  display: flex
+  flex-direction: column
+  height: 953px
+  justify-content: center
 
 
+  p.info-text
+    font-family: 'MuseoSansCyrl-300', sans-Serif
+    font-size: 16px
+    line-height: 24px
+    width: 530px
+    align-self: flex-end
+
+.quote
+  margin-bottom: 80px
+  p
+    width: 550px
+  font-family: 'MuseoSansCyrl-500', sans-Serif
+  width: 590px
+  align-self: flex-end
+  font-size: 21px
+  color: $color_text
+  position: relative
+  &::before
+    position: absolute
+    content: ''
+    width: 30px
+    height: 2px
+    background: $color_yellow
+    top: 15px
+    left: -65px
+  &::after
+    position: absolute
+    content: '"'
+    font-family: 'BerlingskeSerif-Blk', Sans-Serif
+    font-size: 400px
+    color: #f1f2f3
+    line-height: 0
+    right: -100px
+    top: 130px
+    z-index: -1
+.lets-meet-about
+  display: inline-block
+  margin-left: 330px
+
+  p
+    font-family: 'MuseoSansCyrl-700', sans-Serif
+    font-size: 19px
+  span:first-child
+    position: relative
+    display: inline-block
+    &:after
+      content: ''
+      position: absolute
+      width: 155px
+      height: 2px
+      background: #ffd05d
+      bottom: 4px
+      left: 0
+  span:last-child
+    font-family: 'MuseoSansCyrl-300', sans-Serif
+
+
+//our help
+.our-help
+  position: relative
+  margin-bottom: 140px
+.our-help-inner
+  display: grid
+  grid-template-columns: 50% 40%
+  grid-gap: 10%
+  margin-bottom: 70px
+.our-help-media
+  display: inline-block
+  border-radius: 10px
+  box-shadow: 0 0 29px 0 rgba(60, 66, 91, 0.39)
+  //background-color: rgb(161, 161, 161)
+.our-help-info
+  p
+    font-family: 'MuseoSansCyrl-700',sans-serif
+    font-size: 16px
+    color: $color_text
+  a
+    display: block
+    &:last-child
+     padding: 25px 0
+.our-help-info-header
+  border-bottom: 1px solid #bebebe
+
+  h5
+    font-family: 'MuseoSansCyrl-700',sans-serif
+    font-size: 16px
+    color: $color_text
+    position: relative
+    &:after
+      content: ''
+      position: absolute
+      width: 380px
+      height: 2px
+      background: #ffd05d
+      bottom: 4px
+      left: 0
+
+  p
+    font-family: 'MuseoSansCyrl-300',sans-serif
+    font-size: 14px
+    color: $color_grey
+
+.our-help-media-slide-item
+
+  h5
+    margin: 20px 0 25px 0
+  p
+    font-family: 'MuseoSansCyrl-300', sans-serif
+    color: $color_grey
+    line-height: 24px
+    font-size: 14px
+    width: 260px
+.our-help-media-slide-image
+  //border-radius: 10px
+  //box-shadow: 0 0 29px 0 rgba(60, 66, 91, 0.22)
+  //width: 260px
+.controls
+  position: relative
+.prev
+  position: absolute
+  cursor: pointer
+  bottom: 100px
+  left: -75px
+  &:focus
+    outline-width: 0
+.next
+  position: absolute
+  cursor: pointer
+  bottom: 100px
+  right: -75px
+  &:focus
+    outline-width: 0
+
+//why our work
+
+.why-our-work
+  p
+    position: relative
+    width: 33.33%
+    font-family: 'MuseoSansCyrl-100',sans-serif
+    font-size: 16px
+    color: $color_text
+    margin-left: 30px
+    span
+      font-family: 'MuseoSansCyrl-500',sans-serif
+    &:before
+      position: absolute
+      content: ''
+      width: 12px
+      height: 12px
+      border-radius: 50%
+      border: 3px solid $color_l_blue
+      left: -30px
+      top: 12px

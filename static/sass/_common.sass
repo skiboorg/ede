@@ -4,7 +4,8 @@ $color_blue: #4b5c9d
 $color_yellow: #ffd05d
 $color_border: #dddde0
 $color_l_blue: #009cff
-
+button[type='button']
+  display: none
 .container
   max-width: 1140px
   padding: 0 15px
@@ -17,7 +18,7 @@ $color_l_blue: #009cff
 
 
 h3
-  font-family: 'MuseoSansCyrl-100', sans-Serif
+  font-family: 'MuseoSansCyrl-100', sans-serif
   font-size: 45px
   color: $color_grey
   line-height: 1.2
@@ -25,7 +26,10 @@ h3
 h4
   @extend h3
   font-size: 18px
-
+h5
+  font-family: 'MuseoSansCyrl-700', sans-serif
+  font-size: 16px
+  color: $color_text
 .is_visible
   display: block
 
@@ -109,7 +113,8 @@ h4
   text-align: center
 .text-right
   text-align: right
-
+.text-upper
+  text-transform: uppercase
 .mw100
   max-width: 100%
 
@@ -123,6 +128,8 @@ h4
   margin-bottom: 20px
 .mb30
   margin-bottom: 30px
+.mb35
+  margin-bottom: 35px
 .mb40
   margin-bottom: 40px
 .mb50
