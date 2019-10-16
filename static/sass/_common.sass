@@ -4,7 +4,7 @@ $color_blue: #4b5c9d
 $color_yellow: #ffd05d
 $color_border: #dddde0
 $color_l_blue: #009cff
-
+$bg-grey: #f8f9fb
 body
   font-size: 14px
   font-family: 'MuseoSansCyrl-300', sans-serif
@@ -12,16 +12,20 @@ body
 
 button[type='button']
   display: none
+
 .container
   max-width: 1140px
   padding: 0 15px
   margin: 0 auto
 
-
 .container-sm
   max-width: 810px
   margin: 0 auto
 
+h1
+  font-family: 'MuseoSansCyrl-100', sans-serif
+  font-size: 45px
+  color: $color_grey
 
 h3
   font-family: 'MuseoSansCyrl-100', sans-serif
@@ -38,15 +42,28 @@ h5
   color: $color_text
 
 @media (max-width: 575px)
-  h3
+  h1, h3
     font-size: 24px
   h4
     display: none
 
+.no-border
+  border: none !important
 
-.is_visible
-  display: block
-
+.breadcrumbs
+  font-family: 'MuseoSansCyrl-100', sans-serif
+  font-size: 16px
+  margin-bottom: 60px
+  ul
+    display: flex
+    li
+      &:after
+        content: '/'
+        margin: 0 10px
+      &:last-child:after
+        content: ''
+      a
+        color: $color_l_blue
 .text-block
   font-family: 'MuseoSansCyrl-300',sans-serif
   font-size: 14px
@@ -166,3 +183,7 @@ h5
   margin-top: 40px
 .mt50
   margin-top: 50px
+
+
+.pt30
+  padding-top: 30px

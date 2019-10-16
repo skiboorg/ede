@@ -1,0 +1,87 @@
+.contacts
+  margin-bottom: 120px
+.contacts-bg
+  background: $bg-grey
+  height: 220px
+  padding-top: 40px
+  margin-bottom: 60px
+
+.contacts-wrapper
+  display: flex
+  flex-wrap: wrap
+  justify-content: space-between
+
+.contacts-work-time
+  margin-bottom: 130px
+.contacts-phones
+  width: 450px
+
+.contacts-phones-header
+  margin-bottom: 60px
+  text-align: center
+  p
+    position: relative
+    font-family: 'MuseoSansCyrl-500',sans-serif
+    font-size: 24px
+    display: inline-block
+    &:before
+      position: absolute
+      content: url(../images/icons/contacts-phone.png)
+      bottom: 45px
+      left: 37%
+.contacts-mail
+  text-align: center
+  width: 450px
+.contacts-mail-header
+  margin-bottom: 60px
+  p
+    position: relative
+    font-family: 'MuseoSansCyrl-500',sans-serif
+    font-size: 24px
+    display: inline-block
+    &:before
+      position: absolute
+      content: url(../images/icons/contacts-mail.png)
+      bottom: 45px
+      left: 22%
+.contacts-mail-info
+  border-bottom: 1px solid #bebebe
+
+  p
+    font-family: 'MuseoSansCyrl-100',sans-serif
+    font-size: 16px
+    color: $color_text
+    display: inline-block
+
+  span
+    font-family: 'MuseoSansCyrl-100',sans-serif
+    font-size: 24px
+    color: $color_l_blue
+    display: block
+
+.contacts-phones-inner
+  ul
+    li
+      display: flex
+      align-items: center
+      justify-content: space-between
+      padding: 20px 0
+      border-bottom: 1px solid #bebebe
+      &:first-child
+        padding-top: 0
+      &:last-child
+        border-bottom: none
+.contacts-phones-town
+  font-family: 'MuseoSansCyrl-100', sans-serif
+  font-size: 16px
+  color: $color_grey
+  display: inline-block
+.contacts-phones-number
+  font-family: 'MuseoSansCyrl-500', sans-serif
+  font-size: 18px
+  color: $color_l_blue
+  display: inline-block
+
+@media (max-width: 575px)
+  .contacts-phones
+    margin-bottom: 130px

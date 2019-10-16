@@ -1,0 +1,45 @@
+.blog
+  margin-bottom: 130px
+.grid-col3.blog-posts-wrapper
+  grid-gap: 30px
+  grid-template-columns: repeat(auto-fill, minmax(360px, 330px))
+
+.blog-post-item
+
+  img
+    border-radius: 10px
+    max-width: 330px
+  h5
+    color: $color_grey
+    font-size: 21px !important
+    width: 290px
+    a
+      color: inherit
+  p
+    max-width: 360px
+
+@media (max-width: 1024px)
+  .grid-col3.blog-posts-wrapper
+    justify-content: center
+.blog-post
+  margin-bottom: 100px
+
+//.blog-post-wrapper
+//  display: grid
+//  grid-template-columns: repeat(2,50%)
+//  grid-gap: 30px
+
+.blog-post-text
+  h1
+    font-family: 'MuseoSansCyrl-700',sans-serif
+    font-size: 21px
+    color: $color_grey
+    margin-bottom: 50px
+  p
+    line-height: 30px
+    max-width: 330px
+
+.blog-post-image
+  img
+    border-radius: 10px
+    max-width: 330px
