@@ -62,94 +62,88 @@
         <div class="breadcrumbs">
             <ul>
                 <li><a href="#">Главная</a></li>
-                <li class="active">Цены и сроки</li>
+                <li class="active">Личный кабинет</li>
             </ul>
         </div>
     </div><!--// breadcrumbs-->
 
-    <section class="all-prices">
+    <section class="lk">
         <div class="container">
-            <h1 class="mb50">Цены на основные услуги</h1>
-            <div class="prices-wrapper">
-                <div class="price-item bg-grey">
-                    <h5>Дипломая работа</h5>
-                    <p class="mb20">Стоимость:<span>от 7900 руб</span></p>
-                    <p class="mb20">Сроки:<span>от 7 дней</span></p>
-                    <p class="mb20">Работ выполнено:<span>23,783</span></p>
-                    <a href="#" class="btn">заказать работу</a>
+            <div class="lk-tabs">
+                <div class="lk-tab bordered" onclick="openTab('orders',this)">
+                    <span id="orders_icon"></span>
+                    <p class="not-visible-sm">Мои заказы</p>
                 </div>
-                <div class="price-item bg-grey">
-                    <h5>Дипломая работа</h5>
-                    <p class="mb20">Стоимость:<span>от 7900 руб</span></p>
-                    <p class="mb20">Сроки:<span>от 7 дней</span></p>
-                    <p class="mb20">Работ выполнено:<span>23,783</span></p>
-                    <a href="#" class="btn">заказать работу</a>
+                <div class="lk-tab lk-tab-active bordered" onclick="openTab('payment',this)">
+                    <span id="payment_icon"></span>
+                    <p class="not-visible-sm">Оплата</p>
                 </div>
-                <div class="price-item bg-grey">
-                    <h5>Дипломая работа</h5>
-                    <p class="mb20">Стоимость:<span>от 7900 руб</span></p>
-                    <p class="mb20">Сроки:<span>от 7 дней</span></p>
-                    <p class="mb20">Работ выполнено:<span>23,783</span></p>
-                    <a href="#" class="btn">заказать работу</a>
-
+                <div class="lk-tab bordered" onclick="openTab('profile',this)">
+                    <span id="profile_icon"></span>
+                    <p class="not-visible-sm">Профиль</p>
                 </div>
-            </div><!--//prices-wrapper -->
-            <div class="price-search">
-                <h3 class="not-visible-sm">Все услуги</h3>
-                <input class="form-control borderless" name="" placeholder="Поиск по виду работы">
+                <div class="lk-tab" onclick="openTab('new_order',this)">
+                    <span id="new_order_icon"></span>
+                    <p class="not-visible-sm">Новый заказ</p>
+                </div>
             </div>
-            <div class="prices-items">
 
-                <div id="tab_1" class="prices-item mb20">
-                    <div class="prices-item-inner">
-                        <p class="price-item-name">Контрольная работа</p>
-                        <p class="price-item-cost not-visible-sm">от 100 р</p>
-                        <p class="price-item-time not-visible-sm">от 1 дня</p>
-                        <a href="#" data-tab_id="1" class="price-toggle"><span ></span></a>
-
+            <div id="orders" class="tab">
+                <div class="tab-order">
+                    <div class="tab-order-number">Заказ №4556434</div>
+                    <div class="tab-order-total">
+                        <div class="tab-order-info">
+                            <p class="text-block"><span>Вид работы:</span> Курсовая работа</p>
+                            <p class="text-block"><span>Предмет:</span> Бухгалтерский учет и аудит</p>
+                            <p class="text-block"><span>Тема:</span> Бухучет основных средств</p>
+                        </div>
+                        <div class="tab-order-price">
+                            <p>Стоимость:</p>
+                            <span>7 900 руб</span>
+                        </div>
+                        <div class="tab-order-prepay">
+                            <p>Предоплата:</p>
+                            <span>2 300 руб</span>
+                        </div>
                     </div>
-                    <div  class="price-item dropdown-prices ">
-                        <p class="mb20">Сроки:<span>от 1 дня</span></p>
-                        <p class="mb20">Цена:<span>от 100 р</span></p>
-                        <a href="#" class="btn">заказать</a>
-
+                    <p class="tab-order-status">Статус заказа:</p>
+                    <div class="tab-order-status-wrapper">
+                        <div class="tab-order-status-bar">
+                          <div class="tab-order-status-bar-inner" style="width: 10%">
+                             <span style="left: 3%">10%</span> <!-- процент - 7 -->
+                              <span>Ожидаем предоплаты</span>
+                        </div>
                     </div>
-                </div>
-                <div id="tab_2" class="prices-item mb20">
-                    <div class="prices-item-inner">
-                        <p class="price-item-name">Контрольная работа</p>
-                        <p class="price-item-cost not-visible-sm">от 100 р</p>
-                        <p class="price-item-time not-visible-sm">от 1 дня</p>
-                        <a href="#" data-tab_id="2" class="price-toggle"><span></span></a>
+                    <a href="#" class="btn">внести предоплату</a>
                     </div>
-                    <div  class="price-item dropdown-prices">
-                        <p class="mb20">Сроки:<span>от 1 дня</span></p>
-                        <p class="mb20">Цена:<span>от 100 р</span></p>
-                        <a href="#" class="btn">заказать</a>
-                    </div>
-                </div>
+
+
+                </div><!--// tab-order-->
 
 
 
-            </div>
+
+            </div><!--// orders tab -->
+
+            <div id="payment" class="tab" style="display:none">
+                <h2>Paris</h2>
+                <p>Paris is the capital of France.</p>
+            </div><!--// payment tab -->
+
+            <div id="profile" class="tab" style="display:none">
+                <h2>Tokyo</h2>
+                <p>Tokyo is the capital of Japan.</p>
+            </div><!--// profile tab -->
+            <div id="new_order" class="tab" style="display:none">
+                <h2>Tokyo</h2>
+                <p>Tokyo is the capital of Japan.</p>
+            </div><!--// new_order tab -->
 
         </div>
 
 
-    </section><!--// all-prices-->
-    <section class="why-our-work">
-        <div class="container">
-            <h3>Почему работу лучше купить,<br>чем делать самому?</h3>
-            <p class="mb40">Дипломная работа - это самое сложное и ответственное <span>задание за весь учебный срок</span></p>
-            <p class="mb40"><span>Риск получить низкий балл</span> из-за преподавателей и сложности оформления</p>
-            <p class="mb40">Лучше <span>положиться на профессионалов,</span> чем ошибиться самому</p>
-            <p>Написание дипломных работ – практически всегда <span>нервотрепка и стресс</span></p>
 
-
-
-        </div>
-
-    </section><!--// why-our-work-->
+    </section><!--// lk-->
 </div><!-- // main -->
 <footer class="footer">
     <div class="container">
@@ -205,8 +199,7 @@
     let mobile_button = document.getElementsByClassName('mobile-toggle')[0]
     let mobile_menu_panel = document.getElementsByClassName('mobile-menu-panel')[0]
     let mobile_menu = document.getElementsByClassName('mobile-menu-panel-inner')[0]
-    let price_toggles = document.getElementsByClassName('price-toggle')
-    let link_chahged = false
+    let header_dropdown = document.getElementsByClassName('header-dropdown')[0]
 
     mobile_button.onclick = function () {
         this.classList.toggle('mobile-toggle-active')
@@ -214,35 +207,22 @@
         mobile_menu.classList.toggle('mobile-menu-panel-inner-active')
     }
 
-    window.addEventListener('resize', function() {
-        checkWidth()
-    });
+    function openTab(tab,el) {
+        let i;
+        let x = document.getElementsByClassName("tab");
+        let t = document.getElementsByClassName("lk-tab");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        for (i = 0; i < t.length; i++) {
+            t[i].classList.remove('lk-tab-active')
+        }
 
-    function openDropdown(id) {
-        console.log(id)
-        document.getElementById(`tab_${id}`).classList.toggle('dropdown-active')
+        document.getElementById(tab).style.display = "block";
+        el.classList.add('lk-tab-active')
     }
 
-    function checkWidth() {
-         if (window.innerWidth  < 528 && !link_chahged){
 
-            for (var i of price_toggles){
-                console.log(i.dataset.tab_id)
-                i.setAttribute('onclick',`openDropdown(${i.dataset.tab_id}); return false`)
-            }
-            link_chahged = true
-
-        }
-        if (window.innerWidth  > 528){
-            for (var i of price_toggles){
-                i.removeAttribute('onclick')
-            }
-            link_chahged = false
-
-        }
-    }
-
-    checkWidth()
 
 </script>
 

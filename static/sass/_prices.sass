@@ -3,17 +3,15 @@
   justify-content: space-between
   align-items: center
   input
-    width: 300px
-//thead
-//      font-size: 21px
-//      border-bottom: 1px solid #bebebe
-//      line-height: 50px
-.prices-items
+    width: 330px
+    margin-bottom: 20px
 
 .prices-item
   overflow: hidden
   height: 70px
   transition: height .2s ease-in
+
+
 .prices-item-inner
   font-family: 'MuseoSansCyrl-100', sans-serif
   font-size: 16px
@@ -42,14 +40,14 @@
   &:hover
     background: $bg-grey
     transition: background-color .3s ease-in
+
+
 .dropdown-prices
   height: 170px
   border: 1px solid #bebebe
   border-top: none
   border-radius: 30px
 
-.price-tab-toggle:checked
-  ~ .prices-item
-    height: 310px
-
+.dropdown-active
+  height: 310px
 

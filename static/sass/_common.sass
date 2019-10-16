@@ -87,13 +87,15 @@ h5
   cursor: pointer
   text-align: center
   width: 260px
-  background: linear-gradient(#ffeead, #ffda70, #ffdd84)
+  background-image: linear-gradient(to bottom, #ffe484 0%, #ffce5a 100%)
+  //background: linear-gradient(#ffeead, #ffda70, #ffdd84)
   padding: 10px
   font-family: 'Circe-Bold', sans-serif
   font-size: 16px
   color: $color_text
   border-radius: 20px 20px 20px 20px / 40px 40px 40px 40px
   box-shadow: 0 2px 0 0 #f7bf70
+  //box-shadow: inset 0 0 18px rgba(255, 255, 255, 0.75)
 
   span
     font-family: 'MuseoSansCyrl-300', sans-serif
@@ -102,6 +104,9 @@ h5
 
   &:focus
     outline-width: 0
+  &:hover
+    //box-shadow: inset 0 0 73px rgba(255, 187, 0, 0.18), inset 0 0 18px rgba(255, 255, 255, 0.75)
+    background-image: linear-gradient(to bottom, #ffce5a 0%, #ffe484 100%)
 
 
 .btn-lg
