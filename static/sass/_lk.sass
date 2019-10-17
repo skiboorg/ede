@@ -36,21 +36,25 @@
 #new_order_icon
   @extend .profile-icons
   background: url(../images/icons/new_icon.png)
-
+//tab order
 .tab
-  border: 1px solid #bebebe
-  padding: 30px 60px
+  //padding: 30px 60px
   &-order
-    border-bottom: 1px solid #bebebe
+    position: relative
+    border: 1px solid #bebebe
+    padding: 30px 60px
+    //border-bottom: 1px solid #bebebe
     margin-bottom: 40px
   &-order-status
     font-family: "MuseoSansCyrl-500", sans-serif
     font-size: 14px
   &-order-number
+    position: absolute
     color: $color_l_blue
     font-family: "MuseoSansCyrl-700", sans-serif
     font-size: 21px
-    margin-bottom: 20px
+    top: -18px
+    background: #fff
   &-order-total
     display: flex
     flex-wrap: wrap
@@ -132,6 +136,8 @@
     a
       margin-left: 50px
 
+//tab order
+
 @media (max-width: 575px)
   .tab
     padding: 20px 0
@@ -148,3 +154,59 @@
       a
         margin: 0
         flex: 1
+
+//tab payment
+.tab-payment-grid
+  display: grid
+  grid-template-columns: 3fr 1fr
+  grid-gap: 20px
+  &-orders
+    //border: 1px solid #bebebe
+  &-topay
+    padding: 30px 15px
+    border: 1px solid #bebebe
+    h5
+      font-size: 21px
+      border-bottom: 1px solid #bebebe
+      padding-bottom: 15px
+      margin-bottom: 15px
+    table
+      width: 100%
+      margin-bottom: 25px
+      tr
+        line-height: 30px
+        p
+          font-family: 'MuseoSansCyrl-300',sans-serif
+          font-size: 14px
+          color: $color_text
+        span
+          font-family: 'MuseoSansCyrl-500',sans-serif
+          font-size: 18px
+          color: $color_text
+          &.colored
+            color: $color_l_blue !important
+
+
+.tab-payment
+  position: relative
+  border: 1px solid #bebebe
+  padding: 30px 60px
+  //border-bottom: 1px solid #bebebe
+  margin-bottom: 40px
+  &-order-number
+    position: absolute
+    color: $color_l_blue
+    font-family: "MuseoSansCyrl-700", sans-serif
+    font-size: 21px
+    top: -18px
+    background: #fff
+
+//tab payment
+@media (max-width: 575px)
+  .tab-payment-grid
+    display: grid
+    grid-template-columns: 1fr
+    &-orders
+      order: 2
+    &-topay
+      order: 1

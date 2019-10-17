@@ -70,11 +70,11 @@
     <section class="lk">
         <div class="container">
             <div class="lk-tabs">
-                <div class="lk-tab bordered" onclick="openTab('orders',this)">
+                <div class="lk-tab lk-tab-active bordered" onclick="openTab('orders',this)">
                     <span id="orders_icon"></span>
                     <p class="not-visible-sm">Мои заказы</p>
                 </div>
-                <div class="lk-tab lk-tab-active bordered" onclick="openTab('payment',this)">
+                <div class="lk-tab  bordered" onclick="openTab('payment',this)">
                     <span id="payment_icon"></span>
                     <p class="not-visible-sm">Оплата</p>
                 </div>
@@ -109,12 +109,12 @@
                     <p class="tab-order-status">Статус заказа:</p>
                     <div class="tab-order-status-wrapper">
                         <div class="tab-order-status-bar">
-                          <div class="tab-order-status-bar-inner" style="width: 10%">
-                             <span style="left: 3%">10%</span> <!-- процент - 7 -->
-                              <span>Ожидаем предоплаты</span>
+                            <div class="tab-order-status-bar-inner" style="width: 10%">
+                                <span style="left: 3%">10%</span> <!-- процент - 7 -->
+                                <span>Ожидаем предоплаты</span>
+                            </div>
                         </div>
-                    </div>
-                    <a href="#" class="btn">внести предоплату</a>
+                        <a href="#" class="btn">внести предоплату</a>
                     </div>
 
 
@@ -123,11 +123,37 @@
 
 
 
+
             </div><!--// orders tab -->
 
             <div id="payment" class="tab" style="display:none">
-                <h2>Paris</h2>
-                <p>Paris is the capital of France.</p>
+                <div class="tab-payment-grid">
+
+                    <div class="tab-payment-grid-orders">
+                        <div class="tab-payment">
+                            <div class="tab-payment-order-number">Заказ №4556434</div>
+                        </div><!--// tab-payment-->
+                    </div><!--// tab-payment-grid-orders-->
+
+                    <div class="tab-payment-grid-topay">
+                        <h5>Всего к оплате:</h5>
+                        <table>
+                            <tr>
+                                <td><p>Заказов</p></td>
+                                <td><p>1</p></td>
+
+                            <tr>
+                                <td><span>Сумма</span></td>
+                                <td><span class="colored">3840 руб</span></td>
+                            </tr>
+                        </table>
+                        <a href="" class="btn">оплатить</a>
+                    </div><!--// tab-payment-grid-topay-->
+
+                </div><!--// tab-payment-grid -->
+
+
+
             </div><!--// payment tab -->
 
             <div id="profile" class="tab" style="display:none">

@@ -2005,13 +2005,10 @@ select {
   background: url(../images/icons/new_icon.png);
 }
 
-.tab {
+.tab-order {
+  position: relative;
   border: 1px solid #bebebe;
   padding: 30px 60px;
-}
-
-.tab-order {
-  border-bottom: 1px solid #bebebe;
   margin-bottom: 40px;
 }
 
@@ -2021,10 +2018,12 @@ select {
 }
 
 .tab-order-number {
+  position: absolute;
   color: #009cff;
   font-family: "MuseoSansCyrl-700", sans-serif;
   font-size: 21px;
-  margin-bottom: 20px;
+  top: -18px;
+  background: #fff;
 }
 
 .tab-order-total {
@@ -2147,6 +2146,65 @@ select {
 
 .tab-order-status-wrapper a {
   margin-left: 50px;
+}
+
+.tab-payment-grid {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-gap: 20px;
+}
+
+.tab-payment-grid-topay {
+  padding: 30px 15px;
+  border: 1px solid #bebebe;
+}
+
+.tab-payment-grid-topay h5 {
+  font-size: 21px;
+  border-bottom: 1px solid #bebebe;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+
+.tab-payment-grid-topay table {
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.tab-payment-grid-topay table tr {
+  line-height: 30px;
+}
+
+.tab-payment-grid-topay table tr p {
+  font-family: 'MuseoSansCyrl-300',sans-serif;
+  font-size: 14px;
+  color: #151515;
+}
+
+.tab-payment-grid-topay table tr span {
+  font-family: 'MuseoSansCyrl-500',sans-serif;
+  font-size: 18px;
+  color: #151515;
+}
+
+.tab-payment-grid-topay table tr span.colored {
+  color: #009cff !important;
+}
+
+.tab-payment {
+  position: relative;
+  border: 1px solid #bebebe;
+  padding: 30px 60px;
+  margin-bottom: 40px;
+}
+
+.tab-payment-order-number {
+  position: absolute;
+  color: #009cff;
+  font-family: "MuseoSansCyrl-700", sans-serif;
+  font-size: 21px;
+  top: -18px;
+  background: #fff;
 }
 
 .footer {
@@ -2439,6 +2497,23 @@ select {
     -webkit-box-flex: 1;
     -ms-flex: 1;
     flex: 1;
+  }
+
+  .tab-payment-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .tab-payment-grid-orders {
+    -webkit-box-ordinal-group: 3;
+    -ms-flex-order: 2;
+    order: 2;
+  }
+
+  .tab-payment-grid-topay {
+    -webkit-box-ordinal-group: 2;
+    -ms-flex-order: 1;
+    order: 1;
   }
 
   .footer-top-phones {
