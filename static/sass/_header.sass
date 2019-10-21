@@ -545,7 +545,7 @@
   top: -15px
 .how-it-works-slider
   position: relative
-  height: 400px
+  height: 300px
 
 .how-it-works-slide
   display: grid
@@ -555,10 +555,14 @@
   transition: opacity .3s ease-in
 
 //
+
+
 .how-it-works-slide.slide-active
   opacity: 1
 
-
+@media (max-width: 575px)
+  .how-it-works-slide
+    grid-template-columns: 1fr
 
 
 .slide-text
@@ -605,7 +609,7 @@
 
   .slider-arrows
     width: 100%
-    bottom: -70px
+    bottom: 0px
 
   .how-it-works-slide.slide-active
     grid-template-columns: 1fr

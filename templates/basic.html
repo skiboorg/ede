@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<!-- SKIBORG WAS HERE -->
+<html lang="ru">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-store, no-cache, must-revalidate"/>
+    <title>{% block title %}  title {% endblock %} </title>
+    <meta name="keywords" content="{% block keywords %} keywords {% endblock %}">
+    <meta name="description" content="{% block description %} description {% endblock %}"/>
+    {% block css %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    {% endblock %}
+</head>
+<body>
+<div class="main">
+{% block content %}
+{% endblock %}
+</div><!-- // main -->
+{% include 'footer.html' %}
+{% block js %}
+{% endblock %}
+</body>
+</html>

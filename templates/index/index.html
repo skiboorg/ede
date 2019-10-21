@@ -1,118 +1,28 @@
-<!DOCTYPE html>
-<!-- SKIBORG WAS HERE -->
-<html lang="ru">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta charset="UTF-8">
-    <title>index</title>
-    <link rel="stylesheet" href="css/tiny-slider.css">
-    <link rel="stylesheet" href="css/prism.css">
-    <link rel="stylesheet" href="css/main.css">
-</head>
-<body>
+{% extends  'basic.html' %}
+{% load static %}
 
-<header class="header">
-    <div class="container header-wrapper grid-col3">
-        <div class="grid-item header-logo">
-            <img src="images/icons/ede.png" alt="">
-            <span>Заказать диплом или курсовую у реальных практиков</span>
-        </div>
-        <div class="grid-item header-statistic">
-            <div class="header-statistic-wrapper">
-                <img src="images/header_books.png" alt="">
-                <p>47,470<span>работ выполнено</span></p>
-            </div>
-            <a href="#">посмотреть работы</a>
-        </div>
-        <div class="grid-item header-phones">
-            <div class="header-phones-inner">
-                <p>Есть вопрос? Звоните</p>
-                <span>+7 (351) 230 80 40</span>
-                <a href="#" class="btn btn-callback">перезвоните мне</a>
-            </div>
-        </div>
-    </div><!-- end header-wrapper -->
-    <div class="container mobile-menu-wrapper">
-        <div class="mobile-toggle"></div>
-        <div class="mobile-menu-phohe">
-            <a href="tel:+73512308040">+7 (351) 230 80 40</a>
-        </div>
-    </div>
-    <div class="mobile-menu-panel">
-        <div class="mobile-menu-panel-inner">
-            <div class="header-dropdown-user" >
-                <!-- <a class="link" href="#">Зарегистрироваться</a> -->
-                <img src="images/icons/EDE.png" alt="">
-                <a class="link" href="#">Анастатися</a>
-            </div>
-            <ul class="mobile-nav">
-                <li class="active"><a href="#">Главная</a></li>
-                <li><a href="#">Цены и сроки</a></li>
-                <li><a href="#">Способы оплаты</a></li>
-                <li><a href="#">Отзывы</a></li>
-                <li><a href="#">О нас</a></li>
-                <li><a href="#">Конакты</a></li>
-            </ul>
-        </div>
-    </div><!-- end mobile-menu-panel -->
-    <div class="header-dropdown">
-        <img src="images/icons/EDE.png" alt="">
-        <ul class="nav">
-            <li class="active"><a href="#">Главная</a></li>
-            <li><a href="#">Цены и сроки</a></li>
-            <li><a href="#">Способы оплаты</a></li>
-            <li><a href="#">Отзывы</a></li>
-            <li><a href="#">О нас</a></li>
-            <li><a href="#">Конакты</a></li>
-        </ul>
-        <a href="#" class="btn ">оформить заявку</a>
-        <div class="header-dropdown-user" >
-            <!-- <a class="link" href="#">Зарегистрироваться</a> -->
-            <img src="images/icons/EDE.png" alt="">
-            <a class="link" href="#">Анастатися</a>
-        </div>
-    </div><!-- end header-dropdown -->
-    <div class="container  header-inner">
+{% block title %}
+    {{ block.super }} - уауку
+{% endblock %}
 
-        <h1>Вашу работу выполнит <span>настоящий практик</span><br/>менее чем за 1 неделю</h1>
-        <p class="not-visible-sm"><span>Узнайте стоимость</span> своей работы прямо на сайте с<br/>помощью нашей формы</p>
+{% block keywords %}
+    {{ block.super }}
+{% endblock %}
 
-        <a href="#callback_form" class="btn btn-lg">Узнать цену своей работы</a>
+{% block description %}
+    {{ block.super }}
+{% endblock %}
 
-        <div class="header-features-grid">
-            <div>
-                <div class="header-feature header-feature-1">
-                    <div class="header-feature-inner">
-                        <p>Вместе с выполненной работой, вы получите <span>результат проверки её на анти-плагиат</span></p>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="header-feature header-feature-2">
-                <div class="header-feature-inner">
-                    <p>Успешно трудимся с 2004 года, за это время мы ни разу <span>не сорвали сроки выполнения работы</span></p>
-                </div>
-
-            </div>
-            <div class="header-feature header-feature-3">
-                <div class="header-feature-inner">
-                    <p class="text-block">Сопровождаем вас до полной сдачи работы, <span>все доработки выполним бесплатно</span></p>
-                </div>
-
-            </div>
-
-        </div>
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/tiny-slider.css' %}">
+    <link rel="stylesheet" href="{% static 'css/prism.css' %} ">
+    {{ block.super }}
+{% endblock %}
 
 
 
-
-    </div><!-- end header-inner -->
-
-
-
-</header>
-<div class="main">
+{% block content %}
+    {% include 'header_index.html' %}
     <div class="features" >
         <div class="container grid-col3">
             <div class="feature-item text-center">
@@ -139,11 +49,20 @@
                     <div class="form-row">
                         <div class="select-wrapper">
                             <select class="form-control" >
-                                <option selected>Вид работы</option>
-                                <option>Вид работы</option>
+                                <option selected="selected" value="">Вид работы</option>
+                                {% for service in allService %}
+                                <option value="{{ service.id }}">{{ service.name }}</option>
+                                {% endfor %}
                             </select>
                         </div>
-                        <input class="form-control" value="" placeholder="Предмет">
+                       <div class="select-wrapper">
+                            <select class="form-control" >
+                                <option selected="selected" value="">Предмет</option>
+                                 {% for subject in allSubjects %}
+                                    <option value="{{ subject.id }}">{{ subject.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
 
                         <input class="form-control" value="" placeholder="Предмет">
                         <div class="d-flex-jc-sb">
@@ -233,7 +152,7 @@
                         <p ><a class="link" href="#">Заполните несколько полей</a>, после чего мы сами моментально свяжемся с вами и отправим письмо с ценой вашей работы на ваш e-mail</p>
                     </div>
                     <div class="slide-img text-right not-visible-sm">
-                        <img src="images/hw-slider.jpg" alt="">
+                        <img src="{% static 'images/hw-slider.jpg' %}" alt="">
                     </div>
                 </div>
                 <div id="slide_2" class="how-it-works-slide ">
@@ -242,7 +161,7 @@
                         <p ><a class="link" href="#">Заполните несколько полей</a>, после чего мы сами моментально свяжемся с вами и отправим письмо с ценой вашей работы на ваш e-mail</p>
                     </div>
                     <div class="slide-img text-right not-visible-sm">
-                        <img src="images/hw-slider.jpg" alt="">
+                        <img src="{% static 'images/hw-slider.jpg' %}" alt="">
                     </div>
                 </div>
                 <div id="slide_3" class="how-it-works-slide ">
@@ -251,7 +170,7 @@
                         <p ><a class="link" href="#">Заполните несколько полей</a>, после чего мы сами моментально свяжемся с вами и отправим письмо с ценой вашей работы на ваш e-mail</p>
                     </div>
                     <div class="slide-img text-right not-visible-sm">
-                        <img src="images/hw-slider.jpg" alt="">
+                        <img src="{% static 'images/hw-slider.jpg' %}" alt="">
                     </div>
                 </div>
                 <div id="slide_4" class="how-it-works-slide ">
@@ -260,7 +179,7 @@
                         <p ><a class="link" href="#">Заполните несколько полей</a>, после чего мы сами моментально свяжемся с вами и отправим письмо с ценой вашей работы на ваш e-mail</p>
                     </div>
                     <div class="slide-img text-right not-visible-sm">
-                        <img src="images/hw-slider.jpg" alt="">
+                        <img src="{% static 'images/hw-slider.jpg' %}" alt="">
                     </div>
                 </div>
 
@@ -301,7 +220,7 @@
             <h3>Посмотрите, как мы уже помогли другим клиентам</h3>
             <h4 class="text-center mb50">Несколько примеров нашей работы и реальные отзывы о ней</h4>
             <div class="our-help-inner">
-                <div class="our-help-media" style="background: url(images/help_bg_big.jpg) no-repeat">
+                <div class="our-help-media" style="background: url({% static 'images/help_bg_big.jpg' %}) no-repeat">
                 </div>
                 <div class="our-help-info">
                     <div class="our-help-info-header mb30">
@@ -318,42 +237,42 @@
             <div class="our-help-media-slider" id="our-help-media-slider">
                 <div class="our-help-media-slide-item">
                     <div class="our-help-media-slide-image">
-                        <img src="images/slide-item.png" alt="">
+                        <img src="{% static 'images/slide-item.png' %}" alt="">
                     </div>
                     <h5>Студент очник</h5>
                     <p>Совместно выявили самые сложные моменты в его программе и взяли их на себя</p>
                 </div>
                 <div class="our-help-media-slide-item">
                     <div class="our-help-media-slide-image">
-                        <img src="images/slide-item.png" alt="">
+                        <img src="{% static 'images/slide-item.png' %}" alt="">
                     </div>
                     <h5>Студент очник</h5>
                     <p>Совместно выявили самые сложные моменты в его программе и взяли их на себя</p>
                 </div>
                 <div class="our-help-media-slide-item">
                     <div class="our-help-media-slide-image">
-                        <img src="images/slide-item.png" alt="">
+                        <img src="{% static 'images/slide-item.png' %}" alt="">
                     </div>
                     <h5>Студент очник</h5>
                     <p>Совместно выявили самые сложные моменты в его программе и взяли их на себя</p>
                 </div>
                 <div class="our-help-media-slide-item">
                     <div class="our-help-media-slide-image">
-                        <img src="images/slide-item.png" alt="">
+                        <img src="{% static 'images/slide-item.png' %}" alt="">
                     </div>
                     <h5>Студент очник</h5>
                     <p>Совместно выявили самые сложные моменты в его программе и взяли их на себя</p>
                 </div>
                 <div class="our-help-media-slide-item">
                     <div class="our-help-media-slide-image">
-                        <img src="images/slide-item.png" alt="">
+                        <img src="{% static 'images/slide-item.png' %}" alt="">
                     </div>
                     <h5>Студент очник</h5>
                     <p>Совместно выявили самые сложные моменты в его программе и взяли их на себя</p>
                 </div>
                 <div class="our-help-media-slide-item">
                     <div class="our-help-media-slide-image">
-                        <img src="images/slide-item.png" alt="">
+                        <img src="{% static 'images/slide-item.png' %}" alt="">
                     </div>
                     <h5>Студент очник</h5>
                     <p>Совместно выявили самые сложные моменты в его программе и взяли их на себя</p>
@@ -361,10 +280,10 @@
             </div>
             <div class="controls" id="customize-controls">
                 <div class="prev">
-                    <img src="images/icons/blue_left_arrow.svg" alt="">
+                    <img src="{% static 'images/icons/blue_left_arrow.svg' %}" alt="">
                 </div>
                 <div class="next">
-                    <img src="images/icons/blue_right_arrow.svg" alt="">
+                    <img src="{% static 'images/icons/blue_right_arrow.svg' %}" alt="">
                 </div>
             </div>
         </div>
@@ -383,64 +302,11 @@
         </div>
 
     </section>
-</div><!-- // main -->
-<footer class="footer">
-    <div class="container">
-        <div class="footer-top grid-col4">
-            <div class="footer-top-info">
-                <p>Все материалы данного сайта защищены авторским правом. Полное или частичное копирование запрещено. Информация предназначена для аудитории 14+</p>
-            </div>
-            <div class="footer-top-list not-visible-sm">
-                <p>Реквизиты в России:</p>
-                <ul>
-                    <li>ИП Фамилия И.И.</li>
-                    <li>ИНН 54651326526</li>
-                    <li>ОГРНИП 561563592526</li>
-                </ul>
-            </div>
-            <div class="footer-top-list not-visible-sm">
-                <p>Адрес офиса:</p>
-                <ul>
-                    <li>г. Челябинск</li>
-                    <li>7010, ул. Название, 55</li>
-                    <li>Телефон: +7 351 230 80 40</li>
-                </ul>
-            </div>
+{% endblock %}
 
-            <div class="footer-top-phones text-right">
-                <p>+7 (351) 230 80 40</p>
-                <a href="#" class="btn ">заказать звонок</a>
-            </div>
-
-
-
-            <div class="header-logo not-visible-sm">
-                <img src="images/icons/ede.png" alt="">
-                <span>Заказать диплом или курсовую у реальных практиков</span>
-            </div>
-            <div class="footer-social">
-                <a class="link" href="#">политика конфидициальности</a>
-
-                <ul>
-                    <li><a href="#" rel="nofollow"><span class="vk_icon"></span></a></li>
-                    <li><a href="#" rel="nofollow"><span class="fb_icon"></span></a></li>
-                    <li><a href="#" rel="nofollow"><span class="inst_icon"></span></a></li>
-                </ul>
-            </div>
-        </div>
-
-    </div>
-</footer>
-
-
-
-
-<script src="js/tiny-slider.js"></script>
-
-
+{% block js %}
+    <script src="{% static 'js/tiny-slider.js' %}"></script>
 <script>
-    var doc = document
-
     var mobile = 'false',
         isTestPage = false,
         isDemoPage = true,
@@ -470,9 +336,7 @@
             autoplay: true,
             autoplayTimeout: 4000,
             speed: 1000,
-
         },
-
     }
 
     for (var i in options) {
@@ -480,32 +344,13 @@
         item.container = '#' + i;
         item.swipeAngle = false;
         if (!item.speed) { item.speed = speed; }
-
-        if (doc.querySelector(item.container)) {
+        if (document.querySelector(item.container)) {
             sliders[i] = tns(options[i]);
-
-            // call test functions
             if (isTestPage && initFns[i]) { initFns[i](); }
-
-
-            // test responsive pages
         } else if (i.indexOf('responsive') >= 0) {
             if (isTestPage && initFns[i]) { initFns[i](); }
         }
     }
-
-    // goto
-    if (doc.querySelector('#base_wrapper')) {
-        var goto = doc.querySelector('#base_wrapper .goto-controls'),
-            gotoBtn = goto.querySelector('.button'),
-            gotoInput = goto.querySelector('input');
-
-        gotoBtn.onclick = function (event) {
-            var index = gotoInput.value;
-            sliders['base'].goTo(index);
-        };
-    }
-
 
     let mobile_button = document.getElementsByClassName('mobile-toggle')[0]
     let mobile_menu_panel = document.getElementsByClassName('mobile-menu-panel')[0]
@@ -553,16 +398,12 @@
         console.log('last_slide before', last_slide)
         console.log('current_slide before', current_slide)
         let cur_slide = document.getElementsByClassName('slide-active')[0]
-
-
         last_slide = current_slide
           if (current_slide+1 > 4){
            current_slide = 1
         }else {
           current_slide += 1
         }
-
-
     changeSlide()
     }
 
@@ -577,19 +418,5 @@
 
         }, 300);
     }
-
-    //  document.getElementsByClassName('slide-active')[0].addEventListener("webkitAnimationEnd", function () {
-    //      console.log('end')
-    //      document.getElementById(`slide_${last_slide}`).classList.remove('slide-out')
-    //      document.getElementById(`slide_${last_slide}`).classList.remove('slide-active')
-    //      document.getElementById(`slide_${current_slide}`).classList.add('slide-active')
-    //       document.getElementById(`slide_${current_slide}`).classList.add('slide-in')
-    //
-    // })
-
-
-
 </script>
-
-</body>
-</html>
+{% endblock %}

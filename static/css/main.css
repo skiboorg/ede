@@ -211,6 +211,10 @@ body {
   color: #151515;
 }
 
+.main {
+  scroll-behavior: smooth;
+}
+
 button[type='button'] {
   display: none;
 }
@@ -1355,7 +1359,7 @@ select {
 
 .how-it-works-slider {
   position: relative;
-  height: 400px;
+  height: 300px;
 }
 
 .how-it-works-slide {
@@ -2535,6 +2539,10 @@ select {
     font-size: 24px;
   }
 
+  .how-it-works-slide {
+    grid-template-columns: 1fr;
+  }
+
   .slide-text h5:before {
     left: -5px;
     font-size: 90px;
@@ -2543,7 +2551,7 @@ select {
 
   .slider-arrows {
     width: 100%;
-    bottom: -70px;
+    bottom: 0px;
   }
 
   .how-it-works-slide.slide-active {

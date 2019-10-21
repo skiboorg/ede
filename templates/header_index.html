@@ -1,0 +1,108 @@
+{% load static %}
+<header class="header">
+    <div class="container header-wrapper grid-col3">
+        <div class="grid-item header-logo">
+            <img src="{% static 'images/icons/ede.png' %}" alt="">
+            <span>Заказать диплом или курсовую у реальных практиков</span>
+        </div>
+        <div class="grid-item header-statistic">
+            <div class="header-statistic-wrapper">
+                <img src="{% static 'images/header_books.png' %}" alt="">
+                <p>47,470<span>работ выполнено</span></p>
+            </div>
+            <a href="#">посмотреть работы</a>
+        </div>
+        <div class="grid-item header-phones">
+            <div class="header-phones-inner">
+                <p>Есть вопрос? Звоните</p>
+                <span>+7 (351) 230 80 40</span>
+                <a href="#" class="btn btn-callback">перезвоните мне</a>
+            </div>
+        </div>
+    </div><!-- end header-wrapper -->
+    <div class="container mobile-menu-wrapper">
+        <div class="mobile-toggle"></div>
+        <div class="mobile-menu-phohe">
+            <a href="tel:+73512308040">+7 (351) 230 80 40</a>
+        </div>
+    </div>
+    <div class="mobile-menu-panel">
+        <div class="mobile-menu-panel-inner">
+            <div class="header-dropdown-user" >
+                {% if request.user.is_authenticated %}
+                    <img src="{% static 'images/icons/EDE.png' %}" alt="">
+                    <a class="link" href="#">{{ request.user.email }}</a>
+                {% else %}
+                    <a class="link" href="#">Зарегистрироваться</a>
+                {% endif %}
+            </div>
+            <ul class="mobile-nav">
+                <li class="active"><a href="#">Главная</a></li>
+                <li><a href="#">Цены и сроки</a></li>
+                <li><a href="#">Способы оплаты</a></li>
+                <li><a href="#">Отзывы</a></li>
+                <li><a href="#">О нас</a></li>
+                <li><a href="#">Конакты</a></li>
+            </ul>
+        </div>
+    </div><!-- end mobile-menu-panel -->
+    <div class="header-dropdown">
+        <img src="{% static 'images/icons/EDE.png' %}" alt="">
+        <ul class="nav">
+            <li class="active"><a href="#">Главная</a></li>
+            <li><a href="#">Цены и сроки</a></li>
+            <li><a href="#">Способы оплаты</a></li>
+            <li><a href="#">Отзывы</a></li>
+            <li><a href="#">О нас</a></li>
+            <li><a href="#">Конакты</a></li>
+        </ul>
+        <a href="#" class="btn ">оформить заявку</a>
+        <div class="header-dropdown-user" >
+            {% if request.user.is_authenticated %}
+                    <img src="{% static 'images/icons/EDE.png' %}" alt="">
+                    <a class="link" href="#">{{ request.user.email }}</a>
+                {% else %}
+                    <a class="link" href="#">Зарегистрироваться</a>
+                {% endif %}
+        </div>
+    </div><!-- end header-dropdown -->
+    <div class="container  header-inner">
+
+        <h1>Вашу работу выполнит <span>настоящий практик</span><br/>менее чем за 1 неделю</h1>
+        <p class="not-visible-sm"><span>Узнайте стоимость</span> своей работы прямо на сайте с<br/>помощью нашей формы</p>
+
+        <a href="#callback_form" class="btn btn-lg">Узнать цену своей работы</a>
+
+        <div class="header-features-grid">
+            <div>
+                <div class="header-feature header-feature-1">
+                    <div class="header-feature-inner">
+                        <p>Вместе с выполненной работой, вы получите <span>результат проверки её на анти-плагиат</span></p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="header-feature header-feature-2">
+                <div class="header-feature-inner">
+                    <p>Успешно трудимся с 2004 года, за это время мы ни разу <span>не сорвали сроки выполнения работы</span></p>
+                </div>
+
+            </div>
+            <div class="header-feature header-feature-3">
+                <div class="header-feature-inner">
+                    <p class="text-block">Сопровождаем вас до полной сдачи работы, <span>все доработки выполним бесплатно</span></p>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+
+    </div><!-- end header-inner -->
+
+
+
+</header>
