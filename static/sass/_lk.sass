@@ -190,7 +190,11 @@
 .tab-payment
   position: relative
   border: 1px solid #bebebe
-  padding: 30px 60px
+  &-wrapper
+    //padding: 30px 25px
+    display: flex
+    flex-wrap: wrap
+    flex: 1
   //border-bottom: 1px solid #bebebe
   margin-bottom: 40px
   &-order-number
@@ -200,6 +204,55 @@
     font-size: 21px
     top: -18px
     background: #fff
+  &-order-info
+    position: relative
+    flex-basis: 220px
+    padding: 30px 15px
+    flex-grow: 1
+    h5
+      font-size: 18px
+    p
+      &.border-bottom:after
+        position: absolute
+        content: ''
+        width: 60px
+        height: 1px
+        background: #bebebe
+        left: 15px
+        bottom: 85px
+    span
+      font-family: 'MuseoSansCyrl-700', sans-serif
+      font-size: 28px
+      color: $color_grey
+
+  &-fullpay
+    flex-basis: 220px
+    background: $bg-grey
+    flex-grow: 1
+    padding: 30px 0 30px 15px
+  &-prepay
+    flex-basis: 220px
+    flex-grow: 1
+    padding: 30px 0 30px 15px
+  &-radio
+    position: relative
+    font-family: 'MuseoSansCyrl-700', sans-serif
+    font-size: 18px
+    color: $color_grey
+    cursor: pointer
+    margin-left: 30px
+    &:before
+      position: absolute
+      content: url(../images/icons/radio-empty.png)
+      left: -30px
+      bottom: -7px
+    &.radio-checked:before
+      content: url(../images/icons/radio-checked.png)
+
+
+
+
+
 
 //tab payment
 @media (max-width: 575px)

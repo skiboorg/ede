@@ -545,15 +545,21 @@
   top: -15px
 .how-it-works-slider
   position: relative
+  height: 400px
 
 .how-it-works-slide
-  display: none
-
-.how-it-works-slide.slide-active
   display: grid
-
+  position: absolute
   grid-template-columns: 50% 50%
-  transition: all 1s ease-in
+  opacity: 0
+  transition: opacity .3s ease-in
+
+//
+.how-it-works-slide.slide-active
+  opacity: 1
+
+
+
 
 .slide-text
   h5
@@ -618,16 +624,19 @@
       font-size: 50px
       line-height: 50px
 
-  p
-    font-family: 'Circe-Regular', sans-serif
-    font-size: 14px
-    line-height: 13px
+    p
+      font-family: 'Circe-Regular', sans-serif
+      font-size: 14px
+      line-height: 13px
+      color: $color_yellow
 
 .slider-arrow-left.arrow-not-active, .slider-arrow-right.arrow-not-active
   color: #bebebe
   a
     cursor: context-menu
     pointer-events: none
+    p
+      color: $color_yellow
     span
       color: #bebebe
 

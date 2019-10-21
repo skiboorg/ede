@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- SKIBORG WAS HERE -->
 <html lang="ru">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -225,7 +226,7 @@
                     <a href="#"><span>04</span></a>
                 </div>
             </div><!-- // how-it-works-numbers -->
-            <div class="container-sm how-it-works-slider">
+            <div class="container-sm how-it-works-slider" id="how-it-works-slider">
                 <div id="slide_1" class="how-it-works-slide slide-active">
                     <div class="slide-text">
                         <h5 data-number="01" class="mb30">Оставьте заявку и узнайте цену</h5>
@@ -240,7 +241,7 @@
                         <h5 data-number="02" class="mb30">Оставьте заявку и узнайте цену</h5>
                         <p ><a class="link" href="#">Заполните несколько полей</a>, после чего мы сами моментально свяжемся с вами и отправим письмо с ценой вашей работы на ваш e-mail</p>
                     </div>
-                    <div class="slide-img text-right">
+                    <div class="slide-img text-right not-visible-sm">
                         <img src="images/hw-slider.jpg" alt="">
                     </div>
                 </div>
@@ -249,7 +250,7 @@
                         <h5 data-number="03" class="mb30">Оставьте заявку и узнайте цену</h5>
                         <p ><a class="link" href="#">Заполните несколько полей</a>, после чего мы сами моментально свяжемся с вами и отправим письмо с ценой вашей работы на ваш e-mail</p>
                     </div>
-                    <div class="slide-img text-right">
+                    <div class="slide-img text-right not-visible-sm">
                         <img src="images/hw-slider.jpg" alt="">
                     </div>
                 </div>
@@ -258,19 +259,21 @@
                         <h5 data-number="04" class="mb30">Оставьте заявку и узнайте цену</h5>
                         <p ><a class="link" href="#">Заполните несколько полей</a>, после чего мы сами моментально свяжемся с вами и отправим письмо с ценой вашей работы на ваш e-mail</p>
                     </div>
-                    <div class="slide-img text-right">
+                    <div class="slide-img text-right not-visible-sm">
                         <img src="images/hw-slider.jpg" alt="">
                     </div>
                 </div>
 
                 <div class="slider-arrows">
                     <div class="slider-arrow-left ">
-                        <a id="arrow-left" href="javascript:void(0)"><span>&#8592;</span></a>
+                        <a id="arrow-left" href="javascript:void(0)"><span>&#8592;</span>
                         <p>Предыдущий<br/>этап</p>
+                        </a>
                     </div>
                     <div class="slider-arrow-right">
-                        <a id="arrow-right" href="javascript:void(0)"><span class="text-right">&#8594;</span></a>
+                        <a id="arrow-right" href="javascript:void(0)"><span class="text-right">&#8594;</span>
                         <p class="text-right">Следующий<br/>этап</p>
+                        </a>
                     </div>
                 </div><!-- // slider-arrows -->
             </div>
@@ -468,7 +471,8 @@
             autoplayTimeout: 4000,
             speed: 1000,
 
-        }
+        },
+
     }
 
     for (var i in options) {
@@ -531,6 +535,17 @@
 
     arrow_left.onclick = function () {
         console.log('left click')
+        console.log('last_slide before', last_slide)
+        console.log('current_slide before', current_slide)
+         let cur_slide = document.getElementsByClassName('slide-active')[0]
+        last_slide = current_slide
+        if (current_slide-1 < 1){
+           current_slide = 4
+        }else {
+          current_slide -= 1
+        }
+
+        changeSlide()
     }
 
     arrow_right.onclick = function () {
@@ -538,21 +553,29 @@
         console.log('last_slide before', last_slide)
         console.log('current_slide before', current_slide)
         let cur_slide = document.getElementsByClassName('slide-active')[0]
-        cur_slide.classList.remove('slide-in')
-        cur_slide.classList.add('slide-out')
-        last_slide = current_slide
-        current_slide += 1
-        console.log('last_slide after', last_slide)
-        console.log('current_slide after', current_slide)
-        setTimeout(function() {
-            document.getElementById(`slide_${last_slide}`).classList.remove('slide-out')
-            document.getElementById(`slide_${last_slide}`).classList.remove('slide-active')
-        }, (1000));
-        setTimeout(function() {
-            document.getElementById(`slide_${current_slide}`).classList.add('slide-active')
-            document.getElementById(`slide_${current_slide}`).classList.add('slide-in')
-        }, (2000));
 
+
+        last_slide = current_slide
+          if (current_slide+1 > 4){
+           current_slide = 1
+        }else {
+          current_slide += 1
+        }
+
+
+    changeSlide()
+    }
+
+    function changeSlide() {
+        console.log(current_slide)
+            document.getElementById(`step_${last_slide}`).classList.remove('step-active')
+            document.getElementById(`slide_${last_slide}`).classList.remove('slide-active')
+
+        setTimeout(function() {
+            document.getElementById(`step_${current_slide}`).classList.add('step-active')
+            document.getElementById(`slide_${current_slide}`).classList.add('slide-active')
+
+        }, 300);
     }
 
     //  document.getElementsByClassName('slide-active')[0].addEventListener("webkitAnimationEnd", function () {
