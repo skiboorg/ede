@@ -147,19 +147,20 @@
 
                         <input class="form-control" value="" placeholder="Предмет">
                         <div class="d-flex-jc-sb">
-                            <input class="form-control form-control-sm " value="" placeholder="Предмет">
-                            <input class="form-control form-control-sm" value="" placeholder="Предмет">
+                            <input type="number" class="form-control form-control-sm " value="" placeholder="Объем">
+                            <input class="form-control form-control-sm " value="" placeholder="Срок">
                         </div>
-                        <input class="form-control form-control-lg" value="" placeholder="Предмет">
+                        <input type="file" class="form-control form-control-lg">
                     </div>
 
 
                 </div>
                 <div class="calculation-form-footer">
-                    <input class="form-control" value="" placeholder="Предмет">
-                    <input class="form-control" value="" placeholder="Предмет">
-                    <input class="form-control" value="" placeholder="Предмет">
+                    <input class="form-control input-phone" value="" placeholder="Сотовый номер">
+                    <input class="form-control input-email" value="" placeholder="E-mail адрес">
+                    <input class="form-control input-user" value="" placeholder="Ваше ФИО">
                 </div>
+                <p class="form-error">Отмеченные поля обязательны для заполнения</p>
                 <button  class="btn btn-lg m-a mt30 mb30">Узнать стоимость своей работы<br><span>ответ придет на ваш почтовый ящик</span></button>
 
                 <label class="custom-checkbox"><span>Даю согласие на обработку моих персональных данных</span>
@@ -301,14 +302,14 @@
             <h3>Посмотрите, как мы уже помогли другим клиентам</h3>
             <h4 class="text-center mb50">Несколько примеров нашей работы и реальные отзывы о ней</h4>
             <div class="our-help-inner">
-                <div class="our-help-media" style="background: url(images/help_bg_big.jpg) no-repeat">
+                <div id="review_image" class="our-help-media" style="background: url(images/help_bg_big.jpg) no-repeat">
                 </div>
                 <div class="our-help-info">
                     <div class="our-help-info-header mb30">
-                        <h5 class="mb20">Родила на третьем курсе, а доучиваться еще два</h5>
-                        <p  class="mb20">Изучили положение и помогли сформировать пакет работ по подходящему бюджету</p>
+                        <h5 id="review_title" class="mb20">Родила на третьем курсе, а доучиваться еще два</h5>
+                        <p id="review_description"  class="mb20">Изучили положение и помогли сформировать пакет работ по подходящему бюджету</p>
                     </div>
-                    <p class="mb30">
+                    <p id="review_shortReview" class="mb30">
                         На третьем курсе Юлия стала мамой, возможности писать рефераты и курсовые работы не стало. Брать академический отпуск — финансово нецелесообразно. Тогда она решила обратиться к нам.
                     </p>
                     <a href="#" class="link text-upper mb40">Читать далее...</a>
@@ -316,7 +317,13 @@
                 </div>
             </div><!-- //our-help-inner-->
             <div class="our-help-media-slider" id="our-help-media-slider">
-                <div class="our-help-media-slide-item">
+                <div class="our-help-media-slide-item"
+                     data-image="images/blog-item.png"
+                     data-title="titleeeeeeeeeeeeeeeee"
+                     data-description="description"
+                     data-shortReview="shortReviewshortReview"
+                     data-fullReview="fullReviewfullReviewfullReviewfullReview"
+                     onclick="changeReview(this)">
                     <div class="our-help-media-slide-image">
                         <img src="images/slide-item.png" alt="">
                     </div>
@@ -439,6 +446,20 @@
 
 
 <script>
+     let review_image=document.getElementById('review_image'), review_title=document.getElementById('review_title'),
+            review_description=document.getElementById('review_description'),
+            review_shortReview=document.getElementById('review_shortReview')
+    function changeReview(el) {
+        let image = el.dataset.image, title = el.dataset.title, description = el.dataset.description,
+            shortReview = el.dataset.shortReview, fullReview = el.dataset.fullReview
+    review_image.style.background = "url('"+image+"') no-repeat"
+    review_title.innerText = title
+
+
+
+    }
+
+
     var doc = document
 
     var mobile = 'false',

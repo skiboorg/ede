@@ -73,10 +73,10 @@
             <div class="prices-wrapper">
                 <div class="price-item bg-grey">
                     <h5>Дипломая работа</h5>
-                    <p class="mb20">Стоимость:<span>от 7900 руб</span></p>
+                    <p class="mb20">Стоимость:<span>от 7e900 руб</span></p>
                     <p class="mb20">Сроки:<span>от 7 дней</span></p>
                     <p class="mb20">Работ выполнено:<span>23,783</span></p>
-                    <a href="#" class="btn">заказать работу</a>
+                    <a class="btn" onclick="toggleModal()">заказать работу</a>
                 </div>
                 <div class="price-item bg-grey">
                     <h5>Дипломая работа</h5>
@@ -96,11 +96,11 @@
             </div><!--//prices-wrapper -->
             <div class="price-search">
                 <h3 class="not-visible-sm">Все услуги</h3>
-                <input class="form-control borderless" name="" placeholder="Поиск по виду работы">
+                <input class="form-control borderless" oninput="filterWorks(this)" placeholder="Поиск по виду работы">
             </div>
             <div class="prices-items">
 
-                <div id="tab_1" class="prices-item mb20">
+                <div data-name="контрольная работа" id="tab_1" class="prices-item mb20">
                     <div class="prices-item-inner">
                         <p class="price-item-name">Контрольная работа</p>
                         <p class="price-item-cost not-visible-sm">от 100 р</p>
@@ -115,17 +115,18 @@
 
                     </div>
                 </div>
-                <div id="tab_2" class="prices-item mb20">
+                <div data-name="курсовая работа" id="tab_2" class="prices-item mb20">
                     <div class="prices-item-inner">
-                        <p class="price-item-name">Контрольная работа</p>
+                        <p class="price-item-name">Курсовая работа</p>
                         <p class="price-item-cost not-visible-sm">от 100 р</p>
                         <p class="price-item-time not-visible-sm">от 1 дня</p>
+
                         <a href="#" data-tab_id="2" class="price-toggle"><span></span></a>
                     </div>
                     <div  class="price-item dropdown-prices">
                         <p class="mb20">Сроки:<span>от 1 дня</span></p>
                         <p class="mb20">Цена:<span>от 100 р</span></p>
-                        <a href="#" class="btn">заказать</a>
+                        <a href="#" class="btn" onclick="toggleModal()">заказать</a>
                     </div>
                 </div>
 
@@ -151,6 +152,55 @@
 
     </section><!--// why-our-work-->
 </div><!-- // main -->
+<div id="callback_modal" class="callback-modal">
+    <div class="callback-modal-content">
+        <div class="calculation-form-wrapper modal-form">
+            <span class="callback-modal-close" onclick="toggleModal()">&#215;</span>
+            <div class="calculation-form-inner">
+                <div class="form-row">
+                    <div class="select-wrapper">
+                        <select class="form-control" >
+                            <option selected>Вид работы</option>
+                            <option>Вид работы</option>
+                        </select>
+                    </div>
+                    <input class="form-control" value="" placeholder="Предмет">
+
+                    <input class="form-control" value="" placeholder="Предмет">
+                    <div class="d-flex-jc-sb">
+                        <input type="number" class="form-control form-control-sm " value="" placeholder="Объем">
+                        <input class="form-control form-control-sm " value="" placeholder="Срок">
+                    </div>
+                    <input type="file" class="form-control form-control-lg">
+                </div>
+
+
+            </div>
+            <div class="calculation-form-footer">
+                <input class="form-control input-phone" value="" placeholder="Сотовый номер">
+                <input class="form-control input-email" value="" placeholder="E-mail адрес">
+                <input class="form-control input-user" value="" placeholder="Ваше ФИО">
+            </div>
+            <p class="form-error">Отмеченные поля обязательны для заполнения</p>
+            <button  class="btn btn-lg m-a mt30 mb30">Узнать стоимость своей работы<br><span>ответ придет на ваш почтовый ящик</span></button>
+
+            <label class="custom-checkbox"><span>Даю согласие на обработку моих персональных данных</span>
+                <input name="" checked  type="checkbox">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+
+    </div>
+
+</div><!--callback-modal -->
+<script>
+
+    function toggleModal() {
+        document.getElementsByClassName('callback-modal-content')[0].classList.toggle('modal-active')
+        return false
+
+    }
+</script>
 <footer class="footer">
     <div class="container">
         <div class="footer-top grid-col4">
@@ -206,7 +256,25 @@
     let mobile_menu_panel = document.getElementsByClassName('mobile-menu-panel')[0]
     let mobile_menu = document.getElementsByClassName('mobile-menu-panel-inner')[0]
     let price_toggles = document.getElementsByClassName('price-toggle')
+    let allWorks = document.getElementsByClassName('prices-item')
     let link_chahged = false
+
+    function filterWorks(el){
+        if(el.value){
+            for(i of allWorks){
+                if (!i.dataset.name.includes(el.value.toLowerCase())){
+                    i.style.display='none'
+                }else{
+                    i.style.display='block'
+                }
+            }
+        }else{
+            for(i of allWorks){
+                i.style.display='block'
+            }
+        }
+    }
+
 
     mobile_button.onclick = function () {
         this.classList.toggle('mobile-toggle-active')
@@ -224,9 +292,9 @@
     }
 
     function checkWidth() {
-         if (window.innerWidth  < 528 && !link_chahged){
+        if (window.innerWidth  < 528 && !link_chahged){
 
-            for (var i of price_toggles){
+            for (i of price_toggles){
                 console.log(i.dataset.tab_id)
                 i.setAttribute('onclick',`openDropdown(${i.dataset.tab_id}); return false`)
             }
@@ -234,7 +302,7 @@
 
         }
         if (window.innerWidth  > 528){
-            for (var i of price_toggles){
+            for (i of price_toggles){
                 i.removeAttribute('onclick')
             }
             link_chahged = false

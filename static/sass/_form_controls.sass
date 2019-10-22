@@ -1,18 +1,58 @@
+input[type='file']
+  position: relative
+  color: transparent
+  cursor: pointer
+  &::-webkit-file-upload-button
+    visibility: hidden
+  &:before
+    position: absolute
+    content: 'Прикрепить методичку'
+    color: $color_text
+    bottom: 18px
+  &:after
+    position: absolute
+    content: url(../images/icons/clip.svg)
+    right: 20px
+    bottom: 15px
+
+
 .form-control
   border: none
   background: #f9f4f8
   border-radius: 20px
   padding: 15px
+  color: $color_text
   box-shadow: inset 2px 2px 5px 1px rgba(0, 0, 0, 0.04)
   &::placeholder
       font-family: "MuseoSansCyrl-300",sans-serif
       font-size: 14px
+      color: $color_text
   &:focus
     outline-width: 0
   &.borderless
     box-shadow: none
     background: none
     border: 1px solid #bebebe
+
+.form-control.error
+  box-shadow: inset 0 0 6px 1px $error !important
+
+.form-error
+  border: 1px solid $error
+  box-sizing: border-box
+  width: 50%
+  color: $error
+  padding: 15px
+  margin: 0 auto
+  display: none
+
+.input-phone
+  position: relative
+  &:before
+    position: absolute
+    content: url(../images/icons/phone-icon.svg)
+    left: 20px
+    bottom: 15px
 
 
 select
@@ -43,7 +83,7 @@ select
 
 
 .custom-checkbox
-  padding: 6px 35px
+  padding: 6px 40px
   font-size: 12px
   font-family: 'MuseoSansCyrl-300', sans-serif
   color: #bfc0c5

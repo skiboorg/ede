@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 *::before,
 *::after {
   -webkit-box-sizing: border-box;
@@ -348,6 +350,9 @@ button:hover {
   cursor: pointer;
   z-index: 10;
   position: relative;
+  -webkit-transition: all .3s linear;
+  -o-transition: all .3s linear;
+  transition: all .3s linear;
 }
 
 .btn-md {
@@ -457,11 +462,36 @@ button:hover {
   padding-top: 30px;
 }
 
+input[type='file'] {
+  position: relative;
+  color: transparent;
+  cursor: pointer;
+}
+
+input[type='file']::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+input[type='file']:before {
+  position: absolute;
+  content: 'Прикрепить методичку';
+  color: #151515;
+  bottom: 18px;
+}
+
+input[type='file']:after {
+  position: absolute;
+  content: url(../images/icons/clip.svg);
+  right: 20px;
+  bottom: 15px;
+}
+
 .form-control {
   border: none;
   background: #f9f4f8;
   border-radius: 20px;
   padding: 15px;
+  color: #151515;
   -webkit-box-shadow: inset 2px 2px 5px 1px rgba(0, 0, 0, 0.04);
   box-shadow: inset 2px 2px 5px 1px rgba(0, 0, 0, 0.04);
 }
@@ -469,26 +499,31 @@ button:hover {
 .form-control::-webkit-input-placeholder {
   font-family: "MuseoSansCyrl-300",sans-serif;
   font-size: 14px;
+  color: #151515;
 }
 
 .form-control::-moz-placeholder {
   font-family: "MuseoSansCyrl-300",sans-serif;
   font-size: 14px;
+  color: #151515;
 }
 
 .form-control:-ms-input-placeholder {
   font-family: "MuseoSansCyrl-300",sans-serif;
   font-size: 14px;
+  color: #151515;
 }
 
 .form-control::-ms-input-placeholder {
   font-family: "MuseoSansCyrl-300",sans-serif;
   font-size: 14px;
+  color: #151515;
 }
 
 .form-control::placeholder {
   font-family: "MuseoSansCyrl-300",sans-serif;
   font-size: 14px;
+  color: #151515;
 }
 
 .form-control:focus {
@@ -500,6 +535,33 @@ button:hover {
   box-shadow: none;
   background: none;
   border: 1px solid #bebebe;
+}
+
+.form-control.error {
+  -webkit-box-shadow: inset 0 0 6px 1px rgba(255, 35, 35, 0.77) !important;
+  box-shadow: inset 0 0 6px 1px rgba(255, 35, 35, 0.77) !important;
+}
+
+.form-error {
+  border: 1px solid rgba(255, 35, 35, 0.77);
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 50%;
+  color: rgba(255, 35, 35, 0.77);
+  padding: 15px;
+  margin: 0 auto;
+  display: none;
+}
+
+.input-phone {
+  position: relative;
+}
+
+.input-phone:before {
+  position: absolute;
+  content: url(../images/icons/phone-icon.svg);
+  left: 20px;
+  bottom: 15px;
 }
 
 select {
@@ -535,7 +597,7 @@ select {
 }
 
 .custom-checkbox {
-  padding: 6px 35px;
+  padding: 6px 40px;
   font-size: 12px;
   font-family: 'MuseoSansCyrl-300', sans-serif;
   color: #bfc0c5;
@@ -1155,6 +1217,7 @@ select {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 223px));
   grid-gap: 15px;
+  margin-bottom: 30px;
 }
 
 .calculation-form-footer::before {
@@ -1632,6 +1695,10 @@ select {
   font-family: 'MuseoSansCyrl-300',sans-serif;
   font-size: 14px;
   color: #737995;
+}
+
+.our-help-media-slide-item {
+  cursor: pointer;
 }
 
 .our-help-media-slide-item h5 {
@@ -2384,6 +2451,69 @@ select {
   background-position-x: 75%;
 }
 
+.callback-modal {
+  position: relative;
+  z-index: 999;
+}
+
+.callback-modal-content {
+  position: fixed;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  top: 0;
+  left: 10000px;
+  width: 100%;
+  height: 100%;
+  background: rgba(21, 21, 21, 0.41);
+  -webkit-transition: left 0.3s ease-out;
+  -o-transition: left 0.3s ease-out;
+  transition: left 0.3s ease-out;
+}
+
+.callback-modal-content.modal-active {
+  left: 0;
+  -webkit-transition: left 0.3s ease-in;
+  -o-transition: left 0.3s ease-in;
+  transition: left 0.3s ease-in;
+}
+
+.calculation-form-wrapper.modal-form {
+  position: relative;
+  overflow: auto;
+  width: 100%;
+  max-width: 730px;
+  margin: auto;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 50px 0;
+  text-align: center;
+}
+
+.callback-modal-close {
+  position: absolute;
+  right: 25px;
+  top: 5px;
+  font-size: 30px;
+  cursor: pointer;
+  color: #151515;
+  opacity: .9;
+}
+
+.callback-modal-close:hover {
+  opacity: 1;
+}
+
 @media screen and (max-width: 1199px) {
   .btn-callback::before {
     content: '';
@@ -2504,7 +2634,7 @@ select {
   .btn-lg,
   .btn-md {
     padding: 15px 0;
-    width: 100% !important;
+    width: 95% !important;
   }
 
   .mob {
