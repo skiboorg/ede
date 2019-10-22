@@ -10,7 +10,7 @@
                 <img src="{% static 'images/header_books.png' %}" alt="">
                 <p>47,470<span>работ выполнено</span></p>
             </div>
-            <a href="#">посмотреть работы</a>
+            <a href="{% url 'prices' %}">посмотреть работы</a>
         </div>
         <div class="grid-item header-phones">
             <div class="header-phones-inner">
@@ -38,11 +38,11 @@
             </div>
             <ul class="mobile-nav">
                 <li class="active"><a href="#">Главная</a></li>
-                <li><a href="#">Цены и сроки</a></li>
+                <li><a href="{% url 'prices' %}">Цены и сроки</a></li>
                 <li><a href="#">Способы оплаты</a></li>
                 <li><a href="#">Отзывы</a></li>
                 <li><a href="#">О нас</a></li>
-                <li><a href="#">Конакты</a></li>
+                 <li><a href="{% url 'contacts' %}">Контакты</a></li>
             </ul>
         </div>
     </div><!-- end mobile-menu-panel -->
@@ -50,13 +50,13 @@
         <img src="{% static 'images/icons/EDE.png' %}" alt="">
         <ul class="nav">
             <li class="active"><a href="#">Главная</a></li>
-            <li><a href="#">Цены и сроки</a></li>
+            <li><a href="{% url 'prices' %}">Цены и сроки</a></li>
             <li><a href="#">Способы оплаты</a></li>
             <li><a href="#">Отзывы</a></li>
             <li><a href="#">О нас</a></li>
-            <li><a href="#">Конакты</a></li>
+             <li><a href="{% url 'contacts' %}">Контакты</a></li>
         </ul>
-        <a href="#" class="btn ">оформить заявку</a>
+        <a href="#callback_form" class="btn ">оформить заявку</a>
         <div class="header-dropdown-user" >
             {% if request.user.is_authenticated %}
                     <img src="{% static 'images/icons/EDE.png' %}" alt="">

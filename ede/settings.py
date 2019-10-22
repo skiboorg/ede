@@ -14,10 +14,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ckeditor',
     'customuser',
     'service',
     'callback.apps.CallbackConfig',
-    'order'
+    'order',
+    'comments.apps.CommentsConfig'
 
 ]
 

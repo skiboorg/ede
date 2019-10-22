@@ -1,49 +1,54 @@
-<form onsubmit="return false;" enctype="multipart/form-data" method="post" >{% csrf_token %}
-   <div class="calculation-form-wrapper">
-    <div class="calculation-form-inner">
-        <div class="form-row">
-            <div class="select-wrapper">
-                <select class="form-control" name="{{ callbackForm.workName.name }}">
-                    <option selected="selected"  value="">Вид работы</option>
-                    {% for service in allService %}
-                        <option value="{{ service.name }}">{{ service.name }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="select-wrapper">
-                <select class="form-control" name="{{ callbackForm.subject.name }}">
-                    <option selected="selected"  value="">Предмет</option>
-                    {% for subject in allSubjects %}
-                        <option value="{{ subject.name }}">{{ subject.name }}</option>
-                    {% endfor %}
-                </select>
-            </div>
+<div id="callback_modal" class="callback-modal">
+    <div class="callback-modal-content">
+        <form onsubmit="return false;" enctype="multipart/form-data" method="post" >{% csrf_token %}
+            <div class="calculation-form-wrapper modal-form">
+                <span class="callback-modal-close" onclick="toggleModal()">&#215;</span>
+                <div class="calculation-form-inner">
+                    <div class="form-row">
+                        <div class="select-wrapper">
+                            <select class="form-control" name="{{ callbackForm.workName.name }}">
+                                <option selected="selected"  value="">Вид работы</option>
+                                {% for service in allService %}
+                                    <option value="{{ service.name }}">{{ service.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="select-wrapper">
+                            <select class="form-control" name="{{ callbackForm.subject.name }}">
+                                <option selected="selected"  value="">Предмет</option>
+                                {% for subject in allSubjects %}
+                                    <option value="{{ subject.name }}">{{ subject.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
 
-            <input class="form-control" value="" name="{{ callbackForm.about.name }}" placeholder="Тема работы">
-            <div class="d-flex-jc-sb">
-                <input type="number" class="form-control form-control-sm " name="{{ callbackForm.volume.name }}" value="" placeholder="Объем">
-                <input class="form-control form-control-sm " value="" name="{{ callbackForm.deadLine.name }}" placeholder="Срок">
+                        <input class="form-control" value="" name="{{ callbackForm.about.name }}" placeholder="Тема работы">
+                        <div class="d-flex-jc-sb">
+                            <input type="number" class="form-control form-control-sm " name="{{ callbackForm.volume.name }}" value="" placeholder="Объем">
+                            <input class="form-control form-control-sm " value="" name="{{ callbackForm.deadLine.name }}" placeholder="Срок">
+                        </div>
+                        <input type="file" class="form-control form-control-lg" name="{{ callbackForm.file.name }}">
+                    </div>
+
+
+                </div>
+                <div class="calculation-form-footer">
+                    <input class="form-control input-phone" name="{{ callbackForm.phone.name }}" value="" placeholder="Сотовый номер">
+                    <input class="form-control input-email" name="{{ callbackForm.email.name }}" value="" placeholder="E-mail адрес">
+                    <input class="form-control input-user" name="{{ callbackForm.name.name }}" value="" placeholder="Ваше ФИО">
+                </div>
+                <p class="form-error">Отмеченные поля обязательны для заполнения</p>
+                <button id="form_submit" type="submit"  class="btn btn-lg m-a mb30" onclick="sendForm();">
+                    Узнать стоимость своей работы<br>
+                    <span>ответ придет на ваш почтовый ящик</span>
+                </button>
+
+                <label class="custom-checkbox"><span>Даю согласие на обработку моих персональных данных</span>
+                    <input name="personal" checked required type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+                <input style="display: none" name="agree" type="checkbox">
             </div>
-            <input type="file" class="form-control form-control-lg" name="{{ callbackForm.file.name }}">
-        </div>
-
-
+        </form>
     </div>
-    <div class="calculation-form-footer">
-        <input class="form-control input-phone" name="{{ callbackForm.phone.name }}" value="" placeholder="Сотовый номер">
-        <input class="form-control input-email" name="{{ callbackForm.email.name }}" value="" placeholder="E-mail адрес">
-        <input class="form-control input-user" name="{{ callbackForm.name.name }}" value="" placeholder="Ваше ФИО">
-    </div>
-    <p class="form-error">Отмеченные поля обязательны для заполнения</p>
-    <button id="form_submit" type="submit"  class="btn btn-lg m-a mb30" onclick="sendForm();">
-        Узнать стоимость своей работы<br>
-        <span>ответ придет на ваш почтовый ящик</span>
-    </button>
-
-    <label class="custom-checkbox"><span>Даю согласие на обработку моих персональных данных</span>
-        <input name="personal" checked required type="checkbox">
-        <span class="checkmark"></span>
-    </label>
-   <input style="display: none" name="agree" type="checkbox">
 </div>
-</form>

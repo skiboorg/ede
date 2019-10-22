@@ -3,7 +3,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-admin.site.site_header = "Админка"
+admin.site.site_header = "EDELWEYS"
 admin.site.site_title = "Edelweys администрирование"
 admin.site.index_title = "Edelweys администрирование"
 

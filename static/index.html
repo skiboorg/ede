@@ -312,9 +312,15 @@
                     <p id="review_shortReview" class="mb30">
                         На третьем курсе Юлия стала мамой, возможности писать рефераты и курсовые работы не стало. Брать академический отпуск — финансово нецелесообразно. Тогда она решила обратиться к нам.
                     </p>
-                    <a href="#" class="link text-upper mb40">Читать далее...</a>
+                    <div class="our-help-inner-full-review">
+                        На третьем курсе Юлия стала мамой, возможности писать рефераты и курсовые работы не стало. Брать академический отпуск — финансово нецелесообразно. Тогда она решила обратиться к нам.
+                        На третьем курсе Юлия стала мамой, возможности писать рефераты и курсовые работы не стало. Брать академический отпуск — финансово нецелесообразно. Тогда она решила обратиться к нам.
+                        На третьем курсе Юлия стала мамой, возможности писать рефераты и курсовые работы не стало. Брать академический отпуск — финансово нецелесообразно. Тогда она решила обратиться к нам.
+
+                    </div>
+                    <a id="readfullreview_btn" class="link text-upper mb40" onclick="readFullReview()">Читать далее...</a>
                     <a href="#" class="btn btn-md">оставить свой отзыв</a>
-                </div>
+                    </div>
             </div><!-- //our-help-inner-->
             <div class="our-help-media-slider" id="our-help-media-slider">
                 <div class="our-help-media-slide-item"
@@ -446,6 +452,17 @@
 
 
 <script>
+    function readFullReview() {
+        let x = document.getElementById("readfullreview_btn")
+        if (x.innerHTML === "Читать далее...") {
+            x.innerHTML = "Скрыть";
+          } else {
+            x.innerHTML = "Читать далее...";
+          }
+        document.getElementsByClassName('our-help-inner-full-review')[0].classList.toggle('full-review-active')
+
+
+    }
      let review_image=document.getElementById('review_image'), review_title=document.getElementById('review_title'),
             review_description=document.getElementById('review_description'),
             review_shortReview=document.getElementById('review_shortReview')
@@ -454,9 +471,6 @@
             shortReview = el.dataset.shortReview, fullReview = el.dataset.fullReview
     review_image.style.background = "url('"+image+"') no-repeat"
     review_title.innerText = title
-
-
-
     }
 
 

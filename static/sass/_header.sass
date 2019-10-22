@@ -408,6 +408,10 @@
   .calculation-form-footer
     grid-template-columns: repeat(auto-fill, minmax(200px,1fr))
     grid-gap: 30px
+    max-width: 360px
+  .form-row
+    max-width: 360px
+
 .form-row
   display: grid
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr))
@@ -737,10 +741,25 @@
   grid-template-columns: 50% 40%
   grid-gap: 10%
   margin-bottom: 70px
+  &-full-review
+    max-height: 0
+    visibility: hidden
+    border-bottom: 1px solid $color_border
+    margin-bottom: 10px
+    padding-bottom: 10px
+    transition: visibility .1s linear, max-height .2s linear
+    &.full-review-active
+      max-height: 300px
+      visibility: visible
+
+      transition: max-height .2s linear, visibility .1s linear .1s
+
+
 .our-help-media
   display: inline-block
   border-radius: 10px
   box-shadow: 0 0 29px 0 rgba(60, 66, 91, 0.39)
+  height: 435px
   //background-color: rgb(161, 161, 161)
 .our-help-info
   p
@@ -773,6 +792,7 @@
     font-size: 14px
     color: $color_grey
 
+
 .our-help-media-slide-item
   cursor: pointer
 
@@ -785,9 +805,9 @@
     font-size: 14px
     width: 260px
 .our-help-media-slide-image
-  //border-radius: 10px
-  //box-shadow: 0 0 29px 0 rgba(60, 66, 91, 0.22)
-  //width: 260px
+  img
+    border-radius: 10px
+
 .controls
   position: relative
 .prev

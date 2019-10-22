@@ -44,8 +44,55 @@
         <div style="margin-top: 140px" class="container-sm">
             <h3 class="text-center">Узнайте стоимость своей работы</h3>
             <h4 class="text-center">Мы пришлём точный ответ на вашу почту</h4>
+            <form onsubmit="return false;" enctype="multipart/form-data" method="post" >{% csrf_token %}
+                <div class="calculation-form-wrapper">
+                    <div class="calculation-form-inner">
+                        <div class="form-row">
+                            <div class="select-wrapper">
+                                <select class="form-control" name="{{ callbackForm.workName.name }}">
+                                    <option selected="selected"  value="">Вид работы</option>
+                                    {% for service in allService %}
+                                        <option value="{{ service.name }}">{{ service.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="select-wrapper">
+                                <select class="form-control" name="{{ callbackForm.subject.name }}">
+                                    <option selected="selected"  value="">Предмет</option>
+                                    {% for subject in allSubjects %}
+                                        <option value="{{ subject.name }}">{{ subject.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
 
-            {% include 'callback_form.html' %}
+                            <input class="form-control" value="" name="{{ callbackForm.about.name }}" placeholder="Тема работы">
+                            <div class="d-flex-jc-sb">
+                                <input type="number" class="form-control form-control-sm " name="{{ callbackForm.volume.name }}" value="" placeholder="Объем">
+                                <input class="form-control form-control-sm " value="" name="{{ callbackForm.deadLine.name }}" placeholder="Срок">
+                            </div>
+                            <input type="file" class="form-control form-control-lg" name="{{ callbackForm.file.name }}">
+                        </div>
+
+
+                    </div>
+                    <div class="calculation-form-footer">
+                        <input class="form-control input-phone" name="{{ callbackForm.phone.name }}" value="" placeholder="Сотовый номер">
+                        <input class="form-control input-email" name="{{ callbackForm.email.name }}" value="" placeholder="E-mail адрес">
+                        <input class="form-control input-user" name="{{ callbackForm.name.name }}" value="" placeholder="Ваше ФИО">
+                    </div>
+                    <p class="form-error">Отмеченные поля обязательны для заполнения</p>
+                    <button id="form_submit" type="submit"  class="btn btn-lg m-a mb30" onclick="sendForm();">
+                        Узнать стоимость своей работы<br>
+                        <span>ответ придет на ваш почтовый ящик</span>
+                    </button>
+
+                    <label class="custom-checkbox"><span>Даю согласие на обработку моих персональных данных</span>
+                        <input name="personal" checked required type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                    <input style="display: none" name="agree" type="checkbox">
+                </div>
+            </form>
         </div>
     </section><!-- // calculation-form -->
     <section class="about-man">
@@ -179,64 +226,40 @@
         <div class="container ">
             <h3>Посмотрите, как мы уже помогли другим клиентам</h3>
             <h4 class="text-center mb50">Несколько примеров нашей работы и реальные отзывы о ней</h4>
-            <div class="our-help-inner">
-                <div class="our-help-media" style="background: url({% static 'images/help_bg_big.jpg' %}) no-repeat">
+           <div class="our-help-inner">
+                <div id="review_image" class="our-help-media" style="background: url({{ allComments.first.image_big.url }}) no-repeat center">
                 </div>
                 <div class="our-help-info">
                     <div class="our-help-info-header mb30">
-                        <h5 class="mb20">Родила на третьем курсе, а доучиваться еще два</h5>
-                        <p  class="mb20">Изучили положение и помогли сформировать пакет работ по подходящему бюджету</p>
+                        <h5 id="review_title" class="mb20">{{ allComments.first.title }}</h5>
+                        <p id="review_description"  class="mb20">{{ allComments.first.description }}</p>
                     </div>
-                    <p class="mb30">
-                        На третьем курсе Юлия стала мамой, возможности писать рефераты и курсовые работы не стало. Брать академический отпуск — финансово нецелесообразно. Тогда она решила обратиться к нам.
+                    <p id="review_shortReview" class="mb30">
+                         {{ allComments.first.shortReview }}
                     </p>
-                    <a href="#" class="link text-upper mb40">Читать далее...</a>
+                    <div id="review_fullReview" class="our-help-inner-full-review">
+                        {{ allComments.first.fullReview }}
+                    </div>
+                    <a id="readfullreview_btn" class="link text-upper mb40" onclick="readFullReview()">Читать далее...</a>
                     <a href="#" class="btn btn-md">оставить свой отзыв</a>
                 </div>
             </div><!-- //our-help-inner-->
             <div class="our-help-media-slider" id="our-help-media-slider">
-                <div class="our-help-media-slide-item">
+                {% for comment in allComments %}
+                   <div class="our-help-media-slide-item"
+                     data-image="{{ comment.image_big.url }}"
+                     data-title="{{ comment.title }}"
+                     data-description="{{ comment.description }}"
+                     data-shortreview="{{ comment.shortReview }}"
+                     data-fullreview="{{ comment.fullReview }}"
+                     onclick="changeReview(this)">
                     <div class="our-help-media-slide-image">
-                        <img src="{% static 'images/slide-item.png' %}" alt="">
+                        <img src="{{ comment.image_small.url }}" alt="">
                     </div>
-                    <h5>Студент очник</h5>
-                    <p>Совместно выявили самые сложные моменты в его программе и взяли их на себя</p>
+                    <h5>{{ comment.writtenBy }}</h5>
+                    <p>{{ comment.description }}</p>
                 </div>
-                <div class="our-help-media-slide-item">
-                    <div class="our-help-media-slide-image">
-                        <img src="{% static 'images/slide-item.png' %}" alt="">
-                    </div>
-                    <h5>Студент очник</h5>
-                    <p>Совместно выявили самые сложные моменты в его программе и взяли их на себя</p>
-                </div>
-                <div class="our-help-media-slide-item">
-                    <div class="our-help-media-slide-image">
-                        <img src="{% static 'images/slide-item.png' %}" alt="">
-                    </div>
-                    <h5>Студент очник</h5>
-                    <p>Совместно выявили самые сложные моменты в его программе и взяли их на себя</p>
-                </div>
-                <div class="our-help-media-slide-item">
-                    <div class="our-help-media-slide-image">
-                        <img src="{% static 'images/slide-item.png' %}" alt="">
-                    </div>
-                    <h5>Студент очник</h5>
-                    <p>Совместно выявили самые сложные моменты в его программе и взяли их на себя</p>
-                </div>
-                <div class="our-help-media-slide-item">
-                    <div class="our-help-media-slide-image">
-                        <img src="{% static 'images/slide-item.png' %}" alt="">
-                    </div>
-                    <h5>Студент очник</h5>
-                    <p>Совместно выявили самые сложные моменты в его программе и взяли их на себя</p>
-                </div>
-                <div class="our-help-media-slide-item">
-                    <div class="our-help-media-slide-image">
-                        <img src="{% static 'images/slide-item.png' %}" alt="">
-                    </div>
-                    <h5>Студент очник</h5>
-                    <p>Совместно выявили самые сложные моменты в его программе и взяли их на себя</p>
-                </div>
+                {% endfor %}
             </div>
             <div class="controls" id="customize-controls">
                 <div class="prev">
@@ -267,6 +290,33 @@
 {% block js %}
     <script src="{% static 'js/tiny-slider.js' %}"></script>
     <script>
+      let review_image=document.getElementById('review_image'), review_title=document.getElementById('review_title'),
+            review_description=document.getElementById('review_description'),
+            review_shortReview=document.getElementById('review_shortReview'),
+            review_fullReview=document.getElementById('review_fullReview'),
+            readfullreview_btn = document.getElementById("readfullreview_btn"),
+            full_review_div=document.getElementsByClassName('our-help-inner-full-review')[0]
+    function changeReview(el) {
+            full_review_div.classList.remove('full-review-active')
+            readfullreview_btn.innerHTML = "Читать далее...";
+            review_image.style.background = "url('"+el.dataset.image+"') no-repeat center"
+            review_title.innerText = el.dataset.title
+            review_description.innerText = el.dataset.description
+            review_shortReview.innerText = el.dataset.shortreview
+            review_fullReview.innerHTML = el.dataset.fullreview
+
+    }
+    function readFullReview() {
+
+        if (readfullreview_btn.innerHTML === "Читать далее...") {
+            readfullreview_btn.innerHTML = "Скрыть"
+          } else {
+            readfullreview_btn.innerHTML = "Читать далее..."
+          }
+        full_review_div.classList.toggle('full-review-active')
+
+    }
+
         var mobile = 'false',
             isTestPage = false,
             isDemoPage = true,

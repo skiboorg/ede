@@ -38,14 +38,16 @@ input[type='file']
   box-shadow: inset 0 0 6px 1px $error !important
 
 .form-error
-  border: 1px solid $error
+  border: 1px dashed  $error
   box-sizing: border-box
-  width: 50%
+  max-width: 470px
   color: $error
   padding: 15px
   margin: 0 auto
   display: none
-
+@media (max-width: 556px)
+  .form-error
+    max-width: 360px
 .input-phone
   position: relative
   &:before
