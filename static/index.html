@@ -28,7 +28,7 @@
             <div class="header-phones-inner">
                 <p>Есть вопрос? Звоните</p>
                 <span>+7 (351) 230 80 40</span>
-                <a href="#" class="btn btn-callback">перезвоните мне</a>
+                <a class="btn btn-callback" onclick="toggleModal('callback-order-modal')">перезвоните мне</a>
             </div>
         </div>
     </div><!-- end header-wrapper -->
@@ -41,9 +41,9 @@
     <div class="mobile-menu-panel">
         <div class="mobile-menu-panel-inner">
             <div class="header-dropdown-user" >
-                <!-- <a class="link" href="#">Зарегистрироваться</a> -->
-                <img src="images/icons/EDE.png" alt="">
-                <a class="link" href="#">Анастатися</a>
+                < <a class="link" onclick="toggleModal('login-modal')" href="#">Зарегистрироваться</a> >
+                <!--img src="images/icons/EDE.png" alt="">
+                <a class="link" href="#">Анастатися</a-->
             </div>
             <ul class="mobile-nav">
                 <li class="active"><a href="#">Главная</a></li>
@@ -67,9 +67,9 @@
         </ul>
         <a href="#" class="btn ">оформить заявку</a>
         <div class="header-dropdown-user" >
-            <!-- <a class="link" href="#">Зарегистрироваться</a> -->
-            <img src="images/icons/EDE.png" alt="">
-            <a class="link" href="#">Анастатися</a>
+            <a class="link"  onclick="toggleModal('login-modal')">Зарегистрироваться</a>
+            <!--img src="images/icons/EDE.png" alt="">
+            <a class="link" href="#">Анастатися</a-->
         </div>
     </div><!-- end header-dropdown -->
     <div class="container  header-inner">
@@ -268,12 +268,12 @@
                 <div class="slider-arrows">
                     <div class="slider-arrow-left ">
                         <a id="arrow-left" href="javascript:void(0)"><span>&#8592;</span>
-                        <p>Предыдущий<br/>этап</p>
+                            <p>Предыдущий<br/>этап</p>
                         </a>
                     </div>
                     <div class="slider-arrow-right">
                         <a id="arrow-right" href="javascript:void(0)"><span class="text-right">&#8594;</span>
-                        <p class="text-right">Следующий<br/>этап</p>
+                            <p class="text-right">Следующий<br/>этап</p>
                         </a>
                     </div>
                 </div><!-- // slider-arrows -->
@@ -320,7 +320,7 @@
                     </div>
                     <a id="readfullreview_btn" class="link text-upper mb40" onclick="readFullReview()">Читать далее...</a>
                     <a href="#" class="btn btn-md">оставить свой отзыв</a>
-                    </div>
+                </div>
             </div><!-- //our-help-inner-->
             <div class="our-help-media-slider" id="our-help-media-slider">
                 <div class="our-help-media-slide-item"
@@ -443,6 +443,89 @@
         </div>
 
     </div>
+    <div id="login_modal" class="modal">
+        <div class="modal-content login-modal">
+            <div class="calculation-form-wrapper modal-form login-form">
+                <span class="modal-close" onclick="toggleModal('login-modal')">&#215;</span>
+                <div class="login-form-wrapper">
+                    <div class="login-form-buttons">
+                        <input type="radio" id="login_button" name="login-button"  checked>
+                        <label id="login-form-button" for="login_button">вход</label>
+                        <input type="radio" id="register_button" name="login-button"  >
+                        <label id="register-form-button" for="register_button">регистрация</label>
+
+                        <div class="login-form-login-tab mt10">
+                            <div class="form-filed-wrapper">
+                                <label >Телефон </label>
+                                <input  class="form-control" value="" placeholder="79991112233">
+                            </div>
+                            <div class="form-filed-wrapper mb10">
+                                <label>Пароль </label>
+                                <input type="password" class="form-control" value="">
+                            </div>
+                            <p class="form-error">Отмеченные поля обязательны для заполнения</p>
+                            <a href="#" class="btn mt10">войти</a>
+                        </div>
+                        <div class="login-form-register-tab mt10">
+                            <div class="form-filed-wrapper mb10">
+                                <label >Телефон</label>
+                                <input  class="form-control" value="" placeholder="В формате: 79991112233">
+                            </div>
+                            <div class="form-filed-wrapper mb10">
+                                <label >E-Mail</label>
+                                <input  class="form-control" value="" placeholder="">
+                            </div>
+                            <div class="form-filed-wrapper mb10">
+                                <label>Пароль </label>
+                                <input type="password" class="form-control" value="">
+                            </div>
+                            <div class="form-filed-wrapper mb10">
+                                <label>Повторите<br>пароль </label>
+                                <input type="password" class="form-control" value="">
+                            </div>
+                            <label class="custom-checkbox"><span>Даю согласие на обработку моих персональных данных</span>
+                                <input name="" checked  type="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                            <p class="form-error ">Отмеченные поля обязательны для заполнения</p>
+                            <a href="#" class="btn mt10">зарегистрироваться</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div><!--login_modal -->
+
+    <div id="callback_order_modal" class="modal">
+        <div class="modal-content callback-order-modal">
+            <div class="calculation-form-wrapper modal-form login-form">
+
+                <span class="modal-close" onclick="toggleModal('callback-order-modal')">&#215;</span>
+                <div class="callback-order-form">
+                    <div class="form-filed-wrapper mb10">
+                        <label >Ваше имя </label>
+                        <input  class="form-control" value="" placeholder="">
+                    </div>
+                    <div class="form-filed-wrapper mb10">
+                        <label >Ваш телефон </label>
+                        <input  class="form-control" value="" placeholder="">
+                    </div>
+                    <label class="custom-checkbox"><span>Даю согласие на обработку моих персональных данных</span>
+                        <input name="" checked  type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                    <p class="form-error">Отмеченные поля обязательны для заполнения</p>
+                    <a href="#" class="btn mt10">жду звонка</a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div><!--callback_order_modal -->
 </footer>
 
 
@@ -452,25 +535,31 @@
 
 
 <script>
+    function toggleModal(type) {
+
+        document.getElementsByClassName(type)[0].classList.toggle('modal-active')
+        return false
+
+    }
     function readFullReview() {
         let x = document.getElementById("readfullreview_btn")
         if (x.innerHTML === "Читать далее...") {
             x.innerHTML = "Скрыть";
-          } else {
+        } else {
             x.innerHTML = "Читать далее...";
-          }
+        }
         document.getElementsByClassName('our-help-inner-full-review')[0].classList.toggle('full-review-active')
 
 
     }
-     let review_image=document.getElementById('review_image'), review_title=document.getElementById('review_title'),
-            review_description=document.getElementById('review_description'),
-            review_shortReview=document.getElementById('review_shortReview')
+    let review_image=document.getElementById('review_image'), review_title=document.getElementById('review_title'),
+        review_description=document.getElementById('review_description'),
+        review_shortReview=document.getElementById('review_shortReview')
     function changeReview(el) {
         let image = el.dataset.image, title = el.dataset.title, description = el.dataset.description,
             shortReview = el.dataset.shortReview, fullReview = el.dataset.fullReview
-    review_image.style.background = "url('"+image+"') no-repeat"
-    review_title.innerText = title
+        review_image.style.background = "url('"+image+"') no-repeat"
+        review_title.innerText = title
     }
 
 
@@ -572,12 +661,12 @@
         console.log('left click')
         console.log('last_slide before', last_slide)
         console.log('current_slide before', current_slide)
-         let cur_slide = document.getElementsByClassName('slide-active')[0]
+        let cur_slide = document.getElementsByClassName('slide-active')[0]
         last_slide = current_slide
         if (current_slide-1 < 1){
-           current_slide = 4
+            current_slide = 4
         }else {
-          current_slide -= 1
+            current_slide -= 1
         }
 
         changeSlide()
@@ -591,20 +680,20 @@
 
 
         last_slide = current_slide
-          if (current_slide+1 > 4){
-           current_slide = 1
+        if (current_slide+1 > 4){
+            current_slide = 1
         }else {
-          current_slide += 1
+            current_slide += 1
         }
 
 
-    changeSlide()
+        changeSlide()
     }
 
     function changeSlide() {
         console.log(current_slide)
-            document.getElementById(`step_${last_slide}`).classList.remove('step-active')
-            document.getElementById(`slide_${last_slide}`).classList.remove('slide-active')
+        document.getElementById(`step_${last_slide}`).classList.remove('step-active')
+        document.getElementById(`slide_${last_slide}`).classList.remove('slide-active')
 
         setTimeout(function() {
             document.getElementById(`step_${current_slide}`).classList.add('step-active')

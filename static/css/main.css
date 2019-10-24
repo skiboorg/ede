@@ -551,7 +551,6 @@ input[type='file']:after {
   color: rgba(255, 35, 35, 0.77);
   padding: 15px;
   margin: 0 auto;
-  display: none;
 }
 
 .input-phone {
@@ -2480,12 +2479,26 @@ select {
   background-position-x: 75%;
 }
 
-.callback-modal {
+.modal {
   position: relative;
   z-index: 999;
 }
 
-.callback-modal-content {
+.modal-close {
+  position: absolute;
+  right: 25px;
+  top: 5px;
+  font-size: 30px;
+  cursor: pointer;
+  color: #151515;
+  opacity: .9;
+}
+
+.modal-close:hover {
+  opacity: 1;
+}
+
+.modal-content {
   position: fixed;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2511,7 +2524,7 @@ select {
   transition: left 0.3s ease-out;
 }
 
-.callback-modal-content.modal-active {
+.modal-content.modal-active {
   left: 0;
   -webkit-transition: left 0.3s ease-in;
   -o-transition: left 0.3s ease-in;
@@ -2530,18 +2543,70 @@ select {
   text-align: center;
 }
 
-.callback-modal-close {
-  position: absolute;
-  right: 25px;
-  top: 5px;
-  font-size: 30px;
-  cursor: pointer;
-  color: #151515;
-  opacity: .9;
+.calculation-form-wrapper.modal-form.login-form {
+  max-width: 430px;
 }
 
-.callback-modal-close:hover {
-  opacity: 1;
+#register-form-button,
+#login-form-button {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 10px 0;
+  width: 49%;
+  background: #efefef;
+  color: #151515;
+  font-family: 'MuseoSansCyrl-500', sans-serif;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.form-filed-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  padding: 0 10px;
+}
+
+.form-filed-wrapper label {
+  -ms-flex-preferred-size: 30%;
+  flex-basis: 30%;
+}
+
+.form-filed-wrapper input {
+  -webkit-box-flex: 2;
+  -ms-flex-positive: 2;
+  flex-grow: 2;
+}
+
+input[type='radio']#login_button {
+  display: none;
+}
+
+input[type='radio']#login_button:checked ~ .login-form-register-tab {
+  display: none;
+}
+
+input[type='radio']#login_button:checked ~ #login-form-button {
+  background: #fff;
+  border-bottom: 1px solid #009cff;
+}
+
+input[type='radio']#register_button {
+  display: none;
+}
+
+input[type='radio']#register_button:checked ~ .login-form-login-tab {
+  display: none;
+}
+
+input[type='radio']#register_button:checked ~ #register-form-button {
+  background: #fff;
+  border-bottom: 1px solid #009cff;
 }
 
 @media screen and (max-width: 1199px) {

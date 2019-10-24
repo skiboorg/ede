@@ -1,7 +1,16 @@
-.callback-modal
+.modal
   position: relative
   z-index: 999
-
+  &-close
+    position: absolute
+    right: 25px
+    top: 5px
+    font-size: 30px
+    cursor: pointer
+    color: $color_text
+    opacity: .9
+    &:hover
+      opacity: 1
 
   &-content
     position: fixed
@@ -32,13 +41,46 @@
   background: #ffffff
   padding: 50px 0
   text-align: center
-.callback-modal-close
-  position: absolute
-  right: 25px
-  top: 5px
-  font-size: 30px
-  cursor: pointer
+
+.calculation-form-wrapper.modal-form.login-form
+  max-width: 430px
+
+#register-form-button, #login-form-button
+  display: inline-block
+  margin-bottom: 10px
+  padding: 10px 0
+  width: 49%
+  background: #efefef
   color: $color_text
-  opacity: .9
-  &:hover
-    opacity: 1
+  font-family: 'MuseoSansCyrl-500', sans-serif
+  text-transform: uppercase
+  cursor: pointer
+
+
+.form-filed-wrapper
+  display: flex
+  align-items: center
+  justify-content: space-around
+  padding: 0 10px
+
+  label
+    flex-basis: 30%
+  input
+    flex-grow: 2
+
+input[type='radio']#login_button
+  display: none
+  &:checked
+    ~.login-form-register-tab
+      display: none
+    ~#login-form-button
+      background: #fff
+      border-bottom: 1px solid $color_l_blue
+input[type='radio']#register_button
+  display: none
+  &:checked
+    ~.login-form-login-tab
+      display: none
+    ~#register-form-button
+      background: #fff
+      border-bottom: 1px solid $color_l_blue

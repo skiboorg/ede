@@ -76,7 +76,7 @@
                     <p class="mb20">Стоимость:<span>от 7e900 руб</span></p>
                     <p class="mb20">Сроки:<span>от 7 дней</span></p>
                     <p class="mb20">Работ выполнено:<span>23,783</span></p>
-                    <a class="btn" onclick="toggleModal()">заказать работу</a>
+                    <a class="btn" onclick="toggleModal('callback-modal')">заказать работу</a>
                 </div>
                 <div class="price-item bg-grey">
                     <h5>Дипломая работа</h5>
@@ -152,10 +152,10 @@
 
     </section><!--// why-our-work-->
 </div><!-- // main -->
-<div id="callback_modal" class="callback-modal">
-    <div class="callback-modal-content">
+<div id="callback_modal" class="modal">
+    <div class="modal-content callback-modal">
         <div class="calculation-form-wrapper modal-form">
-            <span class="callback-modal-close" onclick="toggleModal()">&#215;</span>
+            <span class="modal-close" onclick="toggleModal('callback-modal')">&#215;</span>
             <div class="calculation-form-inner">
                 <div class="form-row">
                     <div class="select-wrapper">
@@ -195,8 +195,9 @@
 </div><!--callback-modal -->
 <script>
 
-    function toggleModal() {
-        document.getElementsByClassName('callback-modal-content')[0].classList.toggle('modal-active')
+    function toggleModal(type) {
+
+        document.getElementsByClassName(type)[0].classList.toggle('modal-active')
         return false
 
     }
