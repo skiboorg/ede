@@ -30,3 +30,10 @@ class ServiceName(models.Model):
 
 class Subject(models.Model):
     name = models.CharField('Предмет', max_length=255, blank=False, null=True)
+
+    def __str__(self):
+        return 'Предмет : {}'.format(self.name)
+
+    class Meta:
+        verbose_name = "Предмет"
+        verbose_name_plural = "Предметы"

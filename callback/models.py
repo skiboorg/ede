@@ -1,5 +1,7 @@
 from django.db import models
 
+
+
 class Callback(models.Model):
     workName = models.CharField('Вид работы', max_length=255, blank=False)
     subject = models.CharField('Предмет', max_length=255, blank=False)
@@ -15,6 +17,8 @@ class Callback(models.Model):
     def __str__(self):
         return 'Форма обратной связи. Заполнена {} '.format(self.created_at)
 
+
+
     class Meta:
         verbose_name = "Форма обратной связи"
         verbose_name_plural = "Формы обратной связи"
@@ -27,6 +31,8 @@ class CallbackOrder(models.Model):
 
     def __str__(self):
         return 'Форма заказа звонка. От {} '.format(self.userName)
+
+
 
     class Meta:
         verbose_name = "Форма заказа звонка"
