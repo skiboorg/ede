@@ -250,12 +250,67 @@
       content: url(../images/icons/radio-checked.png)
 
 
+.order-messages
+  margin-top: 20px
+  border: 1px solid #bebebe
+  padding: 20px
+  &-title
+    border-bottom: 1px solid #bebebe
+    margin-bottom: 20px
+    padding-bottom: 10px
+    font-family: 'MuseoSansCyrl-700', sans-serif
+    font-size: 18px
+  &-wrapper
+    display: flex
+    flex-direction: column
 
 
+.order-message
+  display: flex
+  flex-direction: column
+.order-user-message
+  align-self: flex-start
+  border: 1px solid $color_l_blue
+  display: inline-flex
+  flex-direction: column
+  width: 50%
+  border-radius: 20px
+  padding: 10px
+  margin-bottom: 10px
+  background: $bg-grey
+  span
+    display: inline-block
+    font-family: 'MuseoSansCyrl-700', sans-serif
+    font-size: 10px
 
 
+.order-admin-message
+  border: 2px solid $color_yellow
+  background: $bg-grey
+  display: inline-flex
+  flex-direction: column
+  align-self: flex-end
+  width: 50%
+  border-radius: 20px
+  padding: 10px
+  margin-bottom: 10px
+  span
+    display: inline-block
+    font-family: 'MuseoSansCyrl-700', sans-serif
+    font-size: 10px
+.new-order-message
+  textarea
+    display: block
+    margin-bottom: 20px
+    height: 100px
+    width: 97%
 //tab payment
 @media (max-width: 575px)
+  .tab-order
+    padding: 10px
+  .order-messages
+    padding: 5px
+
   .tab-payment-grid
     display: grid
     grid-template-columns: 1fr
@@ -263,3 +318,8 @@
       order: 2
     &-topay
       order: 1
+  .new-order-message
+    textarea
+      width: 88%
+    button
+      width: 93%

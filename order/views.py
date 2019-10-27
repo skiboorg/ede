@@ -15,3 +15,14 @@ def newOrder(request):
 
         return HttpResponseRedirect('/lk')
 
+def newMesage(request):
+    print(request.POST)
+
+    if request.POST:
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            print(form.errors)
+
+        return HttpResponseRedirect('/lk')

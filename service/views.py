@@ -36,10 +36,13 @@ def contacts(request):
 
 
 def lk(request):
+    n1 = random.randint(0, 9)
+    n2 = random.randint(0, 9)
     if request.user.is_authenticated:
+        messageForm = MessageForm()
         orderForm = OrderForm()
         userForm = UpdateForm()
-        allOrders = Order.objects.filter(user=request.user)
+        allOrders = Order.objects.filter(user=request.user, is_complete=False)
         allService = ServiceName.objects.all()
         allSubjects = Subject.objects.all()
         return render(request, 'pages/lk.html', locals())

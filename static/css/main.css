@@ -2394,6 +2394,95 @@ select {
   content: url(../images/icons/radio-checked.png);
 }
 
+.order-messages {
+  margin-top: 20px;
+  border: 1px solid #bebebe;
+  padding: 20px;
+}
+
+.order-messages-title {
+  border-bottom: 1px solid #bebebe;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  font-family: 'MuseoSansCyrl-700', sans-serif;
+  font-size: 18px;
+}
+
+.order-messages-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.order-message {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.order-user-message {
+  -ms-flex-item-align: start;
+  align-self: flex-start;
+  border: 1px solid #009cff;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 50%;
+  border-radius: 20px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background: #f8f9fb;
+}
+
+.order-user-message span {
+  display: inline-block;
+  font-family: 'MuseoSansCyrl-700', sans-serif;
+  font-size: 10px;
+}
+
+.order-admin-message {
+  border: 2px solid #ffd05d;
+  background: #f8f9fb;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-item-align: end;
+  align-self: flex-end;
+  width: 50%;
+  border-radius: 20px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.order-admin-message span {
+  display: inline-block;
+  font-family: 'MuseoSansCyrl-700', sans-serif;
+  font-size: 10px;
+}
+
+.new-order-message textarea {
+  display: block;
+  margin-bottom: 20px;
+  height: 100px;
+  width: 97%;
+}
+
 .footer {
   border-top: 1px solid #bebebe;
   padding-bottom: 70px;
@@ -2858,6 +2947,14 @@ input[type='radio']#register_button:checked ~ #register-form-button {
     flex: 1;
   }
 
+  .tab-order {
+    padding: 10px;
+  }
+
+  .order-messages {
+    padding: 5px;
+  }
+
   .tab-payment-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -2873,6 +2970,14 @@ input[type='radio']#register_button:checked ~ #register-form-button {
     -webkit-box-ordinal-group: 2;
     -ms-flex-order: 1;
     order: 1;
+  }
+
+  .new-order-message textarea {
+    width: 88%;
+  }
+
+  .new-order-message button {
+    width: 93%;
   }
 
   .footer-top-phones {

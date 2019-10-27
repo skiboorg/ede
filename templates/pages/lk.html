@@ -85,12 +85,49 @@
                     <div class="tab-order-status-wrapper">
                         <div class="tab-order-status-bar">
                             <div class="tab-order-status-bar-inner" style="width: {{ order.complete }}%">
-                                <span style="left: {{ order.complete }}%">{{ order.complete }}%</span> <!-- процент - 7 -->
+                                {% if order.complete >= 10 %}
+                                <span style="left: {{  order.complete | add:"-7" }}%">{{ order.complete }}%</span> <!-- процент - 7 -->
+                                {% else %}
+                                 <span style="left: {{  order.complete | add:"5" }}%">{{ order.complete }}%</span> <!-- процент - 7 -->
+                                {% endif %}
 
                             </div>
                         </div>
                         <a href="#" class="btn">внести предоплату</a>
                     </div>
+                    {% if order.ordermessages %}
+
+                            <div class="order-messages mb20">
+                    <p class="order-messages-title">Чат с администрацией</p>
+                    <div class="order-messages-wrapper">
+                        {% for message in order.ordermessages.all %}
+                              <div class="order-message">
+                            <p class="order-user-message">
+                                <span>{{ message.created_at | date }} Вы написали:</span>
+                                {{ message.message }}
+                            </p>
+                                  {% if message.reply %}
+                                    <p class="order-admin-message">
+                                         <span>{{ message.updated_at | date }} Администратор ответил:</span>
+                                        {{ message.reply }}
+                                    </p>
+                              {% endif %}
+                        </div>
+                        {% endfor %}
+                         <div class="new-order-message">
+                             <form action="{% url 'newMesage' %}" method="post">{% csrf_token %}
+                                 <textarea class="form-control" name="{{ messageForm.message.name }}" required placeholder="Ваше сообщение"></textarea>
+                                 <input type="hidden" name="{{ messageForm.user.name }}" value="{{ request.user.id }}" >
+                                 <input type="hidden" name="{{ messageForm.order.name }}" value="{{ order.id }}" >
+                                 <button type="submit" class="btn">Отправить</button>
+                             </form>
+
+                        </div>
+                    </div>
+                </div><!--// order-messages-->
+
+                     {% endif %}
+
 
 
                 </div><!--// tab-order-->

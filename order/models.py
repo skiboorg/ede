@@ -51,10 +51,12 @@ class OrderFile(models.Model):
 
 
 class Messages(models.Model):
-    order = models.ForeignKey(Order, blank=False, on_delete=models.CASCADE, verbose_name='Сообщение к заказу')
+    order = models.ForeignKey(Order, blank=False, on_delete=models.CASCADE, verbose_name='Сообщение к заказу', related_name='ordermessages')
     user = models.ForeignKey(User, blank=False, on_delete=models.CASCADE, verbose_name='От пользователя')
     message = models.TextField('Сообщение', default='')
-    reply = models.TextField('Ответ', default='')
+    reply = models.TextField('Ответ', blank=True)
+    created_at = models.DateTimeField('Дата создания сообщения', auto_now_add=True)
+    updated_at = models.DateTimeField('Дата ответа',auto_now=True)
 
     def __str__(self):
         return 'Сообщение к заказу №{} '.format(self.order.id)

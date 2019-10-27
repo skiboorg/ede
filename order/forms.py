@@ -15,3 +15,12 @@ class OrderForm(ModelForm):
             'file',
             'comment'
         )
+
+class MessageForm(ModelForm):
+    class Meta:
+        model = Messages
+        fields = (
+            'user',
+            'order',
+            'message',
+        )
