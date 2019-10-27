@@ -76,6 +76,8 @@ input[type='radio']#login_button
     ~#login-form-button
       background: #fff
       border-bottom: 1px solid $color_l_blue
+    ~#login-form-button
+      cursor: default
 input[type='radio']#register_button
   display: none
   &:checked
@@ -84,3 +86,24 @@ input[type='radio']#register_button
     ~#register-form-button
       background: #fff
       border-bottom: 1px solid $color_l_blue
+    ~#register-form-button
+      cursor: default
+
+.captcha
+  display: flex
+  align-items: center
+  justify-content: center
+  justify-content: flex-end
+  padding: 0 15px
+
+  span:nth-child(odd)
+    display: inline-block
+    width: 20px
+    height: 34px
+    margin-left: 5px
+  span:nth-child(even)
+    display: inline-block
+    width: 25px
+    height: 34px
+    margin-left: 5px
+

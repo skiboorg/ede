@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from customuser.models import User
 from django.http import JsonResponse, HttpResponseRedirect
-from .forms import SignUpForm #, UpdateForm
+from .forms import SignUpForm , UpdateForm
 
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
@@ -12,51 +12,20 @@ def create_password():
     import string
     password = ''.join(choices(string.ascii_uppercase + string.ascii_lowercase + string.digits, k=8))
     return password
-#
-# def account(request):
-#     if request.user.is_authenticated:
-#         return render(request, 'customuser/account.html', locals())
-#     else:
-#         return HttpResponseRedirect('/')
-#
-# def orders(request):
-#     if request.user.is_authenticated:
-#         orders = Order.objects.filter(client=request.user)
-#         return render(request, 'customuser/orders.html', locals())
-#     else:
-#         return HttpResponseRedirect('/')
-#
-# def order(request, order_code):
-#     if request.user.is_authenticated:
-#         order = Order.objects.get(order_code=order_code)
-#         return render(request, 'customuser/order.html', locals())
-#     else:
-#         return HttpResponseRedirect('/')
+
 
 def account_edit(request):
-
-    client = request.user
-
+    user = request.user
     if request.POST:
-        form = UpdateForm(request.POST, instance=request.user)
+        form = UpdateForm(request.POST, instance=user)
         if form.is_valid():
             form.save()
-            client.profile_ok = True
-            client.save(force_update=True)
-
-        return render(request, 'customuser/account_edit.html', locals())
+        return render(request, 'pages/lk.html', locals())
     else:
-        form = UpdateForm(instance=client)
-        return render(request, 'customuser/account_edit.html', locals())
+        userForm = UpdateForm(instance=user)
+        return render(request, 'pages/lk.html', locals())
 
 
-def wishlist(request):
-    if request.user.is_authenticated:
-        wish_list = Wishlist.objects.filter(client=request.user)
-
-        return render(request, 'customuser/wishlist.html', locals())
-    else:
-        return HttpResponseRedirect('/')
 
 
 def restore(request):
@@ -85,16 +54,15 @@ def log_out(request):
 
 def log_in(request):
     return_dict = {}
-    email = request.POST.get('email')
+    phone = request.POST.get('phone')
     password = request.POST.get('password')
-    print(email)
-
-    user = authenticate(email=email, password=password)
+    print(phone)
+    user = authenticate(phone=phone, password=password)
     print(user)
     if user is not None:
         if user.is_active:
             login(request, user)
-            return_dict['result'] = 'success'
+            return_dict['result'] = 'ok'
             return JsonResponse(return_dict)
         else:
             return_dict['result'] = 'inactive'
@@ -102,12 +70,12 @@ def log_in(request):
     else:
         return_dict['result'] = 'invalid'
         return JsonResponse(return_dict)
-    return_dict['result'] = 'denied'
-    return JsonResponse(return_dict)
+
 
 
 def signup(request):
     return_dict = {}
+    print(request.POST)
     if request.method == 'POST':
         n1 = int(request.POST.get('n1'))
         n2 = int(request.POST.get('n2'))
@@ -126,10 +94,10 @@ def signup(request):
                 user.is_active = True
                 user.save()
                 print('User registred')
-                msg_html = render_to_string('email/register.html', {'login': email, 'password': password1})
-                send_mail('Регистрация на сайте LAKSHMI888', None, 'info@lakshmi888.ru', [email],
-                          fail_silently=False, html_message=msg_html)
-                print('Email sent to {} with pass {}'.format(email,password1))
+                # msg_html = render_to_string('email/register.html', {'login': email, 'password': password1})
+                # send_mail('Регистрация на сайте LAKSHMI888', None, 'info@lakshmi888.ru', [email],
+                #           fail_silently=False, html_message=msg_html)
+                # print('Email sent to {} with pass {}'.format(email,password1))
                 login(request, user)
 
 
@@ -147,3 +115,5 @@ def signup(request):
             form = SignUpForm()
     return_dict['result'] = 'not post'
     return JsonResponse(return_dict)
+
+

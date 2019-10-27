@@ -288,6 +288,7 @@
 {% endblock %}
 
 {% block js %}
+    {{ block.super }}
     <script src="{% static 'js/tiny-slider.js' %}"></script>
     <script>
       let review_image=document.getElementById('review_image'), review_title=document.getElementById('review_title'),

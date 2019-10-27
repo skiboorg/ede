@@ -13,16 +13,205 @@
     <meta name="keywords" content="{% block keywords %} keywords {% endblock %}">
     <meta name="description" content="{% block description %} description {% endblock %}"/>
     {% block css %}
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
     {% endblock %}
 </head>
 <body>
 <div class="main">
-{% block content %}
-{% endblock %}
+    {% block content %}
+    {% endblock %}
 </div><!-- // main -->
 {% include 'footer.html' %}
+{% if not request.user.is_authenticated %}
+    {% include 'login_modal.html' %}
+{% endif %}
+{% include 'callback_order_modal.html' %}
 {% block js %}
+    <script>
+        function toggleModal(type) {
+            console.log(type)
+            document.getElementsByClassName(type)[0].classList.toggle('modal-active')
+            return false
+        }
+
+        function sendCallbackOrder(){
+            let csrfmiddlewaretoken = document.getElementsByName('csrfmiddlewaretoken')[0].defaultValue
+            let name = document.getElementsByName('userName')[0]
+            let phone = document.getElementsByName('userPhone')[0]
+            let div = document.getElementsByClassName('callback-order-form')[0]
+            let btn = document.getElementById('callback_order_form_submit')
+            let error_label = document.getElementById('callback_order_modal_errors')
+            let req_fields = [phone,name]
+            let all_fields = [phone,name]
+            error_label.style.display = 'none'
+            btn.classList.remove('mt30')
+            btn.setAttribute('disabled', 'disabled');
+            btn.firstChild.data = 'Отправка ...'
+            for (i of req_fields){
+                i.classList.remove("error")
+            }
+            let fd = new FormData();
+            fd.append('csrfmiddlewaretoken',csrfmiddlewaretoken)
+            for (i of all_fields){
+                fd.append(i.getAttribute('name'),i.value)
+            }
+
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST', '/callback/callback/', true);
+            xhr.onload = function () {
+                if (JSON.parse(this.response)['result'] === 'ok'){
+                    div.innerText='Спасибо за обращение, с вами обязательно свяжутся'
+                }
+                else{
+                    error_label.style.display = 'block'
+                    btn.removeAttribute('disabled')
+                    btn.firstChild.data = 'Жду звонка'
+                    console.log(JSON.parse(this.response)['errors'])
+                    for (i of req_fields){
+                        if (JSON.parse(this.response)['errors'][i.getAttribute('name')]){
+                            i.classList.add("error");
+                        }
+                    }
+                }
+            };
+            xhr.send(fd);
+        }
+
+        function signup() {
+            let email = document.getElementById("reg_email")
+            let phone = document.getElementById("reg_phone")
+            let password1 = document.getElementById("reg_pass1")
+            let password2 = document.getElementById("reg_pass2")
+            let n1 = document.getElementById("reg_n1").dataset.n1
+            let n2 = document.getElementById("reg_n2").dataset.n2
+            let reg_answer = document.getElementById("reg_answer")
+            let error_label = document.getElementById('reg_error')
+            let login_form = document.getElementsByClassName('login-form-register-tab')[0]
+            let btn = document.getElementById('login_submit')
+            btn.setAttribute('disabled', 'disabled');
+            btn.firstChild.data = 'Отправка ...'
+
+            let req_fields = [email,phone,password1,password2,reg_answer]
+            for (i of req_fields){
+                i.classList.remove("error")
+            }
+            error_label.style.display = 'none'
+            error_label.innerText = ''
+
+            if(reg_answer.value ===''){
+                reg_answer.classList.add('error')
+                error_label.style.display = 'block'
+                error_label.innerText = 'Введите ответ'
+                btn.removeAttribute('disabled')
+                btn.firstChild.data = 'зарегистрироваться'
+
+            }
+
+            if (password1.value === ''){
+                password1.classList.add('error')
+                error_label.style.display = 'block'
+                error_label.innerText = 'Обязательное поле'
+                btn.removeAttribute('disabled')
+                btn.firstChild.data = 'зарегистрироваться'
+
+            }
+
+            if (email.value === ''){
+                email.classList.add('error')
+                error_label.style.display = 'block'
+                error_label.innerText = 'Обязательное поле'
+                btn.removeAttribute('disabled')
+                btn.firstChild.data = 'зарегистрироваться'
+
+            }
+
+            if (phone.value === ''){
+                phone.classList.add('error')
+                error_label.style.display = 'block'
+                error_label.innerText = 'Обязательное поле'
+                btn.removeAttribute('disabled')
+                btn.firstChild.data = 'зарегистрироваться'
+                return
+            }
+
+            let csrfmiddlewaretoken = document.getElementsByName("csrfmiddlewaretoken")[0].value;
+
+            let fd = new FormData();
+
+            fd.append('csrfmiddlewaretoken',csrfmiddlewaretoken)
+            fd.append('email',email.value)
+            fd.append('phone',phone.value)
+            fd.append('password1',password1.value)
+            fd.append('password2',password2.value)
+            fd.append('n1',n1)
+            fd.append('n2',n2)
+            fd.append('answer',reg_answer.value)
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST', '/user/signup/', true);
+            xhr.onload = function () {
+
+                if (JSON.parse(this.response)['result'] === 'success'){
+                    login_form.innerHTML=`<p>Ваш аккаунт зарегистрирован</p>
+                                           <a onclick='window.location.reload()' class='btn'>авторизоваться</a>`
+                }
+                else if(JSON.parse(this.response)['result'] === 'bad'){
+                    btn.removeAttribute('disabled')
+                    btn.firstChild.data = 'зарегистрироваться'
+                    reg_answer.classList.add('error')
+                    error_label.style.display = 'block'
+                    error_label.innerText = 'Не верный ответ'
+                }
+                else if(JSON.parse(this.response)['result']['email']){
+                    btn.removeAttribute('disabled')
+                    btn.firstChild.data = 'зарегистрироваться'
+                    email.classList.add('error')
+                    error_label.style.display = 'block'
+                    error_label.innerText = JSON.parse(this.response)['result']['email']
+                }
+                else if(JSON.parse(this.response)['result']['password2']){
+                    btn.removeAttribute('disabled')
+                    btn.firstChild.data = 'зарегистрироваться'
+                    password1.classList.add('error')
+                    password2.classList.add('error')
+                    error_label.style.display = 'block'
+                    error_label.innerText = JSON.parse(this.response)['result']['password2']
+                }
+                else if(JSON.parse(this.response)['result']['phone']){
+                    btn.removeAttribute('disabled')
+                    btn.firstChild.data = 'зарегистрироваться'
+                    phone.classList.add('error')
+                    error_label.style.display = 'block'
+                    error_label.innerText = JSON.parse(this.response)['result']['phone']
+                }
+            };
+            xhr.send(fd);
+        }
+
+        function login(){
+            let phone = document.getElementById("login-phone").value;
+            let password = document.getElementById("login-password").value;
+            let csrfmiddlewaretoken = document.getElementsByName("csrfmiddlewaretoken")[0].value;
+            let error_label = document.getElementById('login_error')
+            let fd = new FormData();
+            error_label.style.display = 'none'
+
+            fd.append('csrfmiddlewaretoken',csrfmiddlewaretoken)
+            fd.append('phone',phone)
+            fd.append('password',password)
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST', '/user/log_in/', true);
+            xhr.onload = function () {
+                if (JSON.parse(this.response)['result'] === 'ok'){
+                    window.location.reload()
+                }
+                else{
+                    error_label.style.display = 'block'
+                }
+            };
+            xhr.send(fd);
+        }
+
+    </script>
 {% endblock %}
 </body>
 </html>

@@ -10,9 +10,12 @@
     <div class="mobile-menu-panel">
         <div class="mobile-menu-panel-inner">
             <div class="header-dropdown-user" >
-                <!-- <a class="link" href="#">Зарегистрироваться</a> -->
-                <img src="{% static 'images/icons/EDE.png' %}" alt="">
-                <a class="link" href="#">Анастатися</a>
+                 {% if request.user.is_authenticated %}
+                    <img src="{% static 'images/icons/EDE.png' %}" alt="">
+                        <a class="link" href="{% url 'lk' %}">{{ request.user.email }}</a>
+                {% else %}
+                    <a class="link" onclick="toggleModal('login-modal')">Вход/Регистрация</a>
+                {% endif %}
             </div>
             <ul class="mobile-nav">
                 <li class="active"><a href="#">Главная</a></li>
@@ -34,11 +37,14 @@
             <li><a href="#">О нас</a></li>
              <li><a href="{% url 'contacts' %}">Контакты</a></li>
         </ul>
-        <a  class="btn" onclick="toggleModal()">оформить заявку</a>
+        <a  class="btn" onclick="toggleModal('order-modal')">оформить заявку</a>
         <div class="header-dropdown-user" >
-            <!-- <a class="link" href="#">Зарегистрироваться</a> -->
-            <img src="{% static 'images/icons/EDE.png' %}" alt="">
-            <a class="link" href="#">Анастатися</a>
+            {% if request.user.is_authenticated %}
+                    <img src="{% static 'images/icons/EDE.png' %}" alt="">
+                      <a class="link" href="{% url 'lk' %}">{{ request.user.email }}</a>
+                {% else %}
+                    <a class="link" onclick="toggleModal('login-modal')">Вход/Регистрация</a>
+                {% endif %}
         </div>
     </div><!-- end header-dropdown -->
 

@@ -43,7 +43,7 @@
                 <div class="contacts-work-time ">
                     <p class="text-block mb30">График работы: <span>10:00 - 18:00</span></p>
                     <p class="text-block mb40">Звонок бесплатный <span>из любой точки России</span></p>
-                    <a href="#" class="btn">заказать обратный звонок</a>
+                    <a class="btn" onclick="toggleModal('callback-order-modal')">заказать обратный звонок</a>
                 </div>
             </div>
         </div>
@@ -94,6 +94,7 @@
 {% endblock %}
 
 {% block js %}
+        {{ block.super }}
 <script>
   let mobile_button = document.getElementsByClassName('mobile-toggle')[0]
     let mobile_menu_panel = document.getElementsByClassName('mobile-menu-panel')[0]
@@ -105,11 +106,7 @@
         mobile_menu.classList.toggle('mobile-menu-panel-inner-active')
     }
 
-      function toggleModal() {
-        document.getElementsByClassName('callback-modal-content')[0].classList.toggle('modal-active')
-        return false
 
-    }
 </script>
 
 {% endblock %}

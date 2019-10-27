@@ -17,3 +17,11 @@ class CallbackForm(ModelForm):
             'email',
             'file',
         )
+
+class CallbackOrderForm(ModelForm):
+    class Meta:
+        model = CallbackOrder
+        fields = (
+            'userName',
+            'userPhone',
+        )

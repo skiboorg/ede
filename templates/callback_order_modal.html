@@ -1,0 +1,31 @@
+    <div id="callback_order_modal" class="modal">
+        <div class="modal-content callback-order-modal">
+            <div class="calculation-form-wrapper modal-form login-form">
+
+                <span class="modal-close" onclick="toggleModal('callback-order-modal')">&#215;</span>
+               {% csrf_token %}
+                       <div  class="callback-order-form">
+                    <div class="form-filed-wrapper mb10">
+                        <label >Ваше имя </label>
+                        <input  class="form-control" name="{{ callbackOrderForm.userName.name }}" value="" required placeholder="">
+                    </div>
+                    <div class="form-filed-wrapper mb10">
+                        <label >Ваш телефон </label>
+                        <input  class="form-control" name="{{ callbackOrderForm.userPhone.name }}" value="" required placeholder="">
+                    </div>
+                    <label class="custom-checkbox"><span>Даю согласие на обработку моих персональных данных</span>
+                        <input name="" checked required type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                           <p id="callback_order_modal_errors" class="form-error">Отмеченные поля обязательны для заполнения</p>
+                           <input style="display: none" type="checkbox" name="agree" >
+                    <button id="callback_order_form_submit" type="submit" class="btn mt10" onclick="sendCallbackOrder()">жду звонка</button>
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+    </div><!--callback_order_modal -->

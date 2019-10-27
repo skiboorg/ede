@@ -24,13 +24,13 @@
 
             <div class="footer-top-phones text-right">
                 <p>+7 (351) 230 80 40</p>
-                <a href="#" class="btn ">заказать звонок</a>
+                <a class="btn " onclick="toggleModal('callback-order-modal')">заказать звонок</a>
             </div>
 
 
 
             <div class="header-logo not-visible-sm">
-                <img src="images/icons/ede.png" alt="">
+                <img src="{% static 'images/icons/ede.png' %}" alt="">
                 <span>Заказать диплом или курсовую у реальных практиков</span>
             </div>
             <div class="footer-social">
@@ -46,6 +46,7 @@
 
     </div>
 </footer>
+
 
 <script>
     function sendForm() {
@@ -64,7 +65,7 @@
         let req_fields = [workName,phone,email,subject,about,name]
         let all_fields = [workName,phone,email,subject,about,name,deadLine,volume]
         error_label.style.display = 'none'
-        btn.classList.remove('mt30')
+
         btn.setAttribute('disabled', 'disabled');
         btn.firstChild.data = 'Отправка ...'
         for (i of req_fields){
@@ -77,7 +78,7 @@
         }
         fd.append('file',file)
         let xhr = new XMLHttpRequest();
-        xhr.open('POST', '/callback/create/', true);
+        xhr.open('POST', '/callback/workprice/', true);
         xhr.onload = function () {
             if (JSON.parse(this.response)['result'] === 'ok'){
                 btn.style.display = 'none'
@@ -85,7 +86,7 @@
             }
             else{
                 error_label.style.display = 'block'
-                btn.classList.add('mt30')
+
                 btn.removeAttribute('disabled')
                 btn.firstChild.data = 'Узнать стоимость своей работы'
                 for (i of req_fields){

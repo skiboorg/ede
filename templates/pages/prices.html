@@ -14,7 +14,6 @@
 {% endblock %}
 
 {% block css %}
-
     {{ block.super }}
 {% endblock %}
 
@@ -41,21 +40,21 @@
                     <p class="mb20">Стоимость:<span>от 7e900 руб</span></p>
                     <p class="mb20">Сроки:<span>от 7 дней</span></p>
                     <p class="mb20">Работ выполнено:<span>23,783</span></p>
-                    <a class="btn" onclick="toggleModal()">заказать работу</a>
+                    <a class="btn" onclick="toggleModal('order-modal')">заказать работу</a>
                 </div>
                 <div class="price-item bg-grey">
                     <h5>Дипломая работа</h5>
                     <p class="mb20">Стоимость:<span>от 7900 руб</span></p>
                     <p class="mb20">Сроки:<span>от 7 дней</span></p>
                     <p class="mb20">Работ выполнено:<span>23,783</span></p>
-                    <a class="btn" onclick="toggleModal()">заказать работу</a>
+                    <a class="btn" onclick="toggleModal('order-modal')">заказать работу</a>
                 </div>
                 <div class="price-item bg-grey">
                     <h5>Дипломая работа</h5>
                     <p class="mb20">Стоимость:<span>от 7900 руб</span></p>
                     <p class="mb20">Сроки:<span>от 7 дней</span></p>
                     <p class="mb20">Работ выполнено:<span>23,783</span></p>
-                    <a class="btn" onclick="toggleModal()">заказать работу</a>
+                    <a class="btn" onclick="toggleModal('order-modal')">заказать работу</a>
 
                 </div>
             </div><!--//prices-wrapper -->
@@ -76,7 +75,7 @@
                     <div  class="price-item dropdown-prices ">
                         <p class="mb20">Сроки:<span>от {{ service.time }} дня</span></p>
                         <p class="mb20">Цена:<span>от {{ service.price }} р</span></p>
-                        <a class="btn" onclick="toggleModal()" >заказать</a>
+                        <a class="btn" onclick="toggleModal('order-modal')" >заказать</a>
 
                     </div>
                 </div>
@@ -108,6 +107,9 @@
 {% endblock %}
 
 {% block js %}
+
+    {{ block.super }}
+
   <script>
     let mobile_button = document.getElementsByClassName('mobile-toggle')[0]
     let mobile_menu_panel = document.getElementsByClassName('mobile-menu-panel')[0]
@@ -117,12 +119,6 @@
         this.classList.toggle('mobile-toggle-active')
         mobile_menu_panel.classList.toggle('mobile-menu-panel-active')
         mobile_menu.classList.toggle('mobile-menu-panel-inner-active')
-    }
-
-      function toggleModal() {
-        document.getElementsByClassName('callback-modal-content')[0].classList.toggle('modal-active')
-        return false
-
     }
 
 

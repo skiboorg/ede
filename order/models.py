@@ -1,14 +1,27 @@
 from django.db import models
 from customuser.models import User
 
+
+class OrderStatus(models.Model):
+    status = models.CharField('Статус', max_length=100, blank=False, default='')
+
+    def __str__(self):
+        return 'Статус заказа : {}'.format(self.status)
+
+    class Meta:
+        verbose_name = "Статус заказа"
+        verbose_name_plural = "Статусы заказов"
+
+
 class Order(models.Model):
+    status = models.ForeignKey(OrderStatus, blank=True,null=True, on_delete=models.SET_NULL, verbose_name='Статус заказа')
     user = models.ForeignKey(User, blank=False, on_delete=models.CASCADE, verbose_name='Пользователь')
     workName = models.CharField('Вид работы', max_length=255, blank=False)
     subject = models.CharField('Предмет', max_length=255, blank=False)
     about = models.CharField('Тема', max_length=255, blank=False)
     volume = models.IntegerField('Объем', blank=True, null=True)
     deadLine = models.CharField('Срок', max_length=255, blank=True, default='Пользователь не указал')
-    file = models.FileField('Загруженный файл', upload_to='callback_files', blank=True)
+    file = models.FileField('Загруженный файл', upload_to='new_order_files', blank=True)
     fullPrice = models.IntegerField('Полная стоимость', default=0)
     prePay = models.IntegerField('Предоплата', default=0)
     created_at = models.DateTimeField('Дата заказа', auto_now_add=True)
@@ -35,3 +48,17 @@ class OrderFile(models.Model):
     class Meta:
         verbose_name = "Файл к заказу"
         verbose_name_plural = "Файлы к заказам"
+
+
+class Messages(models.Model):
+    order = models.ForeignKey(Order, blank=False, on_delete=models.CASCADE, verbose_name='Сообщение к заказу')
+    user = models.ForeignKey(User, blank=False, on_delete=models.CASCADE, verbose_name='От пользователя')
+    message = models.TextField('Сообщение', default='')
+    reply = models.TextField('Ответ', default='')
+
+    def __str__(self):
+        return 'Сообщение к заказу №{} '.format(self.order.id)
+
+    class Meta:
+        verbose_name = "Сообщение к заказу"
+        verbose_name_plural = "Сообщения к заказам"

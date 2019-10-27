@@ -2,7 +2,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-   path('create/', views.createCallbackForm, name='createCallbackForm'),
+   path('workprice/', views.createCallbackForm, name='createCallbackForm'),
+   path('callback/', views.createCallbackOrderForm, name='createCallbackOrderForm'),
 
 
 ]

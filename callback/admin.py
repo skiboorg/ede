@@ -12,3 +12,4 @@ class CallbackAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Callback, CallbackAdmin)
+admin.site.register(CallbackOrder)

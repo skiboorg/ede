@@ -6,6 +6,7 @@ class OrderForm(ModelForm):
     class Meta:
         model = Order
         fields = (
+            'user',
             'workName',
             'subject',
             'about',

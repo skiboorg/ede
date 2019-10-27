@@ -16,7 +16,7 @@
             <div class="header-phones-inner">
                 <p>Есть вопрос? Звоните</p>
                 <span>+7 (351) 230 80 40</span>
-                <a href="#" class="btn btn-callback">перезвоните мне</a>
+                <a class="btn btn-callback" onclick="toggleModal('callback-order-modal')">перезвоните мне</a>
             </div>
         </div>
     </div><!-- end header-wrapper -->
@@ -31,9 +31,9 @@
             <div class="header-dropdown-user" >
                 {% if request.user.is_authenticated %}
                     <img src="{% static 'images/icons/EDE.png' %}" alt="">
-                    <a class="link" href="#">{{ request.user.email }}</a>
+                    <a class="link" href="{% url 'lk' %}">{{ request.user.email }}</a>
                 {% else %}
-                    <a class="link" href="#">Зарегистрироваться</a>
+                   <a class="link" onclick="toggleModal('login-modal')">Вход/Регистрация</a>
                 {% endif %}
             </div>
             <ul class="mobile-nav">
@@ -60,9 +60,9 @@
         <div class="header-dropdown-user" >
             {% if request.user.is_authenticated %}
                     <img src="{% static 'images/icons/EDE.png' %}" alt="">
-                    <a class="link" href="#">{{ request.user.email }}</a>
+                    <a class="link" href="{% url 'lk' %}">{{ request.user.email }}</a>
                 {% else %}
-                    <a class="link" href="#">Зарегистрироваться</a>
+                    <a class="link" onclick="toggleModal('login-modal')">Вход/Регистрация</a>
                 {% endif %}
         </div>
     </div><!-- end header-dropdown -->

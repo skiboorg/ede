@@ -1,8 +1,8 @@
-<div id="callback_modal" class="callback-modal">
-    <div class="callback-modal-content">
+<div id="callback_modal" class="modal">
+    <div class="modal-content modal-form order-modal">
         <form onsubmit="return false;" enctype="multipart/form-data" method="post" >{% csrf_token %}
             <div class="calculation-form-wrapper modal-form">
-                <span class="callback-modal-close" onclick="toggleModal()">&#215;</span>
+                <span class="modal-close" onclick="toggleModal('order-modal')">&#215;</span>
                 <div class="calculation-form-inner">
                     <div class="form-row">
                         <div class="select-wrapper">

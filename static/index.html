@@ -455,7 +455,7 @@
                         <label id="register-form-button" for="register_button">регистрация</label>
 
                         <div class="login-form-login-tab mt10">
-                            <div class="form-filed-wrapper">
+                            <div class="form-filed-wrapper mb10">
                                 <label >Телефон </label>
                                 <input  class="form-control" value="" placeholder="79991112233">
                             </div>
@@ -482,6 +482,14 @@
                             <div class="form-filed-wrapper mb10">
                                 <label>Повторите<br>пароль </label>
                                 <input type="password" class="form-control" value="">
+                            </div>
+                             <div class="captcha">
+                                <p class="user-form-p">Антиспам :</p>
+                                <span id="reg_n1" data-n1="${n1}" style="background: url(images/capthca/1.png)"></span>
+                                 <span style="background: url('images/capthca/plus.png')"></span>
+                                 <span id="reg_n2" data-n2="${n2}" style="background: url('images/capthca/9.png')"></span>
+                                 <span style="background: url('images/capthca/eqal.png')"></span>
+                                <input class="form-control" id="reg_answer" type="text"  placeholder="ответ" required="required">
                             </div>
                             <label class="custom-checkbox"><span>Даю согласие на обработку моих персональных данных</span>
                                 <input name="" checked  type="checkbox">

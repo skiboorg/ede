@@ -1,0 +1,63 @@
+<div id="login_modal" class="modal">
+        <div class="modal-content login-modal">
+            <div class="calculation-form-wrapper modal-form login-form">
+                <span class="modal-close" onclick="toggleModal('login-modal')">&#215;</span>
+                <div class="login-form-wrapper">
+                    <div class="login-form-buttons">
+                        <input type="radio" id="login_button" name="login-button"  checked>
+                        <label id="login-form-button" for="login_button">вход</label>
+                        <input type="radio" id="register_button" name="login-button"  >
+                        <label id="register-form-button" for="register_button">регистрация</label>
+
+                        <div class="login-form-login-tab mt10">
+                            <div class="form-filed-wrapper mb10">
+                                <label >Телефон </label>
+                                <input id="login-phone" class="form-control" value="" placeholder="79991112233">
+                            </div>
+                            <div class="form-filed-wrapper mb10">
+                                <label>Пароль </label>
+                                <input id="login-password" type="password" class="form-control" value="">
+                            </div>
+                            <p id="login_error" class="form-error">Проверьте введенные данные</p>
+                            <a class="btn mt10" onclick="login()">войти</a>
+                        </div>
+                        <div class="login-form-register-tab mt10">
+                            <div class="form-filed-wrapper mb10">
+                                <label >Телефон</label>
+                                <input id="reg_phone"  class="form-control" value="" placeholder="В формате: 79991112233">
+                            </div>
+                            <div class="form-filed-wrapper mb10">
+                                <label >E-Mail</label>
+                                <input id="reg_email" class="form-control" value="" placeholder="">
+                            </div>
+                            <div class="form-filed-wrapper mb10">
+                                <label>Пароль </label>
+                                <input id="reg_pass1" type="password" class="form-control" value="">
+                            </div>
+                            <div class="form-filed-wrapper mb10">
+                                <label>Повторите<br>пароль </label>
+                                <input id="reg_pass2" type="password" class="form-control" value="">
+                            </div>
+                              <div class="captcha">
+                                <span id="reg_n1" data-n1="{{ n1 }}" style="background: url('/static/images/capthca/{{ n1 }}.png') no-repeat center"></span>
+                                 <span style="background: url('/static/images/capthca/plus.png')  no-repeat center"></span>
+                                 <span id="reg_n2" data-n2="{{ n2 }}" style="background: url('/static/images/capthca/{{ n2 }}.png')  no-repeat center"></span>
+                                 <span style="background: url('/static/images/capthca/eqal.png')  no-repeat center"></span>
+                                <input class="form-control" id="reg_answer" type="number"  placeholder="ответ" required="required">
+                            </div>
+                            <label class="custom-checkbox"><span>Даю согласие на обработку моих персональных данных</span>
+                                <input name="" checked  type="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                            <p id="reg_error" class="form-error">Отмеченные поля обязательны для заполнения</p>
+                            <a id="login_submit" class="btn mt10 " onclick="signup()">зарегистрироваться</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div><!--login_modal -->
+
