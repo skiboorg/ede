@@ -1,3 +1,15 @@
+.loading
+  background: url(../images/icons/loading.gif) center
+  height: 40px
+  width: 40px
+  background-size: cover
+  display: inline-block
+  margin-left: 20px
+.paid-checkmark
+  color: $color_l_blue
+  font-size: 26px !important
+  display: block
+  text-align: center
 .lk-tabs
   display: flex
   border: 1px solid #bebebe
@@ -85,12 +97,12 @@
             top: 15px
             right: 35px
     span
-      font-family: 'MuseoSansCyrl-500'
+      font-family: 'MuseoSansCyrl-500', sans-serif
       font-size: 21px
   &-order-prepay
     p
       position: relative
-      font-family: 'MuseoSansCyrl-100'
+      font-family: 'MuseoSansCyrl-100', sans-serif
       font-size: 16px
       &:before
           content: "\22C5"
@@ -100,16 +112,22 @@
           font-size: 50px
           top: -30px
     span
-      font-family: 'MuseoSansCyrl-500'
+      font-family: 'MuseoSansCyrl-500', sans-serif
       font-size: 21px
-
+  &-order-status-buttons
+    display: flex
+    align-items: center
+    justify-content: space-between
+    flex-basis: 45%
+    flex-grow: 1
   &-order-status-bar
     position: relative
-    flex-basis: 576px
+    flex-basis: 50%
     height: 43px
     border-radius: 26px
     background-color: #f5f5f5
     padding: 5px
+    flex-grow: 1
   &-order-status-bar-inner
 
     height: 43px
@@ -132,16 +150,22 @@
   &-order-status-wrapper
     display: flex
     align-items: center
+    justify-content: space-between
     flex-wrap: wrap
-    a
-      margin-left: 50px
+    button
+      width: 210px !important
 
 //tab order
-
+@media (max-width: 990px)
+  .tab
+    &-order-status-bar
+      margin-bottom: 20px
 @media (max-width: 575px)
   .tab
     padding: 20px 0
     border: none
+    &-order-status-buttons
+      flex-wrap: wrap
     &-order-info
       flex-basis: 100%
       margin-bottom: 20px
@@ -151,9 +175,15 @@
     &-order-prepay
       flex-basis: 45%
     &-order-status-wrapper
-      a
+      button
         margin: 0
         flex: 1
+        font-size: 14px
+        margin-top: 20px
+      form
+        width: 100%
+        display: flex
+        justify-content: center
 
 //tab payment
 .tab-payment-grid

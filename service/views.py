@@ -48,7 +48,7 @@ def lk(request):
         messageForm = MessageForm()
         orderForm = OrderForm()
         userForm = UpdateForm()
-        allOrders = Order.objects.filter(user=request.user, is_complete=False)
+        allOrders = Order.objects.filter(user=request.user)
         allService = ServiceName.objects.all()
         return render(request, 'pages/lk.html', locals())
     else:

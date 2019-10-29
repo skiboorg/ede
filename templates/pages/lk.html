@@ -22,237 +22,269 @@
 {% block content %}
     {% include 'header.html' %}
     <div class="main mt50">
-    <div class="container">
-        <div class="breadcrumbs">
-            <ul>
-                <li><a href="/">Главная</a></li>
-                <li class="active">Личный кабинет</li>
-            </ul>
-        </div>
-    </div><!--// breadcrumbs-->
-
-    <section class="lk">
         <div class="container">
-            <div class="lk-tabs">
-                <div class="lk-tab lk-tab-active bordered" onclick="openTab('orders',this)">
-                    <span id="orders_icon"></span>
-                    <p class="not-visible-sm">Мои заказы</p>
+            <div class="breadcrumbs">
+                <ul>
+                    <li><a href="/">Главная</a></li>
+                    <li class="active">Личный кабинет</li>
+                </ul>
+            </div>
+        </div><!--// breadcrumbs-->
+
+        <section class="lk">
+            <div class="container">
+                <div class="lk-tabs">
+                    <div class="lk-tab lk-tab-active bordered" onclick="openTab('orders',this)">
+                        <span id="orders_icon"></span>
+                        <p class="not-visible-sm">Мои заказы</p>
+                    </div>
+                    <div class="lk-tab  bordered" onclick="openTab('payment',this)">
+                        <span id="payment_icon"></span>
+                        <p class="not-visible-sm">Оплата</p>
+                    </div>
+                    <div class="lk-tab bordered" onclick="openTab('profile',this)">
+                        <span id="profile_icon"></span>
+                        <p class="not-visible-sm">Профиль</p>
+                    </div>
+                    <div class="lk-tab" onclick="openTab('new_order',this)">
+                        <span id="new_order_icon"></span>
+                        <p class="not-visible-sm">Новый заказ</p>
+                    </div>
                 </div>
-                <div class="lk-tab  bordered" onclick="openTab('payment',this)">
-                    <span id="payment_icon"></span>
-                    <p class="not-visible-sm">Оплата</p>
-                </div>
-                <div class="lk-tab bordered" onclick="openTab('profile',this)">
-                    <span id="profile_icon"></span>
-                    <p class="not-visible-sm">Профиль</p>
-                </div>
-                <div class="lk-tab" onclick="openTab('new_order',this)">
-                    <span id="new_order_icon"></span>
-                    <p class="not-visible-sm">Новый заказ</p>
-                </div>
+
+                <div id="orders" class="tab">
+                    {% for order in allOrders %}
+                        <div class="tab-order">
+
+                            <div class="tab-order-number">Заказ №{{ order.id }}</div>
+                            <div class="tab-order-total">
+                                <div class="tab-order-info">
+                                    <p class="text-block"><span>Вид работы:</span> {{ order.workName }}</p>
+                                    <p class="text-block"><span>Предмет:</span> {{ order.subject }}</p>
+                                    <p class="text-block"><span>Тема:</span> {{ order.about }}</p>
+                                </div>
+                                <div class="tab-order-price">
+                                    <p>Стоимость:</p>
+                                    {% if order.complete and not order.is_fullPayed %}
+                                        <span>{{ order.fullPrice }} руб</span>
+                                    {% elif order.is_fullPayed%}
+                                        <span class="paid-checkmark">&#10004;</span>
+                                    {% else %}
+                                        <span class="loading"></span>
+                                    {% endif %}
+
+
+                                </div>
+                                <div class="tab-order-prepay">
+                                    <p>Предоплата:</p>
+                                    {% if order.complete and not order.is_prePayed%}
+                                        <span>{{ order.prePay }} руб</span>
+                                    {% elif order.is_prePayed%}
+                                        <span class="paid-checkmark">&#10004;</span>
+                                    {% else %}
+                                        <span class="loading"></span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <p class="tab-order-status">Статус заказа:
+                                <strong>
+                                    {{ order.status }}
+                                </strong>
+
+                            </p>
+                            <div class="tab-order-status-wrapper">
+                                <div class="tab-order-status-bar">
+                                    <div class="tab-order-status-bar-inner" style="width: {{ order.complete }}%">
+                                        {% if order.complete >= 10 %}
+                                            <span style="left: {{  order.complete | add:"-7" }}%">{{ order.complete }}%</span> <!-- процент - 7 -->
+                                        {% else %}
+                                            <span style="left: {{  order.complete | add:"5" }}%">{{ order.complete }}%</span> <!-- процент - 7 -->
+                                        {% endif %}
+
+                                    </div>
+                                </div>
+                            {% if order.complete and not order.is_complete %}
+                                <div class="tab-order-status-buttons">
+                                    <form>
+                                        <button type="submit" class="btn">внести предоплату</button>
+                                    </form>
+                                    <form>
+                                        <button type="submit" class="btn">оплатить</button>
+                                    </form>
+                                </div>
+                                {% elif order.is_complete %}
+                                <a href="{{ order.orderfile.first.file.url }}" class="btn">скачать работу</a>
+                            {% endif %}
+
+                            </div>
+                        {% if order.is_complete and order.orderfile.first.comment %}
+                            <div class="order-messages mb20">
+                                <p class="order-messages-title">Комментарий к работе:</p>
+                                 <p>{{ order.orderfile.first.comment }}</p>
+                            </div>
+                        {% endif %}
+                            {% if order.ordermessages %}
+
+                                <div class="order-messages mb20">
+                                    <p class="order-messages-title">Чат с администрацией</p>
+                                    <div class="order-messages-wrapper">
+                                        {% for message in order.ordermessages.all %}
+                                            <div class="order-message">
+                                                <p class="order-user-message">
+                                                    <span>{{ message.created_at | date }} Вы написали:</span>
+                                                    {{ message.message }}
+                                                </p>
+                                                {% if message.reply %}
+                                                    <p class="order-admin-message">
+                                                        <span>{{ message.updated_at | date }} Администратор ответил:</span>
+                                                        {{ message.reply }}
+                                                    </p>
+                                                {% endif %}
+                                            </div>
+                                        {% endfor %}
+                                        <div class="new-order-message">
+                                            <form action="{% url 'newMesage' %}" method="post">{% csrf_token %}
+                                                <textarea class="form-control" name="{{ messageForm.message.name }}" required placeholder="Ваше сообщение"></textarea>
+                                                <input type="hidden" name="{{ messageForm.user.name }}" value="{{ request.user.id }}" >
+                                                <input type="hidden" name="{{ messageForm.order.name }}" value="{{ order.id }}" >
+                                                <button type="submit" class="btn">Отправить</button>
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div><!--// order-messages-->
+
+                            {% endif %}
+
+
+
+                        </div><!--// tab-order-->
+                    {% endfor %}
+
+
+
+
+
+                </div><!--// orders tab -->
+
+                <div id="payment" class="tab" style="display:none">
+                    <div class="tab-payment-grid">
+
+                        <div class="tab-payment-grid-orders">
+                            {% for order in allOrders %}
+                                <div class="tab-payment">
+                                    <div class="tab-payment-order-number">Заказ №{{ order.id }}</div>
+                                    <div class="tab-payment-wrapper">
+                                        <div class="tab-payment-order-info">
+                                            <h5>{{ order.workName }}</h5>
+                                            <p class="text-block mb20">{{ order.subject }}</p>
+                                            <p class="text-block border-bottom mb30">до {{ order.deadLine }}</p>
+                                            {% if order.complete %}
+                                                <span>{{ order.fullPrice }} руб</span>
+                                            {% else %}
+                                               <span class="loading"></span>
+                                            {% endif %}
+
+
+                                        </div><!--// tab-payment-order-info-->
+                                        {% if order.complete %}
+                                            <div class="tab-payment-fullpay">
+                                                <h5>Оплатить полностью</h5>
+                                                <span class="tab-payment-radio radio-checked" data-order_id="1" id="order_1_fullpay"><span>{{ order.fullPrice }} руб</span></span>
+                                            </div><!--// tab-payment-order-fullpay-->
+                                            <div class="tab-payment-prepay">
+                                                <h5>Внести предоплату</h5>
+                                                <span class="tab-payment-radio" data-order_id="1" id="order_1_prepay"><span>{{ order.prePay }} руб</span></span>
+                                            </div><!--// tab-payment-order-prepay-->
+                                            {% else %}
+                                            <div class="tab-payment-fullpay">
+                                            <h5>{{ order.status }}</h5>
+                                            </div>
+                                        {% endif %}
+
+
+                                    </div><!--// tab-payment-wrapper-->
+
+                                </div><!--// tab-payment-->
+                            {% endfor %}
+                        </div><!--// tab-payment-grid-orders-->
+
+                        <div class="tab-payment-grid-topay">
+                            <h5>Всего к оплате:</h5>
+                            <table>
+                                <tr>
+                                    <td><p>Заказов</p></td>
+                                    <td><p>1</p></td>
+
+                                <tr>
+                                    <td><span>Сумма</span></td>
+                                    <td><span class="colored">3840 руб</span></td>
+                                </tr>
+                            </table>
+                            <a href="" class="btn">оплатить</a>
+                        </div><!--// tab-payment-grid-topay-->
+
+                    </div><!--// tab-payment-grid -->
+
+
+
+                </div><!--// payment tab -->
+
+                <div id="profile" class="tab" style="display:none">
+                    <form>
+                        <input class="form-control" name="{{ userForm.name.name }}" value="{{ request.user.name}}">
+                        <input class="form-control" name="{{ userForm.email.name }}" value="{{ request.user.email}}">
+                        <input class="form-control" name="{{ userForm.phone.name }}" value="{{ request.user.phone}}">
+
+                    </form>
+                </div><!--// profile tab -->
+                <div id="new_order" class="tab" style="display:none">
+                    <form action="{% url 'newOrder' %}" enctype="multipart/form-data" method="post" >{% csrf_token %}
+                        <div class="calculation-form-wrapper">
+                            <div class="calculation-form-inner">
+                                <div class="form-row">
+                                    <div class="select-wrapper">
+                                        <select class="form-control" name="{{ orderForm.workName.name }}" required>
+                                            <option selected="selected"  value="">Вид работы</option>
+                                            {% for service in allService %}
+                                                <option value="{{ service.name }}">{{ service.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <input class="form-control" value="" name="{{ orderForm.subject.name }}" placeholder="Предмет">
+
+                                    <input class="form-control" value="" name="{{ orderForm.about.name }}" placeholder="Тема работы">
+                                    <div class="d-flex-jc-sb">
+                                        <input type="number" class="form-control form-control-sm " name="{{ orderForm.volume.name }}" value="" placeholder="Объем">
+                                        <input class="form-control form-control-sm " value="" name="{{ orderForm.deadLine.name }}"
+                                               placeholder="Срок сдачи" type="date"
+                                               onchange="this.className=(this.value!=''?'form-control form-control-sm has-value':'form-control form-control-sm')">
+                                    </div>
+                                    <input type="file" class="form-control form-control-lg" name="{{ orderForm.file.name }}">
+
+                                </div>
+                                <textarea style="width: 95%; height: 100px" name="{{ orderForm.comment.name }}" class="form-control mt20" placeholder="Дополнительная информация"></textarea>
+                                <input type="hidden" name="{{ orderForm.user.name }}" value="{{ request.user.id }}">
+                            </div>
+
+                            <p class="form-error">Отмеченные поля обязательны для заполнения</p>
+                            <button id="form_submit" type="submit"  class="btn mb30" onclick="newOrder();">
+                                заказать
+
+                            </button>
+
+
+                        </div>
+                    </form>
+
+                </div><!--// new_order tab -->
+
             </div>
 
-            <div id="orders" class="tab">
-                {% for order in allOrders %}
-                <div class="tab-order">
-
-                    <div class="tab-order-number">Заказ №{{ order.id }}</div>
-                    <div class="tab-order-total">
-                        <div class="tab-order-info">
-                            <p class="text-block"><span>Вид работы:</span> {{ order.workName }}</p>
-                            <p class="text-block"><span>Предмет:</span> {{ order.subject }}</p>
-                            <p class="text-block"><span>Тема:</span> {{ order.about }}</p>
-                        </div>
-                        <div class="tab-order-price">
-                            <p>Стоимость:</p>
-                            <span>{{ order.fullPrice }} руб</span>
-                        </div>
-                        <div class="tab-order-prepay">
-                            <p>Предоплата:</p>
-                            <span>{{ order.prePay }} руб</span>
-                        </div>
-                    </div>
-                    <p class="tab-order-status">Статус заказа:
-                    <strong>
-                        {% if order.status %}
-                                        {{ order.status.status }}
-                                    {% else %}
-                                        поступил в обработку
-                                    {% endif %}
-                    </strong>
-
-                    </p>
-                    <div class="tab-order-status-wrapper">
-                        <div class="tab-order-status-bar">
-                            <div class="tab-order-status-bar-inner" style="width: {{ order.complete }}%">
-                                {% if order.complete >= 10 %}
-                                <span style="left: {{  order.complete | add:"-7" }}%">{{ order.complete }}%</span> <!-- процент - 7 -->
-                                {% else %}
-                                 <span style="left: {{  order.complete | add:"5" }}%">{{ order.complete }}%</span> <!-- процент - 7 -->
-                                {% endif %}
-
-                            </div>
-                        </div>
-                        <a href="#" class="btn">внести предоплату</a>
-                    </div>
-                    {% if order.ordermessages %}
-
-                            <div class="order-messages mb20">
-                    <p class="order-messages-title">Чат с администрацией</p>
-                    <div class="order-messages-wrapper">
-                        {% for message in order.ordermessages.all %}
-                              <div class="order-message">
-                            <p class="order-user-message">
-                                <span>{{ message.created_at | date }} Вы написали:</span>
-                                {{ message.message }}
-                            </p>
-                                  {% if message.reply %}
-                                    <p class="order-admin-message">
-                                         <span>{{ message.updated_at | date }} Администратор ответил:</span>
-                                        {{ message.reply }}
-                                    </p>
-                              {% endif %}
-                        </div>
-                        {% endfor %}
-                         <div class="new-order-message">
-                             <form action="{% url 'newMesage' %}" method="post">{% csrf_token %}
-                                 <textarea class="form-control" name="{{ messageForm.message.name }}" required placeholder="Ваше сообщение"></textarea>
-                                 <input type="hidden" name="{{ messageForm.user.name }}" value="{{ request.user.id }}" >
-                                 <input type="hidden" name="{{ messageForm.order.name }}" value="{{ order.id }}" >
-                                 <button type="submit" class="btn">Отправить</button>
-                             </form>
-
-                        </div>
-                    </div>
-                </div><!--// order-messages-->
-
-                     {% endif %}
 
 
-
-                </div><!--// tab-order-->
-                {% endfor %}
-
-
-
-
-
-            </div><!--// orders tab -->
-
-            <div id="payment" class="tab" style="display:none">
-                <div class="tab-payment-grid">
-
-                    <div class="tab-payment-grid-orders">
-                         {% for order in allOrders %}
-                        <div class="tab-payment">
-                            <div class="tab-payment-order-number">Заказ №{{ order.id }}</div>
-                            <div class="tab-payment-wrapper">
-                                  <div class="tab-payment-order-info">
-                                     <h5>{{ order.workName }}</h5>
-                                      <p class="text-block mb20">{{ order.subject }}</p>
-                                      <p class="text-block border-bottom mb30">до {{ order.deadLine }}</p>
-                                      {% if order.status %}
-                                         <span>{{ order.fullPrice }} руб</span>
-                                    {% else %}
-                                        <span>Идет расчет</span>
-                                    {% endif %}
-
-
-                                </div><!--// tab-payment-order-info-->
-                            {% if order.status %}
-                                   <div class="tab-payment-fullpay">
-                                    <h5>Оплатить полностью</h5>
-                                    <span class="tab-payment-radio radio-checked" data-order_id="1" id="order_1_fullpay"><span>{{ order.fullPrice }} руб</span></span>
-                                </div><!--// tab-payment-order-fullpay-->
-                                <div class="tab-payment-prepay">
-                                    <h5>Внести предоплату</h5>
-                                    <span class="tab-payment-radio" data-order_id="1" id="order_1_prepay"><span>{{ order.prePay }} руб</span></span>
-                                </div><!--// tab-payment-order-prepay-->
-                                    {% endif %}
-
-
-                            </div><!--// tab-payment-wrapper-->
-
-                        </div><!--// tab-payment-->
-                   {% endfor %}
-                    </div><!--// tab-payment-grid-orders-->
-
-                    <div class="tab-payment-grid-topay">
-                        <h5>Всего к оплате:</h5>
-                        <table>
-                            <tr>
-                                <td><p>Заказов</p></td>
-                                <td><p>1</p></td>
-
-                            <tr>
-                                <td><span>Сумма</span></td>
-                                <td><span class="colored">3840 руб</span></td>
-                            </tr>
-                        </table>
-                        <a href="" class="btn">оплатить</a>
-                    </div><!--// tab-payment-grid-topay-->
-
-                </div><!--// tab-payment-grid -->
-
-
-
-            </div><!--// payment tab -->
-
-            <div id="profile" class="tab" style="display:none">
-                <form>
-                    <input class="form-control" name="{{ userForm.name.name }}" value="{{ request.user.name}}">
-                    <input class="form-control" name="{{ userForm.email.name }}" value="{{ request.user.email}}">
-                    <input class="form-control" name="{{ userForm.phone.name }}" value="{{ request.user.phone}}">
-
-                </form>
-            </div><!--// profile tab -->
-            <div id="new_order" class="tab" style="display:none">
-                   <form action="{% url 'newOrder' %}" enctype="multipart/form-data" method="post" >{% csrf_token %}
-                <div class="calculation-form-wrapper">
-                    <div class="calculation-form-inner">
-                        <div class="form-row">
-                            <div class="select-wrapper">
-                                <select class="form-control" name="{{ orderForm.workName.name }}" required>
-                                    <option selected="selected"  value="">Вид работы</option>
-                                    {% for service in allService %}
-                                        <option value="{{ service.name }}">{{ service.name }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            <input class="form-control" value="" name="{{ orderForm.subject.name }}" placeholder="Предмет">
-
-                            <input class="form-control" value="" name="{{ orderForm.about.name }}" placeholder="Тема работы">
-                            <div class="d-flex-jc-sb">
-                                <input type="number" class="form-control form-control-sm " name="{{ orderForm.volume.name }}" value="" placeholder="Объем">
-                                <input class="form-control form-control-sm " value="" name="{{ orderForm.deadLine.name }}"
-                                       placeholder="Срок" type="date"
-                                       onchange="this.className=(this.value!=''?'form-control form-control-sm has-value':'form-control form-control-sm')">
-                            </div>
-                            <input type="file" class="form-control form-control-lg" name="{{ orderForm.file.name }}">
-
-                        </div>
-                        <textarea style="width: 95%; height: 100px" name="{{ orderForm.comment.name }}" class="form-control mt20" placeholder="Дополнительная информация"></textarea>
-                        <input type="hidden" name="{{ orderForm.user.name }}" value="{{ request.user.id }}">
-                    </div>
-
-                    <p class="form-error">Отмеченные поля обязательны для заполнения</p>
-                    <button id="form_submit" type="submit"  class="btn mb30" onclick="newOrder();">
-                        заказать
-
-                    </button>
-
-
-                </div>
-            </form>
-
-            </div><!--// new_order tab -->
-
-        </div>
-
-
-
-    </section><!--// lk-->
-</div><!-- // main -->
+        </section><!--// lk-->
+    </div><!-- // main -->
 
 {% endblock %}
 
@@ -260,38 +292,38 @@
 
     {{ block.super }}
 
-  <script>
-    let mobile_button = document.getElementsByClassName('mobile-toggle')[0]
-    let mobile_menu_panel = document.getElementsByClassName('mobile-menu-panel')[0]
-    let mobile_menu = document.getElementsByClassName('mobile-menu-panel-inner')[0]
+    <script>
+        let mobile_button = document.getElementsByClassName('mobile-toggle')[0]
+        let mobile_menu_panel = document.getElementsByClassName('mobile-menu-panel')[0]
+        let mobile_menu = document.getElementsByClassName('mobile-menu-panel-inner')[0]
 
-      mobile_button.onclick = function () {
-        this.classList.toggle('mobile-toggle-active')
-        mobile_menu_panel.classList.toggle('mobile-menu-panel-active')
-        mobile_menu.classList.toggle('mobile-menu-panel-inner-active')
-    }
-
-     function openTab(tab,el) {
-        let i;
-        let x = document.getElementsByClassName("tab");
-        let t = document.getElementsByClassName("lk-tab");
-        for (i = 0; i < x.length; i++) {
-            x[i].style.display = "none";
-        }
-        for (i = 0; i < t.length; i++) {
-            t[i].classList.remove('lk-tab-active')
+        mobile_button.onclick = function () {
+            this.classList.toggle('mobile-toggle-active')
+            mobile_menu_panel.classList.toggle('mobile-menu-panel-active')
+            mobile_menu.classList.toggle('mobile-menu-panel-inner-active')
         }
 
-        document.getElementById(tab).style.display = "block";
-        el.classList.add('lk-tab-active')
-    }
+        function openTab(tab,el) {
+            let i;
+            let x = document.getElementsByClassName("tab");
+            let t = document.getElementsByClassName("lk-tab");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            for (i = 0; i < t.length; i++) {
+                t[i].classList.remove('lk-tab-active')
+            }
 
-    function newOrder() {
+            document.getElementById(tab).style.display = "block";
+            el.classList.add('lk-tab-active')
+        }
+
+        function newOrder() {
 
 
 
-    }
+        }
 
-</script>
+    </script>
 
 {% endblock %}

@@ -47,5 +47,17 @@ class User(AbstractUser):
     REQUIRED_FIELDS = []
     objects = UserManager()
 
+class UserLog(models.Model):
+    user = models.ForeignKey(User, blank=False, on_delete=models.CASCADE, verbose_name='Пользователь')
+    action = models.CharField('Действие', max_length=255, blank=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return '{} - пользователь {} : {}'.format(self.created_at, self.user.name, self.action)
+
+    class Meta:
+        verbose_name = "Лог действий"
+        verbose_name_plural = "Логи действий"
+
 
 
