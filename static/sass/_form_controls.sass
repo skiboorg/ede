@@ -1,3 +1,25 @@
+[type="date"]
+  background: #f9f4f8 url(../images/icons/calendar.svg) 86% 50% no-repeat !important
+  color: transparent !important
+
+[type="date"].has-value
+  color: $color_text !important
+[type="date"]:not(.has-value):before
+  content: attr(placeholder)
+  color: $color_text
+[type="date"].has-value:before
+  content: ''
+[type="date"]::-webkit-inner-spin-button
+  display: none
+
+[type="date"]::-webkit-calendar-picker-indicator
+  opacity: 0
+  cursor: pointer
+  pointer-events: all
+
+[type="number"]::-webkit-inner-spin-button
+  display: none
+
 input[type='file']
   position: relative
   color: transparent
@@ -75,7 +97,7 @@ select
      color: $color_text
 
 .form-control-sm
-  width: 33%
+  width: 37%
 
 .form-control-lg
   grid-column: span 2

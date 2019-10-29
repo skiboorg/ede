@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    {{ block.super }} - уауку
+    {{ block.super }} - Главная
 {% endblock %}
 
 {% block keywords %}
@@ -56,19 +56,15 @@
                                     {% endfor %}
                                 </select>
                             </div>
-                            <div class="select-wrapper">
-                                <select class="form-control" name="{{ callbackForm.subject.name }}">
-                                    <option selected="selected"  value="">Предмет</option>
-                                    {% for subject in allSubjects %}
-                                        <option value="{{ subject.name }}">{{ subject.name }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
+
+                            <input class="form-control" value="" name="{{ callbackForm.subject.name }}" placeholder="Предмет">
 
                             <input class="form-control" value="" name="{{ callbackForm.about.name }}" placeholder="Тема работы">
                             <div class="d-flex-jc-sb">
                                 <input type="number" class="form-control form-control-sm " name="{{ callbackForm.volume.name }}" value="" placeholder="Объем">
-                                <input class="form-control form-control-sm " value="" name="{{ callbackForm.deadLine.name }}" placeholder="Срок">
+                                <input class="form-control form-control-sm " value="" name="{{ callbackForm.deadLine.name }}"
+                                       placeholder="Срок" type="date"
+                                       onchange="this.className=(this.value!=''?'form-control form-control-sm has-value':'form-control form-control-sm')">
                             </div>
                             <input type="file" class="form-control form-control-lg" name="{{ callbackForm.file.name }}">
                         </div>
@@ -130,13 +126,13 @@
 
                 </div>
             </div>
-            <a href="#" class="btn btn-md m-a">Посмотреть цены на все услуги</a>
+            <a href="{% url 'prices' %}" class="btn btn-md m-a">Посмотреть цены на все услуги</a>
         </div>
     </section><!-- // prices -->
     <section class="how-it-works">
         <div class="container">
             <h3 class="text-center">Как происходит ход работы</h3>
-            <h4 class="text-center not-visible-sm">Узнайте, что будет, после того как вы обратитесь к нам за помощью</h4>
+            <h4 class="text-center not-visible-sm">Узнайте, что будет, после того как Вы обратитесь к нам за помощью</h4>
             <div class="how-it-works-numbers not-visible-sm">
                 <div id="step_1" class="how-it-works-step step-active">
                     <a href="#"><span>01</span></a>
@@ -205,7 +201,7 @@
             </div>
         </div>
     </section><!-- // how-it-works -->
-    <section class="lets-meet not-visible-md">
+    <section id="about" class="lets-meet not-visible-md">
         <div class="container">
             <div class="lets-meet-inner">
                 <h3>Давайте познакомимся<br/> с вами лично</h3>
@@ -222,7 +218,7 @@
             </div>
         </div>
     </section><!-- // lets-meet -->
-    <section class="our-help not-visible-md">
+    <section id="reviews" class="our-help not-visible-md">
         <div class="container ">
             <h3>Посмотрите, как мы уже помогли другим клиентам</h3>
             <h4 class="text-center mb50">Несколько примеров нашей работы и реальные отзывы о ней</h4>

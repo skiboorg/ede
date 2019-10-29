@@ -10,9 +10,9 @@
     <div class="mobile-menu-panel">
         <div class="mobile-menu-panel-inner">
             <div class="header-dropdown-user" >
-                 {% if request.user.is_authenticated %}
+                {% if request.user.is_authenticated %}
                     <img src="{% static 'images/icons/EDE.png' %}" alt="">
-                        <a class="link" href="{% url 'lk' %}">{{ request.user.email }}</a>
+                    <a class="link" href="{% url 'lk' %}">{{ request.user.email }}</a>
                 {% else %}
                     <a class="link" onclick="toggleModal('login-modal')">Вход/Регистрация</a>
                 {% endif %}
@@ -20,9 +20,9 @@
             <ul class="mobile-nav">
                 <li class="active"><a href="/">Главная</a></li>
                 <li><a href="{% url 'prices' %}">Цены и сроки</a></li>
-                <li><a href="#">Способы оплаты</a></li>
-                <li><a href="#">Отзывы</a></li>
-                <li><a href="#">О нас</a></li>
+                <li><a href="{% url 'allposts' %}">Статьи</a></li>
+                <li><a href="{% url 'index' %}#reviews">Отзывы</a></li>
+                <li><a href="{% url 'index' %}#about">О нас</a></li>
                 <li><a href="{% url 'contacts' %}">Контакты</a></li>
             </ul>
         </div>
@@ -32,19 +32,19 @@
         <ul class="nav">
             <li class="active"><a href="/">Главная</a></li>
             <li><a href="{% url 'prices' %}">Цены и сроки</a></li>
-            <li><a href="#">Способы оплаты</a></li>
-            <li><a href="#">Отзывы</a></li>
-            <li><a href="#">О нас</a></li>
-             <li><a href="{% url 'contacts' %}">Контакты</a></li>
+            <li><a href="{% url 'allposts' %}">Статьи</a></li>
+            <li><a href="{% url 'index' %}#reviews">Отзывы</a></li>
+            <li><a href="{% url 'index' %}#about">О нас</a></li>
+            <li><a href="{% url 'contacts' %}">Контакты</a></li>
         </ul>
         <a  class="btn" onclick="toggleModal('order-modal')">оформить заявку</a>
         <div class="header-dropdown-user" >
             {% if request.user.is_authenticated %}
-                    <img src="{% static 'images/icons/EDE.png' %}" alt="">
-                      <a class="link" href="{% url 'lk' %}">{{ request.user.email }}</a>
-                {% else %}
-                    <a class="link" onclick="toggleModal('login-modal')">Вход/Регистрация</a>
-                {% endif %}
+                <img src="{% static 'images/icons/EDE.png' %}" alt="">
+                <a class="link" href="{% url 'lk' %}">{{ request.user.email }}</a>
+            {% else %}
+                <a class="link" onclick="toggleModal('login-modal')">Вход/Регистрация</a>
+            {% endif %}
         </div>
     </div><!-- end header-dropdown -->
 

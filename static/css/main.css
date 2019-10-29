@@ -271,6 +271,8 @@ h5 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
 .breadcrumbs ul li:after {
@@ -463,6 +465,38 @@ button:hover {
   padding-top: 30px;
 }
 
+[type="date"] {
+  background: #f9f4f8 url(../images/icons/calendar.svg) 86% 50% no-repeat !important;
+  color: transparent !important;
+}
+
+[type="date"].has-value {
+  color: #151515 !important;
+}
+
+[type="date"]:not(.has-value):before {
+  content: attr(placeholder);
+  color: #151515;
+}
+
+[type="date"].has-value:before {
+  content: '';
+}
+
+[type="date"]::-webkit-inner-spin-button {
+  display: none;
+}
+
+[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  cursor: pointer;
+  pointer-events: all;
+}
+
+[type="number"]::-webkit-inner-spin-button {
+  display: none;
+}
+
 input[type='file'] {
   position: relative;
   color: transparent;
@@ -589,7 +623,7 @@ select {
 }
 
 .form-control-sm {
-  width: 33%;
+  width: 37%;
 }
 
 .form-control-lg {
@@ -1535,17 +1569,10 @@ select {
 }
 
 .lets-meet {
-  background: url(../images/bg3.jpg) no-repeat 15% 0;
+  background: url(../images/bg3.jpg) no-repeat;
+  background-position-x: 15%;
   height: 953px;
   margin-bottom: 140px;
-}
-
-.lets-meet h3,
-.lets-meet h4 {
-  width: 700px;
-  -ms-flex-item-align: end;
-  align-self: flex-end;
-  margin-bottom: 110px;
 }
 
 .lets-meet-inner {
@@ -1824,6 +1851,12 @@ select {
   margin-bottom: 100px;
 }
 
+.blog-post-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 30px;
+}
+
 .blog-post-text h1 {
   font-family: 'MuseoSansCyrl-700',sans-serif;
   font-size: 21px;
@@ -1833,12 +1866,10 @@ select {
 
 .blog-post-text p {
   line-height: 30px;
-  max-width: 330px;
 }
 
 .blog-post-image img {
   border-radius: 10px;
-  max-width: 330px;
 }
 
 .contacts {
@@ -2713,9 +2744,6 @@ input[type='radio']#register_button:checked ~ #register-form-button {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
   -webkit-box-pack: end;
   -ms-flex-pack: end;
   justify-content: flex-end;
@@ -2734,6 +2762,20 @@ input[type='radio']#register_button:checked ~ #register-form-button {
   width: 25px;
   height: 34px;
   margin-left: 5px;
+}
+
+@media (max-width: 1366px) {
+  .lets-meet {
+    background-position-x: 40%;
+  }
+
+  h3,
+  h4 {
+    width: 700px;
+    -ms-flex-item-align: end;
+    align-self: flex-end;
+    margin-bottom: 110px;
+  }
 }
 
 @media screen and (max-width: 1199px) {
@@ -2809,6 +2851,29 @@ input[type='radio']#register_button:checked ~ #register-form-button {
 
   .not-visible-lg {
     display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .blog-post-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .blog-post-image {
+    -webkit-box-ordinal-group: 2;
+    -ms-flex-order: 1;
+    order: 1;
+    text-align: center;
+  }
+
+  .blog-post-text {
+    -webkit-box-ordinal-group: 3;
+    -ms-flex-order: 2;
+    order: 2;
+  }
+
+  .blog-post-text h1 {
+    text-align: center;
   }
 }
 

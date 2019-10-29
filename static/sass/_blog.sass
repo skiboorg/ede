@@ -24,10 +24,11 @@
 .blog-post
   margin-bottom: 100px
 
-//.blog-post-wrapper
-//  display: grid
-//  grid-template-columns: repeat(2,50%)
-//  grid-gap: 30px
+.blog-post-wrapper
+  display: grid
+  grid-template-columns: repeat(2, 1fr)
+  grid-gap: 30px
+
 
 .blog-post-text
   h1
@@ -37,9 +38,19 @@
     margin-bottom: 50px
   p
     line-height: 30px
-    max-width: 330px
+
 
 .blog-post-image
   img
     border-radius: 10px
-    max-width: 330px
+
+@media (max-width: 768px)
+  .blog-post-wrapper
+    grid-template-columns:  1fr
+  .blog-post-image
+    order: 1
+    text-align: center
+  .blog-post-text
+    order: 2
+    h1
+      text-align: center

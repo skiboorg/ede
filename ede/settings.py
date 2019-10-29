@@ -4,8 +4,10 @@ AUTH_USER_MODEL = 'customuser.User'
 
 SECRET_KEY = 'h=v@4y-3rj=k-8wh1#mj#$gvmii29g4(c*^q%wlr5o_&n!%jhw'
 DEBUG = True
-
+APPEND_SLASH = True
 ALLOWED_HOSTS = ['*']
+CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
+CKEDITOR_UPLOAD_PATH = "uploads/"
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -15,6 +17,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ckeditor',
+    'blog.apps.BlogConfig',
     'customuser.apps.CustomuserConfig',
     'service.apps.SevicesConfig',
     'callback.apps.CallbackConfig',

@@ -1,0 +1,74 @@
+{% extends  'basic.html' %}
+{% load static %}
+
+{% block title %}
+    {{ block.super }} - Статьи
+{% endblock %}
+
+{% block keywords %}
+    {{ block.super }}
+{% endblock %}
+
+{% block description %}
+    {{ block.super }}
+{% endblock %}
+
+{% block css %}
+    {{ block.super }}
+{% endblock %}
+
+
+
+{% block content %}
+    {% include 'header.html' %}
+    <div class="main mt50">
+    <div class="container">
+        <div class="breadcrumbs">
+            <ul>
+                <li><a href="/">Главная</a></li>
+                <li class="active">Статьи</li>
+            </ul>
+        </div>
+    </div><!--// breadcrumbs-->
+        <section class="blog">
+        <div class="container">
+            <h1 class="mb50">Блог</h1>
+            <div class="grid-col3 blog-posts-wrapper">
+                {% for post in allPost %}
+                    <div class="blog-post-item">
+                    <a href="{% url 'showpost' post.name_slug %}"><img class="mb30" src="{{ post.image.url }}" alt=""></a>
+                    <h5 class="mb20"><a href="{% url 'showpost' post.name_slug %}">{{post.name}}</a></h5>
+                    <p class="text-block">{{ post.short_description }}</p>
+                </div><!--// blog-post-item-->
+                {% endfor %}
+
+            </div><!--// blog-posts-wrapper-->
+        </div>
+
+
+    </section><!--// blog-->
+</div><!-- // main -->
+    {% include 'callback_form.html' %}
+{% endblock %}
+
+{% block js %}
+
+    {{ block.super }}
+
+  <script>
+    let mobile_button = document.getElementsByClassName('mobile-toggle')[0]
+    let mobile_menu_panel = document.getElementsByClassName('mobile-menu-panel')[0]
+    let mobile_menu = document.getElementsByClassName('mobile-menu-panel-inner')[0]
+
+      mobile_button.onclick = function () {
+        this.classList.toggle('mobile-toggle-active')
+        mobile_menu_panel.classList.toggle('mobile-menu-panel-active')
+        mobile_menu.classList.toggle('mobile-menu-panel-inner-active')
+    }
+
+
+
+
+</script>
+
+{% endblock %}

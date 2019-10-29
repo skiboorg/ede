@@ -659,10 +659,13 @@
 
 // lets-meet
 .lets-meet
-  background: url(../images/bg3.jpg) no-repeat 15% 0
+  background: url(../images/bg3.jpg) no-repeat
+  background-position-x: 15%
   height: 953px
   margin-bottom: 140px
-
+@media (max-width: 1366px)
+  .lets-meet
+    background-position-x: 40%
   h3
     width: 700px
     align-self: flex-end
@@ -710,10 +713,13 @@
     right: -100px
     top: 130px
     z-index: -1
+
+
+
+
 .lets-meet-about
   display: inline-block
   margin-left: 330px
-
   p
     font-family: 'MuseoSansCyrl-700', sans-serif
     font-size: 19px

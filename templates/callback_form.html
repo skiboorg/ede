@@ -13,19 +13,13 @@
                                 {% endfor %}
                             </select>
                         </div>
-                        <div class="select-wrapper">
-                            <select class="form-control" name="{{ callbackForm.subject.name }}">
-                                <option selected="selected"  value="">Предмет</option>
-                                {% for subject in allSubjects %}
-                                    <option value="{{ subject.name }}">{{ subject.name }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-
+                        <input class="form-control" value="" name="{{ callbackForm.subject.name }}" placeholder="Предмет">
                         <input class="form-control" value="" name="{{ callbackForm.about.name }}" placeholder="Тема работы">
                         <div class="d-flex-jc-sb">
                             <input type="number" class="form-control form-control-sm " name="{{ callbackForm.volume.name }}" value="" placeholder="Объем">
-                            <input class="form-control form-control-sm " value="" name="{{ callbackForm.deadLine.name }}" placeholder="Срок">
+                            <input class="form-control form-control-sm " value="" name="{{ callbackForm.deadLine.name }}"
+                                   placeholder="Срок" type="date"
+                                   onchange="this.className=(this.value!=''?'form-control form-control-sm has-value':'form-control form-control-sm')">
                         </div>
                         <input type="file" class="form-control form-control-lg" name="{{ callbackForm.file.name }}">
                     </div>
