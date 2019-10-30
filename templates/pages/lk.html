@@ -105,7 +105,14 @@
                                 </div>
                             {% if order.complete and not order.is_complete %}
                                 <div class="tab-order-status-buttons">
-                                    <form>
+                                    <form action="https://money.yandex.ru/quickpay/confirm.xml" method="post" >
+                                        <input type="hidden" name="receiver" value="41001887932830">
+                                        <input type="hidden" name="quickpay-form" value="shop">
+                                         <input type="hidden" name="targets" value="Предоплата заказа {{ order.id }}">
+                                         <input type="hidden" name="paymentType" value="AC">
+                                          <input type="hidden" name="sum" value="10" data-type="number">
+                                         <input type="hidden" name="label" value="o_id:1;p_id:0">
+                                        <input type="hidden" name="successURL" value="http://localhost:8000/test">
                                         <button type="submit" class="btn">внести предоплату</button>
                                     </form>
                                     <form>

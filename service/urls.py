@@ -8,6 +8,7 @@ urlpatterns = [
     path('lk/', views.lk, name='lk'),
     path('posts/', views.allPosts, name='allposts'),
     path('post/<slug>', views.showPost, name='showpost'),
+    path('test/', views.test, name='test'),
 
 
 ]

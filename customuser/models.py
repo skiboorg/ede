@@ -43,6 +43,7 @@ class User(AbstractUser):
     phone = models.CharField('Телефон', max_length=50, blank=False, unique=True)
     comment = models.TextField('Комментарий виден только админу', blank=True, null=True)
     isAllowEmail = models.BooleanField('Согласен на рассылку', default=True)
+    yandex_token = models.TextField(default='')
     USERNAME_FIELD = 'phone'
     REQUIRED_FIELDS = []
     objects = UserManager()

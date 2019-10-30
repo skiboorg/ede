@@ -53,3 +53,8 @@ def lk(request):
         return render(request, 'pages/lk.html', locals())
     else:
         return render(request, 'pages/index.html', locals())
+
+def test(request):
+    print(request.GET)
+    print(request.POST)
+    return render(request, 'pages/index.html', locals())
