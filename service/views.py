@@ -45,16 +45,21 @@ def lk(request):
     n1 = random.randint(0, 9)
     n2 = random.randint(0, 9)
     if request.user.is_authenticated:
+        totalFullPrice = 0
+        totalActiveOrders = 0
         messageForm = MessageForm()
         orderForm = OrderForm()
         userForm = UpdateForm()
         allOrders = Order.objects.filter(user=request.user)
+        for order in allOrders:
+            totalFullPrice += order.fullPrice
+            if order.complete:
+                totalActiveOrders += 1
         allService = ServiceName.objects.all()
         return render(request, 'pages/lk.html', locals())
     else:
         return render(request, 'pages/index.html', locals())
 
-def test(request):
-    print(request.GET)
-    print(request.POST)
-    return render(request, 'pages/index.html', locals())
+
+
+

@@ -1,5 +1,7 @@
 {% extends  'basic.html' %}
 {% load static %}
+{% load rand_str %}
+
 
 {% block title %}
     {{ block.super }} - Личный кабинет
@@ -104,17 +106,19 @@
                                     </div>
                                 </div>
                             {% if order.complete and not order.is_complete %}
+                                {% if not order.is_prePayed %}
                                 <div class="tab-order-status-buttons">
-                                    <form action="https://money.yandex.ru/quickpay/confirm.xml" method="post" >
-                                        <input type="hidden" name="receiver" value="41001887932830">
+                                    <form action="https://money.yandex.ru/quickpay/confirm.xml" method="post" onsubmit="event.preventDefault(); letspay(this);">
+                                        <input type="hidden" name="receiver" value="">
                                         <input type="hidden" name="quickpay-form" value="shop">
-                                         <input type="hidden" name="targets" value="Предоплата заказа {{ order.id }}">
+                                         <input type="hidden" name="targets" value="Предоплата заказа №{{ order.id }}">
                                          <input type="hidden" name="paymentType" value="AC">
-                                          <input type="hidden" name="sum" value="10" data-type="number">
-                                         <input type="hidden" name="label" value="o_id:1;p_id:0">
-                                        <input type="hidden" name="successURL" value="http://localhost:8000/test">
+                                          <input type="hidden" name="sum" value="{{ order.prePay }}" data-type="number">
+                                         <input type="hidden" name="label" value="o_id-1;p_id-0">
+                                        <input type="hidden" name="successURL" value="http://localhost:8000/lk?payment=success">
                                         <button type="submit" class="btn">внести предоплату</button>
                                     </form>
+                                    {% endif %}
                                     <form>
                                         <button type="submit" class="btn">оплатить</button>
                                     </form>
@@ -131,7 +135,6 @@
                             </div>
                         {% endif %}
                             {% if order.ordermessages %}
-
                                 <div class="order-messages mb20">
                                     <p class="order-messages-title">Чат с администрацией</p>
                                     <div class="order-messages-wrapper">
@@ -160,11 +163,7 @@
                                         </div>
                                     </div>
                                 </div><!--// order-messages-->
-
                             {% endif %}
-
-
-
                         </div><!--// tab-order-->
                     {% endfor %}
 
@@ -197,15 +196,28 @@
                                         {% if order.complete %}
                                             <div class="tab-payment-fullpay">
                                                 <h5>Оплатить полностью</h5>
-                                                <span class="tab-payment-radio radio-checked" data-order_id="1" id="order_1_fullpay"><span>{{ order.fullPrice }} руб</span></span>
+                                                <span class="tab-payment-radio radio-checked order-id-{{ order.id }}"
+                                                      data-id="{{ order.id }}"
+                                                      data-price="{{ order.fullPrice }}"
+                                                      data-pid="{% random_str%}:1{% random_str%}:{% random_str%}"
+                                                      onclick = "radioClick({{ order.id }})">
+                                                      <span>{{ order.fullPrice }} руб</span>
+                                                </span>
                                             </div><!--// tab-payment-order-fullpay-->
+
                                             <div class="tab-payment-prepay">
                                                 <h5>Внести предоплату</h5>
-                                                <span class="tab-payment-radio" data-order_id="1" id="order_1_prepay"><span>{{ order.prePay }} руб</span></span>
+                                                <span class="tab-payment-radio order-id-{{ order.id }}"
+                                                       data-id="{{ order.id }}"
+                                                       data-price="{{ order.prePay }}"
+                                                       data-pid="{% random_str%}:0{% random_str%}:{% random_str%}"
+                                                       onclick = "radioClick({{ order.id }})">
+                                                      <span>{{ order.prePay }} руб</span>
+                                                </span>
                                             </div><!--// tab-payment-order-prepay-->
                                             {% else %}
                                             <div class="tab-payment-fullpay">
-                                            <h5>{{ order.status }}</h5>
+                                                <h5>{{ order.status }}</h5>
                                             </div>
                                         {% endif %}
 
@@ -221,14 +233,22 @@
                             <table>
                                 <tr>
                                     <td><p>Заказов</p></td>
-                                    <td><p>1</p></td>
-
+                                    <td><p>{{ totalActiveOrders }}</p></td>
                                 <tr>
                                     <td><span>Сумма</span></td>
-                                    <td><span class="colored">3840 руб</span></td>
+                                    <td><span id="total_price" class="colored">{{ totalFullPrice }}</span><span class="colored"> руб</span></td>
                                 </tr>
                             </table>
-                            <a href="" class="btn">оплатить</a>
+                            <form action="https://money.yandex.ru/quickpay/confirm.xml" method="post" onsubmit="event.preventDefault(); letspay(this);">{% csrf_token %}
+                                        <input type="hidden" name="receiver" value="">
+                                        <input type="hidden" name="quickpay-form" value="shop">
+                                         <input type="hidden" name="targets" value="Предоплата заказа №{{ order.id }}">
+                                         <input type="hidden" name="paymentType" value="AC">
+                                          <input type="hidden" name="sum" value="" data-type="number">
+                                         <input type="hidden" name="label" value="">
+                                        <input type="hidden" name="successURL" value="http://localhost:8000/lk?payment=success">
+                                        <button type="submit" class="btn">оплатить</button>
+                                    </form>
                         </div><!--// tab-payment-grid-topay-->
 
                     </div><!--// tab-payment-grid -->
@@ -275,9 +295,8 @@
                             </div>
 
                             <p class="form-error">Отмеченные поля обязательны для заполнения</p>
-                            <button id="form_submit" type="submit"  class="btn mb30" onclick="newOrder();">
+                            <button id="form_submit" type="submit"  class="btn mb30">
                                 заказать
-
                             </button>
 
 
@@ -304,6 +323,9 @@
         let mobile_menu_panel = document.getElementsByClassName('mobile-menu-panel')[0]
         let mobile_menu = document.getElementsByClassName('mobile-menu-panel-inner')[0]
 
+        let totalPriceSpan = document.getElementById('total_price')
+        let orderIds = []
+
         mobile_button.onclick = function () {
             this.classList.toggle('mobile-toggle-active')
             mobile_menu_panel.classList.toggle('mobile-menu-panel-active')
@@ -325,12 +347,79 @@
             el.classList.add('lk-tab-active')
         }
 
-        function newOrder() {
+        function letspay(form) {
+            let csrfmiddlewaretoken = document.getElementsByName("csrfmiddlewaretoken")[0].value;
+            console.log(form.elements[0].defaultValue='41001887932830')
+            console.log(orderIds)
+
+            let fd = new FormData();
+
+            fd.append('csrfmiddlewaretoken',csrfmiddlewaretoken)
+            fd.append('orders',orderIds)
+
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST', '/order/pay/', true);
+            xhr.onload = function () {
+                if (JSON.parse(this.response)['result'] === 'ok'){
+                    window.location.reload()
+                }
+                else{
+                    error_label.style.display = 'block'
+                }
+            };
+            xhr.send(fd);
+
+            //form.submit()
+        }
+
+        function radioClick(id) {
+            let ids = []
+            let totalPrice = 0
+            let btns = document.getElementsByClassName(`order-id-${id}`)
+
+            for (let btn of btns){
+                    btn.classList.toggle('radio-checked')
+            }
+
+            let checked_radios = document.getElementsByClassName('radio-checked')
+            console.log(checked_radios)
+
+            for (let checked_radio of checked_radios){
+                totalPrice += parseInt(checked_radio.dataset.price)
+                let order = {}
 
 
+                order.id = checked_radio.dataset.id
+                order.pid = checked_radio.dataset.pid
+               ids.push(order)
+            }
+            console.log(JSON.stringify(ids))
+            totalPriceSpan.innerText = totalPrice
+            orderIds = JSON.stringify(ids)
+        }
+
+        function init() {
+            let ids = []
+            let totalPrice = 0
+            let checked_radios = document.getElementsByClassName('radio-checked')
+            console.log(checked_radios)
+
+            for (let checked_radio of checked_radios){
+                totalPrice += parseInt(checked_radio.dataset.price)
+                let order = {}
+
+
+                order.id = checked_radio.dataset.id
+                order.pid = checked_radio.dataset.pid
+               ids.push(order)
+            }
+            console.log(JSON.stringify(ids))
+            totalPriceSpan.innerText = totalPrice
+            orderIds = JSON.stringify(ids)
 
         }
 
+        init()
     </script>
 
 {% endblock %}

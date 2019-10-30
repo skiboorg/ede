@@ -1,3 +1,5 @@
+import json
+
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from .forms import *
@@ -26,3 +28,14 @@ def newMesage(request):
             print(form.errors)
 
         return HttpResponseRedirect('/lk')
+
+
+def pay(request):
+    print(request.POST.get('orders'))
+    req = request.POST.get('orders')
+
+    for x in range(0,len(req)-1):
+        print(req[x])
+        print(req[x])
+        x += 1
+
