@@ -32,6 +32,7 @@ class Order(models.Model):
                 self.status = 'Предоплата получена'
                 self.complete = 25
             if self.is_fullPayed:
+                self.is_prePayed = True
                 self.status = 'Заказ оплачен'
                 self.complete = 50
 

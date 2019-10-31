@@ -16,7 +16,7 @@ class OrderAdmin(admin.ModelAdmin):
     inlines = (FilesInline,MessagesInline,)
     list_filter = ('is_complete','is_fullPayed','is_prePayed',)
     ordering = ('created_at',)
-    readonly_fields = ['status','complete','prePay','is_complete','is_fullPayed','is_prePayed']
+    # readonly_fields = ['status','complete','prePay','is_complete','is_fullPayed','is_prePayed']
     class Meta:
         model = Order
 

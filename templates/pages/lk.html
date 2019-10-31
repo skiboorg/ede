@@ -1,6 +1,7 @@
 {% extends  'basic.html' %}
 {% load static %}
 {% load rand_str %}
+{% load mathfilters %}
 
 
 
@@ -41,7 +42,7 @@
                         <span id="orders_icon"></span>
                         <p class="not-visible-sm">Мои заказы</p>
                     </div>
-                    <div class="lk-tab  bordered" onclick="openTab('payment',this)">
+                    <div class="lk-tab  bordered" onclick=" radioClick(false); openTab('payment',this)">
                         <span id="payment_icon"></span>
                         <p class="not-visible-sm">Оплата</p>
                     </div>
@@ -71,7 +72,7 @@
                                     {% if order.complete and not order.is_fullPayed %}
                                         <span>{{ order.fullPrice }} руб</span>
                                     {% elif order.is_fullPayed%}
-                                        <span class="paid-checkmark">&#10004;</span>
+                                        <span class="paid-checkmark">&#10004; {{ order.fullPrice }} р</span>
                                     {% else %}
                                         <span class="loading"></span>
                                     {% endif %}
@@ -83,7 +84,7 @@
                                     {% if order.complete and not order.is_prePayed%}
                                         <span>{{ order.prePay }} руб</span>
                                     {% elif order.is_prePayed%}
-                                        <span class="paid-checkmark">&#10004;</span>
+                                        <span class="paid-checkmark">&#10004; {{ order.prePay }} р</span>
                                     {% else %}
                                         <span class="loading"></span>
                                     {% endif %}
@@ -106,39 +107,60 @@
 
                                     </div>
                                 </div>
-                            {% if order.complete and not order.is_complete %}
-                                {% if not order.is_prePayed %}
-                                <div class="tab-order-status-buttons">
-                                    <form action="https://money.yandex.ru/quickpay/confirm.xml"
-                                          method="post"
-                                          onsubmit="event.preventDefault(); letspay(this,'quickpay');"
-                                          data-id="{% random_str1 order.id %}">
-
-                                        <input type="hidden" name="receiver" value="">
-                                        <input type="hidden" name="quickpay-form" value="shop">
-                                         <input type="hidden" name="targets" value="">
-                                         <input type="hidden" name="paymentType" value="AC">
-                                          <input type="hidden" name="sum" value="" data-type="number">
-                                         <input type="hidden" name="label" value="">
-                                        <input type="hidden" name="successURL" value="http://localhost:8000/lk?payment=success">
-                                        <button type="submit" class="btn">внести предоплату</button>
-                                    </form>
+                                {% if order.complete and not order.is_complete %}
+                                    <div class="tab-order-status-buttons">
+                                    {% if not order.is_prePayed %}
+                                        <form action="https://money.yandex.ru/quickpay/confirm.xml"
+                                              method="post"
+                                              onsubmit="event.preventDefault(); letspay(this,'quickpay');"
+                                              data-id="{% random_str %}++{% b64encode 0 %}=={% b64encode order.id %}"
+                                              data-oid='{{ order.id }}'>
+                                            <input type="hidden" name="receiver" value="">
+                                            <input type="hidden" name="quickpay-form" value="shop">
+                                            <input type="hidden" name="targets" value="">
+                                            <input type="hidden" name="paymentType" value="AC">
+                                            <input type="hidden" name="sum" value="" data-type="number">
+                                            <input type="hidden" name="label" value="">
+                                            <input type="hidden" name="successURL" value="http://localhost:8000/lk?payment=success">
+                                            <button type="submit" class="btn">внести предоплату</button>
+                                        </form>
                                     {% endif %}
-                                    <form>
-                                        <button type="submit" class="btn">оплатить</button>
-                                    </form>
+
+                                    {% if not order.is_fullPayed %}
+                                        <form action="https://money.yandex.ru/quickpay/confirm.xml"
+                                              method="post"
+                                              onsubmit="event.preventDefault(); letspay(this,'quickpay');"
+                                              data-id="{% random_str %}++{% b64encode 1 %}=={% b64encode order.id %}"
+                                              data-oid='{{ order.id }}'>
+                                            <input type="hidden" name="receiver" value="">
+                                            <input type="hidden" name="quickpay-form" value="shop">
+                                            <input type="hidden" name="targets" value="">
+                                            <input type="hidden" name="paymentType" value="AC">
+                                            <input type="hidden" name="sum" value="" data-type="number">
+                                            <input type="hidden" name="label" value="">
+                                            <input type="hidden" name="successURL" value="http://localhost:8000/lk?payment=success">
+                                            <button type="submit" class="btn">
+                                                {% if not order.is_prePayed %}
+                                                    оплатить
+                                                    {% else %}
+                                                    доплатить {{ order.fullPrice|sub:order.prePay}} руб
+                                                    {% endif %}
+                                                </button>
+                                        </form>
+                                        {% endif %}
+
                                 </div>
                                 {% elif order.is_complete %}
-                                <a href="{{ order.orderfile.first.file.url }}" class="btn">скачать работу</a>
-                            {% endif %}
+                                    <a href="{{ order.orderfile.first.file.url }}" class="btn">скачать работу</a>
+                                {% endif %}
 
                             </div>
-                        {% if order.is_complete and order.orderfile.first.comment %}
-                            <div class="order-messages mb20">
-                                <p class="order-messages-title">Комментарий к работе:</p>
-                                 <p>{{ order.orderfile.first.comment }}</p>
-                            </div>
-                        {% endif %}
+                            {% if order.is_complete and order.orderfile.first.comment %}
+                                <div class="order-messages mb20">
+                                    <p class="order-messages-title">Комментарий к работе:</p>
+                                    <p>{{ order.orderfile.first.comment }}</p>
+                                </div>
+                            {% endif %}
                             {% if order.ordermessages %}
                                 <div class="order-messages mb20">
                                     <p class="order-messages-title">Чат с администрацией</p>
@@ -193,36 +215,57 @@
                                             {% if order.complete %}
                                                 <span>{{ order.fullPrice }} руб</span>
                                             {% else %}
-                                               <span class="loading"></span>
+                                                <span class="loading"></span>
                                             {% endif %}
 
 
                                         </div><!--// tab-payment-order-info-->
                                         {% if order.complete %}
                                             <div class="tab-payment-fullpay">
+                                            {% if not order.is_prePayed %}
                                                 <h5>Оплатить полностью</h5>
                                                 <span class="tab-payment-radio radio-checked order-id-{{ order.id }}"
-                                                      data-id="{{ order.id }}"
+                                                      data-oid='{{ order.id }}'
+                                                      data-id="{% random_str %}++{% b64encode 1 %}=={% b64encode order.id %}"
                                                       data-price="{{ order.fullPrice }}"
-                                                      data-pid="{% random_str%}:1{% random_str%}:{% random_str%}"
                                                       onclick = "radioClick({{ order.id }})">
                                                       <span>{{ order.fullPrice }} руб</span>
                                                 </span>
+                                                {% elif order.is_fullPayed %}
+                                                <h5>Оплата получена</h5>
+                                                 <span style="text-align: start" class="paid-checkmark">&#10004; {{ order.prePay }} руб</span>
+
+                                            {% else %}
+                                                 <h5>Доплатить</h5>
+                                                    <span class="tab-payment-radio radio-checked order-id-{{ order.id }}"
+                                                      data-oid='{{ order.id }}'
+                                                      data-id="{% random_str %}++{% b64encode 1 %}=={% b64encode order.id %}"
+                                                      data-price="{{ order.fullPrice|sub:order.prePay}}"
+                                                      onclick = "radioClick({{ order.id }})">
+                                                      <span>{{ order.fullPrice|sub:order.prePay}} руб</span>
+                                                </span>
+                                            {% endif %}
                                             </div><!--// tab-payment-order-fullpay-->
 
                                             <div class="tab-payment-prepay">
+                                            {% if not order.is_prePayed %}
                                                 <h5>Внести предоплату</h5>
                                                 <span class="tab-payment-radio order-id-{{ order.id }}"
-                                                       data-id="{{ order.id }}"
-                                                       data-price="{{ order.prePay }}"
-                                                       data-pid="{% random_str%}:0{% random_str%}:{% random_str%}"
-                                                       onclick = "radioClick({{ order.id }})">
+                                                      data-oid='{{ order.id }}'
+                                                      data-id="{% random_str %}++{% b64encode 0 %}=={% b64encode order.id %}"
+                                                      data-price="{{ order.prePay }}"
+                                                      onclick = "radioClick({{ order.id }})">
                                                       <span>{{ order.prePay }} руб</span>
                                                 </span>
+                                                {% else %}
+                                                 <h5>Предоплата получена</h5>
+                                                 <span style="text-align: start" class="paid-checkmark">&#10004; {{ order.prePay }} руб</span>
+                                                {% endif %}
                                             </div><!--// tab-payment-order-prepay-->
-                                            {% else %}
+                                        {% else %}
                                             <div class="tab-payment-fullpay">
                                                 <h5>{{ order.status }}</h5>
+
                                             </div>
                                         {% endif %}
 
@@ -245,15 +288,15 @@
                                 </tr>
                             </table>
                             <form action="https://money.yandex.ru/quickpay/confirm.xml" method="post" onsubmit="event.preventDefault(); letspay(this);">{% csrf_token %}
-                                        <input type="hidden" name="receiver" value="">
-                                        <input type="hidden" name="quickpay-form" value="shop">
-                                         <input type="hidden" name="targets" value="Предоплата заказа №{{ order.id }}">
-                                         <input type="hidden" name="paymentType" value="AC">
-                                          <input type="hidden" name="sum" value="" data-type="number">
-                                         <input type="hidden" name="label" value="">
-                                        <input type="hidden" name="successURL" value="http://localhost:8000/lk?payment=success">
-                                        <button type="submit" class="btn">оплатить</button>
-                                    </form>
+                                <input type="hidden" name="receiver" value="">
+                                <input type="hidden" name="quickpay-form" value="shop">
+                                <input type="hidden" name="targets" value="">
+                                <input type="hidden" name="paymentType" value="AC">
+                                <input type="hidden" name="sum" value="" data-type="number">
+                                <input type="hidden" name="label" value="">
+                                <input type="hidden" name="successURL" value="http://localhost:8000/lk?payment=success">
+                                <button type="submit" class="btn">оплатить</button>
+                            </form>
                         </div><!--// tab-payment-grid-topay-->
 
                     </div><!--// tab-payment-grid -->
@@ -352,9 +395,16 @@
             el.classList.add('lk-tab-active')
         }
 
-        function letspay(form) {
+        function letspay(form,type) {
             let csrfmiddlewaretoken = document.getElementsByName("csrfmiddlewaretoken")[0].value;
-            console.log(form.elements[0].defaultValue='41001887932830')
+            console.log(form.elements)
+            if (type==='quickpay'){
+                let ids = {}
+                let order = {}
+                order.id = form.dataset.id
+                ids[`order${form.dataset.oid}`] = order
+                orderIds = JSON.stringify(ids)
+            }
             console.log(orderIds)
 
             let fd = new FormData();
@@ -365,7 +415,12 @@
             let xhr = new XMLHttpRequest();
             xhr.open('POST', '/order/pay/', true);
             xhr.onload = function () {
-                console.log(JSON.parse(this.response))
+                let response = JSON.parse(this.response)
+                console.log(response)
+                form.elements[1].defaultValue=response['wallet']
+                form.elements[3].defaultValue=response['targets']
+                form.elements[5].defaultValue=response['totalprice']
+                form.elements[6].defaultValue=response['label']
             };
             xhr.send(fd);
 
@@ -376,11 +431,11 @@
             let ids = {}
             let totalPrice = 0
             if (id){
-               let btns = document.getElementsByClassName(`order-id-${id}`)
+                let btns = document.getElementsByClassName(`order-id-${id}`)
 
-            for (let btn of btns){
+                for (let btn of btns){
                     btn.classList.toggle('radio-checked')
-            }
+                }
             }
 
 
@@ -390,11 +445,8 @@
             for (let checked_radio of checked_radios){
                 totalPrice += parseInt(checked_radio.dataset.price)
                 let order = {}
-
-
                 order.id = checked_radio.dataset.id
-                order.pid = checked_radio.dataset.pid
-               ids[`order${checked_radio.dataset.id}`] = order
+                ids[`order${checked_radio.dataset.oid}`] = order
             }
             console.log(JSON.stringify(ids))
             totalPriceSpan.innerText = totalPrice
@@ -403,7 +455,7 @@
 
 
 
-       radioClick(false);
+
     </script>
 
 {% endblock %}

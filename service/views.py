@@ -53,7 +53,7 @@ def lk(request):
         allOrders = Order.objects.filter(user=request.user)
         for order in allOrders:
             totalFullPrice += order.fullPrice
-            if order.complete:
+            if order.complete and not order.is_fullPayed:
                 totalActiveOrders += 1
         allService = ServiceName.objects.all()
         return render(request, 'pages/lk.html', locals())

@@ -22,7 +22,8 @@ INSTALLED_APPS = [
     'service.apps.SevicesConfig',
     'callback.apps.CallbackConfig',
     'order.apps.OrderConfig',
-    'comments.apps.CommentsConfig'
+    'comments.apps.CommentsConfig',
+    'mathfilters'
 
 ]
 
