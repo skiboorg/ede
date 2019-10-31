@@ -3,6 +3,7 @@
 {% load rand_str %}
 
 
+
 {% block title %}
     {{ block.super }} - Личный кабинет
 {% endblock %}
@@ -108,13 +109,17 @@
                             {% if order.complete and not order.is_complete %}
                                 {% if not order.is_prePayed %}
                                 <div class="tab-order-status-buttons">
-                                    <form action="https://money.yandex.ru/quickpay/confirm.xml" method="post" onsubmit="event.preventDefault(); letspay(this);">
+                                    <form action="https://money.yandex.ru/quickpay/confirm.xml"
+                                          method="post"
+                                          onsubmit="event.preventDefault(); letspay(this,'quickpay');"
+                                          data-id="{% random_str1 order.id %}">
+
                                         <input type="hidden" name="receiver" value="">
                                         <input type="hidden" name="quickpay-form" value="shop">
-                                         <input type="hidden" name="targets" value="Предоплата заказа №{{ order.id }}">
+                                         <input type="hidden" name="targets" value="">
                                          <input type="hidden" name="paymentType" value="AC">
-                                          <input type="hidden" name="sum" value="{{ order.prePay }}" data-type="number">
-                                         <input type="hidden" name="label" value="o_id-1;p_id-0">
+                                          <input type="hidden" name="sum" value="" data-type="number">
+                                         <input type="hidden" name="label" value="">
                                         <input type="hidden" name="successURL" value="http://localhost:8000/lk?payment=success">
                                         <button type="submit" class="btn">внести предоплату</button>
                                     </form>
@@ -324,7 +329,7 @@
         let mobile_menu = document.getElementsByClassName('mobile-menu-panel-inner')[0]
 
         let totalPriceSpan = document.getElementById('total_price')
-        let orderIds = []
+        let orderIds = {}
 
         mobile_button.onclick = function () {
             this.classList.toggle('mobile-toggle-active')
@@ -360,12 +365,7 @@
             let xhr = new XMLHttpRequest();
             xhr.open('POST', '/order/pay/', true);
             xhr.onload = function () {
-                if (JSON.parse(this.response)['result'] === 'ok'){
-                    window.location.reload()
-                }
-                else{
-                    error_label.style.display = 'block'
-                }
+                console.log(JSON.parse(this.response))
             };
             xhr.send(fd);
 
@@ -373,13 +373,16 @@
         }
 
         function radioClick(id) {
-            let ids = []
+            let ids = {}
             let totalPrice = 0
-            let btns = document.getElementsByClassName(`order-id-${id}`)
+            if (id){
+               let btns = document.getElementsByClassName(`order-id-${id}`)
 
             for (let btn of btns){
                     btn.classList.toggle('radio-checked')
             }
+            }
+
 
             let checked_radios = document.getElementsByClassName('radio-checked')
             console.log(checked_radios)
@@ -391,35 +394,16 @@
 
                 order.id = checked_radio.dataset.id
                 order.pid = checked_radio.dataset.pid
-               ids.push(order)
+               ids[`order${checked_radio.dataset.id}`] = order
             }
             console.log(JSON.stringify(ids))
             totalPriceSpan.innerText = totalPrice
             orderIds = JSON.stringify(ids)
         }
 
-        function init() {
-            let ids = []
-            let totalPrice = 0
-            let checked_radios = document.getElementsByClassName('radio-checked')
-            console.log(checked_radios)
-
-            for (let checked_radio of checked_radios){
-                totalPrice += parseInt(checked_radio.dataset.price)
-                let order = {}
 
 
-                order.id = checked_radio.dataset.id
-                order.pid = checked_radio.dataset.pid
-               ids.push(order)
-            }
-            console.log(JSON.stringify(ids))
-            totalPriceSpan.innerText = totalPrice
-            orderIds = JSON.stringify(ids)
-
-        }
-
-        init()
+       radioClick(false);
     </script>
 
 {% endblock %}

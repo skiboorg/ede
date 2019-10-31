@@ -1,11 +1,13 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
-from customuser.models import User
+from customuser.models import *
 from django.http import JsonResponse, HttpResponseRedirect
 from .forms import SignUpForm , UpdateForm
 
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
+
+
 
 def create_password():
     from random import choices

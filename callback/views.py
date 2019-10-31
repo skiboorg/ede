@@ -5,6 +5,7 @@ import time
 
 from .forms import *
 
+
 def createSession():
     session = requests.Session()
     response = session.get(url='https://edeedel.amocrm.ru/private/api/auth.php')
