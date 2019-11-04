@@ -18,7 +18,7 @@ def createSession():
     return session
 
 
-def createContact(session,name,phone,tags):
+def createContact(session,name,phone,email,tags):
     NEWCONTACT = {
         'add': [{
             'name': name,
@@ -34,15 +34,28 @@ def createContact(session,name,phone,tags):
                     },
                     ]
                 },
+                {
+                    'id': "85863",
+                    'values': [{
+                        'value': email,
+                        'enum': "WORK"
+                    },
+                    ]
+                },
             ]
         }]
     }
+    print(name)
+    print(phone)
+    print(email)
+    print(tags)
     r = session.post("https://edeedel.amocrm.ru/api/v2/contacts", json=NEWCONTACT)
+    print(r.json())
 
     return r.json()['_embedded']['items'][0]['id']
 
 
-def createLead(session,userid,lead_type):
+def createLead(session,userid,lead_type,workType,subject,volume,deadline,about):
     JSONFORMDATA = {
 
         'add': [{
@@ -51,38 +64,51 @@ def createLead(session,userid,lead_type):
             'updated_a': "1508274000",
             'status_id': "13670637",
 
-            'tags': "запрос, звонок",
+            'tags': lead_type,
             'contacts_id': [
                 userid
             ],
-            'company_id': "1099148",
-            'catalog_elements_id': {
-                99999: {
-                    111111: 10
-                }
-            },
-            'custom_fields': [{
-                'id': "4399649",
-                'values': [
-                    "3691615",
-                    "3691616",
-                    "3691617"
-                ]
-            },
 
+            'custom_fields': [
                 {
-                    'id': "3691615",
+                    'id': "202121",
                     'values': [{
-                        'value': "ул. Охотный ряд, 1",
-                        'subtype': "address_line_1"
+                        'value': workType,
+                        'enum': "WORK"
                     },
-                        {
-                            'value': "Москва",
-                            'subtype': "city"
-                        }
-
                     ]
-                }
+                },
+                {
+                    'id': "202123",
+                    'values': [{
+                        'value': about,
+                        'enum': "WORK"
+                    },
+                    ]
+                },
+                {
+                    'id': "202127",
+                    'values': [{
+                        'value': volume,
+                        'enum': "WORK"
+                    },
+                    ]
+                },
+                {
+                    'id': "202129",
+                    'values': [{
+                        'value': deadline,
+                        'enum': "WORK"
+                    },
+                    ]
+                }, {
+                    'id': "202165",
+                    'values': [{
+                        'value': subject,
+                        'enum': "WORK"
+                    },
+                    ]
+                },
             ]
         }]
     }
@@ -99,7 +125,18 @@ def createCallbackForm(request):
         form = CallbackForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+            name = request.POST.get('name')
+            phone = request.POST.get('phone')
+            workName = request.POST.get('workName')
+            subject = request.POST.get('subject')
+            about = request.POST.get('about')
+            email = request.POST.get('email')
+            volume = request.POST.get('volume')
+            deadLine = request.POST.get('deadLine')
+
             return_dict['result'] = 'ok'
+            createLead(createSession(), createContact(createSession(), name, phone, email, 'расчет цены'),
+                       'Расчет стоимости',workName,subject,volume,deadLine,about)
         else:
             return_dict['result'] = 'error'
             return_dict['errors'] = form.errors
@@ -117,7 +154,8 @@ def createCallbackOrderForm(request):
             phone = request.POST.get('userPhone')
             form.save()
             return_dict['result'] = 'ok'
-            createLead(createSession(),createContact(createSession(),name,phone,'запрос, обратный звонок'),'Обратный звонок')
+            createLead(createSession(),createContact(createSession(),name,phone,'Не указан','обратный звонок'),
+                       'Обратный звонок','Не указан','Не указан','Не указан','Не указан','Не указан')
         else:
             return_dict['result'] = 'error'
             return_dict['errors'] = form.errors

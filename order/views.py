@@ -7,6 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from .forms import *
 from order.models import Order, Payment
 from customuser.models import UserLog
+from callback.views import createSession,createContact,createLead
 
 import settings
 
@@ -18,6 +19,16 @@ def newOrder(request):
         form.user_id = request.user.id
         if form.is_valid():
             form.save()
+            name = request.user.name
+            phone = request.user.phone
+            workName = request.POST.get('workName')
+            subject = request.POST.get('subject')
+            volume = request.POST.get('volume')
+            about = request.POST.get('about')
+            email = request.user.email
+            deadLine = request.POST.get('deadLine')
+            createLead(createSession(), createContact(createSession(), name, phone, email, 'Новый заказ'),
+                       'Новый заказ', workName, subject, volume, deadLine, about)
         else:
             print(form.errors)
 
