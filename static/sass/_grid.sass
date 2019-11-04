@@ -63,7 +63,11 @@
 /* COL-3*/
 .grid-col3
   display: grid
-  grid-template-columns: repeat(auto-fill, minmax(345px, 330px))
+  grid-template-columns: repeat(auto-fill, minmax(345px, 380px))
+
+@media (max-width: 1119px)
+  .grid-col3
+    justify-content: center
 
 .grid-col2
   display: grid

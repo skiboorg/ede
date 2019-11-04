@@ -718,7 +718,7 @@ select {
 
 .grid-col3 {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(345px, 330px));
+  grid-template-columns: repeat(auto-fill, minmax(345px, 380px));
 }
 
 .grid-col2 {
@@ -908,17 +908,17 @@ select {
   width: 100%;
   height: 100vh;
   z-index: -1;
-  -webkit-transition: background-color 0.5s ease-in;
-  -o-transition: background-color 0.5s ease-in;
-  transition: background-color 0.5s ease-in;
+  -webkit-transition: background-color 0.1s ease-in;
+  -o-transition: background-color 0.1s ease-in;
+  transition: background-color 0.1s ease-in;
 }
 
 .mobile-menu-panel-active {
   z-index: 11;
   background: rgba(76, 76, 76, 0.84);
-  -webkit-transition: background-color 0.2s ease-in;
-  -o-transition: background-color 0.2s ease-in;
-  transition: background-color 0.2s ease-in;
+  -webkit-transition: background-color 0.1s ease-in;
+  -o-transition: background-color 0.1s ease-in;
+  transition: background-color 0.1s ease-in;
 }
 
 .mobile-menu-panel-inner {
@@ -1204,8 +1204,11 @@ select {
   width: 90px;
   height: 2px;
   bottom: -5px;
-  left: 145px;
   background: #000;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .features .feature-item span {
@@ -1589,6 +1592,11 @@ select {
   justify-content: center;
 }
 
+.lets-meet-inner h3,
+.lets-meet-inner h4 {
+  text-align: end;
+}
+
 .lets-meet-inner p.info-text {
   font-family: 'MuseoSansCyrl-300', sans-serif;
   font-size: 16px;
@@ -1632,7 +1640,6 @@ select {
   line-height: 0;
   right: -100px;
   top: 130px;
-  z-index: -1;
 }
 
 .lets-meet-about {
@@ -2809,10 +2816,25 @@ input[type='radio']#register_button:checked ~ #register-form-button {
 
   h3,
   h4 {
-    width: 700px;
     -ms-flex-item-align: end;
     align-self: flex-end;
     margin-bottom: 110px;
+  }
+
+  .quote::after {
+    content: '';
+  }
+}
+
+@media (max-width: 1200px) {
+  .controls {
+    display: none;
+  }
+}
+
+@media (max-width: 1199px) {
+  .not-visible-xl {
+    display: none !important;
   }
 }
 
@@ -2842,9 +2864,11 @@ input[type='radio']#register_button:checked ~ #register-form-button {
   }
 }
 
-@media (max-width: 1199px) {
-  .not-visible-xl {
-    display: none !important;
+@media (max-width: 1119px) {
+  .grid-col3 {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
   }
 }
 
@@ -2853,6 +2877,10 @@ input[type='radio']#register_button:checked ~ #register-form-button {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
+  }
+
+  .footer-top.grid-col4 {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
@@ -2919,6 +2947,16 @@ input[type='radio']#register_button:checked ~ #register-form-button {
   .blog-post-text h1 {
     text-align: center;
   }
+
+  .footer-top-info {
+    grid-column: span 2;
+    text-align: center;
+  }
+
+  .footer-top-phones {
+    grid-column: span 2;
+    text-align: center !important;
+  }
 }
 
 @media (max-width: 767px) {
@@ -2940,6 +2978,11 @@ input[type='radio']#register_button:checked ~ #register-form-button {
 
   .why-our-work {
     background: none;
+  }
+
+  .why-our-work h3,
+  .why-our-work h4 {
+    margin-bottom: 40px;
   }
 
   .why-our-work p {
@@ -3000,6 +3043,16 @@ input[type='radio']#register_button:checked ~ #register-form-button {
     font-size: 24px;
   }
 
+  .how-it-works {
+    margin-bottom: 40px;
+    height: 390px;
+  }
+
+  .how-it-works h3,
+  .how-it-works h4 {
+    margin-bottom: 40px;
+  }
+
   .how-it-works-slide {
     grid-template-columns: 1fr;
   }
@@ -3017,10 +3070,6 @@ input[type='radio']#register_button:checked ~ #register-form-button {
 
   .how-it-works-slide.slide-active {
     grid-template-columns: 1fr;
-  }
-
-  .how-it-works {
-    height: 360px;
   }
 
   .contacts-phones {
@@ -3106,6 +3155,10 @@ input[type='radio']#register_button:checked ~ #register-form-button {
     width: 93%;
   }
 
+  .footer-top.grid-col4 {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
   .footer-top-phones {
     text-align: center !important;
     -webkit-box-ordinal-group: 3;
@@ -3134,6 +3187,16 @@ input[type='radio']#register_button:checked ~ #register-form-button {
     grid-column: span 1;
   }
 
+  .calculation-form {
+    background: none;
+    height: auto;
+  }
+
+  .calculation-form h3,
+  .calculation-form h4 {
+    margin-bottom: 40px;
+  }
+
   .calculation-form-footer {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     grid-gap: 30px;
@@ -3142,5 +3205,18 @@ input[type='radio']#register_button:checked ~ #register-form-button {
 
   .form-row {
     max-width: 360px;
+  }
+
+  .about-man {
+    margin: 40px 0;
+  }
+
+  .prices {
+    margin-bottom: 40px;
+  }
+
+  .prices h3,
+  .prices h4 {
+    margin-bottom: 20px;
   }
 }

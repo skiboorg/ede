@@ -138,12 +138,12 @@
   width: 100%
   height: 100vh
   z-index: -1
-  transition: background-color 0.5s ease-in
+  transition: background-color 0.1s ease-in
 
 .mobile-menu-panel-active
   z-index: 11
   background: rgba(76, 76, 76, 0.84)
-  transition: background-color 0.2s ease-in
+  transition: background-color 0.1s ease-in
 
 .mobile-menu-panel-inner
   transform: translate(-100%,0)
@@ -352,8 +352,11 @@
         width: 90px
         height: 2px
         bottom: -5px
-        left: 145px
         background: #000
+        left: 0
+        right: 0
+        margin-left: auto
+        margin-right: auto
     span
       display: block
       margin: 0 auto
@@ -405,6 +408,12 @@
     left: 14px
 
 @media (max-width: 556px)
+  .calculation-form
+    background: none
+    height: auto
+
+    h3
+      margin-bottom: 40px
   .calculation-form-footer
     grid-template-columns: repeat(auto-fill, minmax(200px,1fr))
     grid-gap: 30px
@@ -434,13 +443,21 @@
 
   p
     max-width: 450px
-
+@media (max-width: 556px)
+  .about-man
+    margin: 40px 0
 //prices
 
 .prices
   margin-bottom: 140px
   h3
     margin-bottom: 70px
+
+@media (max-width: 556px)
+  .prices
+    margin-bottom: 40px
+    h3
+      margin-bottom: 20px
 
 .prices-wrapper
   display: grid
@@ -566,6 +583,11 @@
   opacity: 1
 
 @media (max-width: 575px)
+  .how-it-works
+    margin-bottom: 40px
+    height: 390px
+    h3
+      margin-bottom: 40px
   .how-it-works-slide
     grid-template-columns: 1fr
 
@@ -619,8 +641,7 @@
   .how-it-works-slide.slide-active
     grid-template-columns: 1fr
 
-  .how-it-works
-    height: 360px
+
 
 
 
@@ -667,7 +688,7 @@
   .lets-meet
     background-position-x: 40%
   h3
-    width: 700px
+    //width: 700px
     align-self: flex-end
     margin-bottom: 110px
 
@@ -676,6 +697,9 @@
   flex-direction: column
   height: 953px
   justify-content: center
+
+  h3
+    text-align: end
 
 
   p.info-text
@@ -712,10 +736,11 @@
     line-height: 0
     right: -100px
     top: 130px
-    z-index: -1
+    //z-index: -1
 
-
-
+@media (max-width: 1366px)
+  .quote::after
+    content: ''
 
 .lets-meet-about
   display: inline-block
@@ -830,7 +855,9 @@
   right: -75px
   &:focus
     outline-width: 0
-
+@media (max-width: 1200px)
+  .controls
+    display: none
 //why our work
 
 .why-our-work
@@ -859,5 +886,7 @@
 @media (max-width: 767px)
   .why-our-work
     background: none
+    h3
+      margin-bottom: 40px
     p
       width: 90%
