@@ -101,3 +101,21 @@ def Order_post_delete(sender, instance, **kwargs):
 
 post_delete.connect(Order_post_delete, sender=OrderFile)
 post_save.connect(Order_post_save, sender=OrderFile)
+
+
+class Payment(models.Model):
+    order = models.ForeignKey(Order,blank=True,null=True,on_delete=models.CASCADE, verbose_name='Платеж к заказу')
+    user = models.ForeignKey(User, blank=True,null=True, on_delete=models.CASCADE, verbose_name='Платеж от')
+    type = models.CharField('Тип платежа', max_length=255, blank=True)
+    sender = models.CharField('Номер счета отправителя', max_length=255, blank=True)
+    amount = models.CharField('Зачислено на счет', max_length=255, blank=True)
+    withdraw_amount = models.CharField('Списано с плательщика', max_length=255, blank=True)
+    operation_id = models.CharField('Номер операции на строне ЯндексДенег', max_length=255, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return '{} к заказу {} от {}, сумма {}, дата {}'.format(self.type, self.order.id,self.user.phone,self.amount,self.created_at)
+
+    class Meta:
+        verbose_name = "Платеж"
+        verbose_name_plural = "Платежи"

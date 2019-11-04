@@ -121,7 +121,7 @@
                                             <input type="hidden" name="paymentType" value="AC">
                                             <input type="hidden" name="sum" value="" data-type="number">
                                             <input type="hidden" name="label" value="">
-                                            <input type="hidden" name="successURL" value="http://localhost:8000/lk?payment=success">
+                                            <input type="hidden" name="successURL" value="{{ returnUrl }}">
                                             <button type="submit" class="btn">внести предоплату</button>
                                         </form>
                                     {% endif %}
@@ -138,7 +138,7 @@
                                             <input type="hidden" name="paymentType" value="AC">
                                             <input type="hidden" name="sum" value="" data-type="number">
                                             <input type="hidden" name="label" value="">
-                                            <input type="hidden" name="successURL" value="http://localhost:8000/lk?payment=success">
+                                            <input type="hidden" name="successURL" value="{{ returnUrl }}">
                                             <button type="submit" class="btn">
                                                 {% if not order.is_prePayed %}
                                                     оплатить
@@ -294,7 +294,7 @@
                                 <input type="hidden" name="paymentType" value="AC">
                                 <input type="hidden" name="sum" value="" data-type="number">
                                 <input type="hidden" name="label" value="">
-                                <input type="hidden" name="successURL" value="http://localhost:8000/lk?payment=success">
+                                <input type="hidden" name="successURL" value="{{ returnUrl }}">
                                 <button type="submit" class="btn">оплатить</button>
                             </form>
                         </div><!--// tab-payment-grid-topay-->
@@ -359,7 +359,7 @@
 
         </section><!--// lk-->
     </div><!-- // main -->
-
+{% include 'pay_sucess.html' %}
 {% endblock %}
 
 {% block js %}
@@ -421,10 +421,10 @@
                 form.elements[3].defaultValue=response['targets']
                 form.elements[5].defaultValue=response['totalprice']
                 form.elements[6].defaultValue=response['label']
+                form.submit()
             };
             xhr.send(fd);
 
-            //form.submit()
         }
 
         function radioClick(id) {
@@ -453,7 +453,14 @@
             orderIds = JSON.stringify(ids)
         }
 
+        document.addEventListener('DOMContentLoaded', function(){
+            let searchParams = new URL(location.href).searchParams.get("payment");
+            console.log(searchParams);
+            if (searchParams === 'success'){
+                toggleModal('pay-success-modal')
+            }
 
+}       );
 
 
     </script>

@@ -7,6 +7,7 @@ from blog.models import *
 from customuser.forms import UpdateForm
 from order.models import Order
 import random
+import settings
 
 
 
@@ -44,6 +45,7 @@ def showPost(request,slug):
 def lk(request):
     n1 = random.randint(0, 9)
     n2 = random.randint(0, 9)
+    returnUrl = settings.RETURN_URL
     if request.user.is_authenticated:
         totalFullPrice = 0
         totalActiveOrders = 0
