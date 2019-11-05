@@ -21,7 +21,7 @@ def createSession():
 def createContact(session,name,phone,email,tags):
     if not name:
         name = 'Не указано'
-        
+
     NEWCONTACT = {
         'add': [{
             'name': name,
