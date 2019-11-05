@@ -19,6 +19,9 @@ def createSession():
 
 
 def createContact(session,name,phone,email,tags):
+    if not name:
+        name = 'Не указано'
+        
     NEWCONTACT = {
         'add': [{
             'name': name,
@@ -136,7 +139,7 @@ def createCallbackForm(request):
 
             return_dict['result'] = 'ok'
             createLead(createSession(), createContact(createSession(), name, phone, email, 'расчет цены'),
-                       'Расчет стоимости',workName,subject,volume,deadLine,about)
+                       'Расчет стоимости', workName, subject, volume, deadLine, about)
         else:
             return_dict['result'] = 'error'
             return_dict['errors'] = form.errors

@@ -114,7 +114,7 @@
                                               method="post"
                                               onsubmit="event.preventDefault(); letspay(this,'quickpay');"
                                               data-id="{% random_str %}++{% b64encode 0 %}=={% b64encode order.id %}"
-                                              data-oid='{{ order.id }}'>
+                                              data-oid='{{ order.id }}'>{% csrf_token %}
                                             <input type="hidden" name="receiver" value="">
                                             <input type="hidden" name="quickpay-form" value="shop">
                                             <input type="hidden" name="targets" value="">
@@ -131,7 +131,7 @@
                                               method="post"
                                               onsubmit="event.preventDefault(); letspay(this,'quickpay');"
                                               data-id="{% random_str %}++{% b64encode 1 %}=={% b64encode order.id %}"
-                                              data-oid='{{ order.id }}'>
+                                              data-oid='{{ order.id }}'>{% csrf_token %}
                                             <input type="hidden" name="receiver" value="">
                                             <input type="hidden" name="quickpay-form" value="shop">
                                             <input type="hidden" name="targets" value="">
@@ -397,7 +397,7 @@
 
         function letspay(form,type) {
             let csrfmiddlewaretoken = document.getElementsByName("csrfmiddlewaretoken")[0].value;
-            console.log(form.elements)
+            //console.log(form.elements)
             if (type==='quickpay'){
                 let ids = {}
                 let order = {}
@@ -405,7 +405,7 @@
                 ids[`order${form.dataset.oid}`] = order
                 orderIds = JSON.stringify(ids)
             }
-            console.log(orderIds)
+            //console.log(orderIds)
 
             let fd = new FormData();
 
@@ -416,7 +416,7 @@
             xhr.open('POST', '/order/pay/', true);
             xhr.onload = function () {
                 let response = JSON.parse(this.response)
-                console.log(response)
+                //console.log(response)
                 form.elements[1].defaultValue=response['wallet']
                 form.elements[3].defaultValue=response['targets']
                 form.elements[5].defaultValue=response['totalprice']
@@ -455,7 +455,7 @@
 
         document.addEventListener('DOMContentLoaded', function(){
             let searchParams = new URL(location.href).searchParams.get("payment");
-            console.log(searchParams);
+            //console.log(searchParams);
             if (searchParams === 'success'){
                 toggleModal('pay-success-modal')
             }
