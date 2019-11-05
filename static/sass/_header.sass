@@ -567,7 +567,7 @@
   top: -15px
 .how-it-works-slider
   position: relative
-  height: 300px
+  height: 360px
 
 .how-it-works-slide
   display: grid
@@ -584,8 +584,8 @@
 
 @media (max-width: 575px)
   .how-it-works
-    margin-bottom: 40px
-    height: 390px
+    margin-bottom: 0
+    //height: 320px
     h3
       margin-bottom: 40px
   .how-it-works-slide
@@ -599,6 +599,7 @@
     color: $color_grey
     position: relative
     z-index: 1
+    line-height: 30px
 
     &:before
       content: attr(data-number)
@@ -607,7 +608,7 @@
       font-family: 'MuseoSansCyrl-900Italic', sans-serif
       color: #e5e5e5
       z-index: -1
-      top: -50px
+      top: -10px
       left: -65px
   p
     font-family: 'MuseoSansCyrl-500', sans-serif
@@ -615,9 +616,6 @@
     color: $color_text
     a
       color: $color_l_blue
-
-
-
 
 
 .slider-arrows
@@ -632,17 +630,14 @@
     h5:before
       left: -5px
       font-size: 90px
-      top: -33px
+      top: -5px
 
   .slider-arrows
     width: 100%
-    bottom: 0px
+    bottom: 50px
 
   .how-it-works-slide.slide-active
     grid-template-columns: 1fr
-
-
-
 
 
 .slider-arrow-left, .slider-arrow-right
@@ -674,7 +669,6 @@
 .slide-out
   transform: translate(200%,0)
 
-
 .slide-in
   transform: translate(0,0)
 
@@ -684,6 +678,7 @@
   background-position-x: 15%
   height: 953px
   margin-bottom: 140px
+
 @media (max-width: 1366px)
   .lets-meet
     background-position-x: 40%
@@ -864,7 +859,7 @@
   background: url(../images/why_bg.jpg) no-repeat center
   height: 900px
 
-  p
+  .with-bullet
     position: relative
     width: 33.33%
     font-family: 'MuseoSansCyrl-100',sans-serif
@@ -883,10 +878,20 @@
       left: -30px
       top: 12px
 
+.why-our-work-text
+  width: 33.33%
+  max-height: 70px
+  overflow: hidden
+  transition: max-height .1s ease-in
+  &-active
+    max-height: 350px
+    transition: max-height .1s ease-in
+
 @media (max-width: 767px)
   .why-our-work
     background: none
+    height: auto
     h3
       margin-bottom: 40px
-    p
+    .with-bullet
       width: 90%

@@ -114,7 +114,10 @@ def pay(request):
 
 @csrf_exempt
 def pay_complete(request):
-    req = request.POST
+    if settings.DEV:
+        req = request.GET
+    else:
+        req = request.POST
     notification_type = req.get('notification_type')
     amount = req.get('amount')
     codepro  = req.get('codepro')

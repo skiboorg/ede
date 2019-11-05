@@ -21,8 +21,8 @@
                 <li class="active"><a href="/">Главная</a></li>
                 <li><a href="{% url 'prices' %}">Цены и сроки</a></li>
                 <li><a href="{% url 'allposts' %}">Статьи</a></li>
-                <li><a href="{% url 'index' %}#reviews">Отзывы</a></li>
-                <li><a href="{% url 'index' %}#about">О нас</a></li>
+                <li><a href="{% url 'index' %}#reviews" class="not-visible-sm">Отзывы</a></li>
+                <li><a href="{% url 'index' %}#about" class="not-visible-sm">О нас</a></li>
                 <li><a href="{% url 'contacts' %}">Контакты</a></li>
             </ul>
         </div>
@@ -33,8 +33,8 @@
             <li class="active"><a href="/">Главная</a></li>
             <li><a href="{% url 'prices' %}">Цены и сроки</a></li>
             <li><a href="{% url 'allposts' %}">Статьи</a></li>
-            <li><a href="{% url 'index' %}#reviews">Отзывы</a></li>
-            <li><a href="{% url 'index' %}#about">О нас</a></li>
+            <li><a href="{% url 'index' %}#reviews" class="not-visible-sm">Отзывы</a></li>
+            <li><a href="{% url 'index' %}#about" class="not-visible-sm">О нас</a></li>
             <li><a href="{% url 'contacts' %}">Контакты</a></li>
         </ul>
         <a  class="btn" onclick="toggleModal('order-modal')">оформить заявку</a>

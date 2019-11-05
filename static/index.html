@@ -387,11 +387,22 @@
     <section class="why-our-work">
         <div class="container">
             <h3>Почему работу лучше купить,<br>чем делать самому?</h3>
-            <p class="mb40">Дипломная работа - это самое сложное и ответственное <span>задание за весь учебный срок</span></p>
-            <p class="mb40"><span>Риск получить низкий балл</span> из-за преподавателей и сложности оформления</p>
-            <p class="mb40">Лучше <span>положиться на профессионалов,</span> чем ошибиться самому</p>
-            <p>Написание дипломных работ – практически всегда <span>нервотрепка и стресс</span></p>
+            <p class="with-bullet mb40">Дипломная работа - это самое сложное и ответственное <span>задание за весь учебный срок</span></p>
+            <p class="with-bullet mb40"><span>Риск получить низкий балл</span> из-за преподавателей и сложности оформления</p>
+            <p class="with-bullet mb40">Лучше <span>положиться на профессионалов,</span> чем ошибиться самому</p>
+            <p class="with-bullet mb40">Написание дипломных работ – практически всегда <span>нервотрепка и стресс</span></p>
 
+            <div id="why-our-work-text" class="why-our-work-text">
+                <p class="mb20">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet, exercitationem.
+                </p>
+                <p class="mb20">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis nemo neque, omnis quasi quidem repudiandae. Blanditiis commodi delectus fuga illo ipsam odio praesentium qui rem suscipit tempora? At autem beatae consequatur, cupiditate dolor eaque enim eos excepturi fugiat hic illum iure maiores molestias nisi nostrum nulla, numquam odit quisquam quos sapiente sunt veritatis voluptatem voluptatum! Accusantium aliquid aut consectetur consequatur dignissimos dolor eveniet, exercitationem expedita labore magni minima, officiis perspiciatis porro possimus praesentium quidem quis quisquam similique soluta vel voluptates!
+                </p>
+
+
+            </div>
+            <a onclick="readOurWorkText()" class="btn">читать полностью</a>
 
 
         </div>
@@ -550,6 +561,12 @@
         return false
 
     }
+
+    function readOurWorkText() {
+        let x = document.getElementById("why-our-work-text")
+        x.classList.toggle('why-our-work-text-active')
+    }
+
     function readFullReview() {
         let x = document.getElementById("readfullreview_btn")
         if (x.innerHTML === "Читать далее...") {

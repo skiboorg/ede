@@ -1459,7 +1459,7 @@ select {
 
 .how-it-works-slider {
   position: relative;
-  height: 300px;
+  height: 360px;
 }
 
 .how-it-works-slide {
@@ -1482,6 +1482,7 @@ select {
   color: #737995;
   position: relative;
   z-index: 1;
+  line-height: 30px;
 }
 
 .slide-text h5:before {
@@ -1491,7 +1492,7 @@ select {
   font-family: 'MuseoSansCyrl-900Italic', sans-serif;
   color: #e5e5e5;
   z-index: -1;
-  top: -50px;
+  top: -10px;
   left: -65px;
 }
 
@@ -1802,7 +1803,7 @@ select {
   height: 900px;
 }
 
-.why-our-work p {
+.why-our-work .with-bullet {
   position: relative;
   width: 33.33%;
   font-family: 'MuseoSansCyrl-100',sans-serif;
@@ -1811,11 +1812,11 @@ select {
   margin-left: 30px;
 }
 
-.why-our-work p span {
+.why-our-work .with-bullet span {
   font-family: 'MuseoSansCyrl-500',sans-serif;
 }
 
-.why-our-work p:before {
+.why-our-work .with-bullet:before {
   position: absolute;
   content: '';
   width: 12px;
@@ -1824,6 +1825,22 @@ select {
   border: 3px solid #009cff;
   left: -30px;
   top: 12px;
+}
+
+.why-our-work-text {
+  width: 33.33%;
+  max-height: 70px;
+  overflow: hidden;
+  -webkit-transition: max-height .1s ease-in;
+  -o-transition: max-height .1s ease-in;
+  transition: max-height .1s ease-in;
+}
+
+.why-our-work-text-active {
+  max-height: 350px;
+  -webkit-transition: max-height .1s ease-in;
+  -o-transition: max-height .1s ease-in;
+  transition: max-height .1s ease-in;
 }
 
 .blog {
@@ -2978,6 +2995,7 @@ input[type='radio']#register_button:checked ~ #register-form-button {
 
   .why-our-work {
     background: none;
+    height: auto;
   }
 
   .why-our-work h3,
@@ -2985,7 +3003,7 @@ input[type='radio']#register_button:checked ~ #register-form-button {
     margin-bottom: 40px;
   }
 
-  .why-our-work p {
+  .why-our-work .with-bullet {
     width: 90%;
   }
 
@@ -3044,8 +3062,7 @@ input[type='radio']#register_button:checked ~ #register-form-button {
   }
 
   .how-it-works {
-    margin-bottom: 40px;
-    height: 390px;
+    margin-bottom: 0;
   }
 
   .how-it-works h3,
@@ -3060,12 +3077,12 @@ input[type='radio']#register_button:checked ~ #register-form-button {
   .slide-text h5:before {
     left: -5px;
     font-size: 90px;
-    top: -33px;
+    top: -5px;
   }
 
   .slider-arrows {
     width: 100%;
-    bottom: 0px;
+    bottom: 50px;
   }
 
   .how-it-works-slide.slide-active {
