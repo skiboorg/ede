@@ -335,7 +335,7 @@
                                                placeholder="Срок сдачи" type="date"
                                                onchange="this.className=(this.value!=''?'form-control form-control-sm has-value':'form-control form-control-sm')">
                                     </div>
-                                    <input type="file" class="form-control form-control-lg" name="{{ orderForm.file.name }}">
+                                    <input data-placeholder="Прикрепить файлы" type="file" class="form-control form-control-lg" name="file" multiple>
 
                                 </div>
                                 <textarea style="width: 95%; height: 100px" name="{{ orderForm.comment.name }}" class="form-control mt20" placeholder="Дополнительная информация"></textarea>
@@ -367,6 +367,15 @@
     {{ block.super }}
 
     <script>
+     document.getElementsByName('file')[0].addEventListener('change', function () {
+        console.log('change')
+        let uploaded_files = 'Прикрепленные файлы : '
+        for (x of this.files){
+            uploaded_files += (x.name + ' ; ')
+        }
+        this.setAttribute('data-placeholder',uploaded_files)
+    })
+
         let mobile_button = document.getElementsByClassName('mobile-toggle')[0]
         let mobile_menu_panel = document.getElementsByClassName('mobile-menu-panel')[0]
         let mobile_menu = document.getElementsByClassName('mobile-menu-panel-inner')[0]

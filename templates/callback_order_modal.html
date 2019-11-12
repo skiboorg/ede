@@ -11,7 +11,7 @@
                     </div>
                     <div class="form-filed-wrapper mb10">
                         <label >Ваш телефон </label>
-                        <input  class="form-control" name="{{ callbackOrderForm.userPhone.name }}" value="" required placeholder="">
+                         <input type="tel"  name="{{ callbackOrderForm.userPhone.name }}" class="masked-phone form-control input-phone" placeholder="Ваш сотовый номер" data-phonemask="+7(___)___-__-__" />
                     </div>
                     <label class="custom-checkbox"><span>Даю согласие на обработку моих персональных данных</span>
                         <input name="" checked required type="checkbox">

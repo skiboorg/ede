@@ -66,13 +66,13 @@
                                        placeholder="Срок сдачи" type="date"
                                        onchange="this.className=(this.value!=''?'form-control form-control-sm has-value':'form-control form-control-sm')">
                             </div>
-                            <input type="file" class="form-control form-control-lg" name="{{ callbackForm.file.name }}">
+                            <input data-placeholder="Прикрепить файлы" type="file" class="form-control form-control-lg" name="file" multiple>
                         </div>
 
 
                     </div>
                     <div class="calculation-form-footer">
-                        <input class="form-control input-phone" name="{{ callbackForm.phone.name }}" value="" placeholder="Сотовый номер">
+                         <input type="tel"  name="{{ callbackForm.phone.name }}" class="masked-phone form-control input-phone" placeholder="Ваш сотовый номер" data-phonemask="+7(___)___-__-__" />
                         <input class="form-control input-email" name="{{ callbackForm.email.name }}" value="" placeholder="E-mail адрес">
                         <input class="form-control input-user" name="{{ callbackForm.name.name }}" value="" placeholder="Ваше ФИО">
                     </div>
@@ -135,17 +135,17 @@
             <h4 class="text-center not-visible-sm">Узнайте, что будет, после того как Вы обратитесь к нам за помощью</h4>
             <div class="how-it-works-numbers not-visible-sm">
                 <div id="step_1" class="how-it-works-step step-active">
-                    <a href="#"><span>01</span></a>
+                    <a onclick="changeSlidebyClick(1)"><span>01</span></a>
                 </div>
                 <div id="step_2" class="how-it-works-step">
 
-                    <a href="#"><span>02</span></a>
+                    <a onclick="changeSlidebyClick(2)"><span>02</span></a>
                 </div>
                 <div id="step_3" class="how-it-works-step">
-                    <a href="#"><span>03</span></a>
+                    <a onclick="changeSlidebyClick(3)"><span>03</span></a>
                 </div>
                 <div id="step_4" class="how-it-works-step">
-                    <a href="#"><span>04</span></a>
+                    <a onclick="changeSlidebyClick(4)"><span>04</span></a>
                 </div>
             </div><!-- // how-it-works-numbers -->
             <div class="container-sm how-it-works-slider" id="how-it-works-slider">
@@ -441,6 +441,13 @@
                 document.getElementById(`slide_${current_slide}`).classList.add('slide-active')
 
             }, 300);
+        }
+        
+        function changeSlidebyClick(slide) {
+            last_slide = current_slide
+            current_slide = slide
+            changeSlide()
+            
         }
     </script>
 {% endblock %}

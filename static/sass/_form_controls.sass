@@ -31,9 +31,10 @@ input[type='file']
     visibility: hidden
   &:before
     position: absolute
-    content: 'Прикрепить методичку'
+    content: attr(data-placeholder)
     color: $color_text
     bottom: 18px
+    width: 90%
   &:after
     position: absolute
     content: url(../images/icons/clip.svg)

@@ -12,7 +12,6 @@ class OrderForm(ModelForm):
             'about',
             'volume',
             'deadLine',
-            'file',
             'comment'
         )
 

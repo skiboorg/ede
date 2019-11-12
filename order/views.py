@@ -16,9 +16,11 @@ def newOrder(request):
     if request.POST:
         req = request.POST
         form = OrderForm(req, request.FILES)
+        print(request.POST)
+        print(request.FILES.getlist('file'))
         form.user_id = request.user.id
         if form.is_valid():
-            form.save()
+            orderID = form.save()
             name = request.user.name
             phone = request.user.phone
             workName = request.POST.get('workName')
@@ -27,8 +29,14 @@ def newOrder(request):
             about = request.POST.get('about')
             email = request.user.email
             deadLine = request.POST.get('deadLine')
-            createLead(createSession(), createContact(createSession(), name, phone, email, 'Новый заказ'),
-                       'Новый заказ', workName, subject, volume, deadLine, about)
+            if request.FILES:
+
+                for f in request.FILES.getlist('file'):
+                    OrderFiles.objects.create(order=orderID, file=f)
+
+            # createLead(createSession(), createContact(createSession(), name, phone, email, 'Новый заказ'),
+            #            'Новый заказ', workName, subject, volume, deadLine, about)
+
         else:
             print(form.errors)
 
@@ -164,7 +172,7 @@ def pay_complete(request):
                         newPayment = Payment.objects.create(order=order,
                                                user_id=user_id,
                                                amount=amount,
-                                               withdraw_amount=withdraw_amount,
+                                               withdraw_amount=order.prePay,
                                                sender=sender,
                                                type='Предоплата {}'.format(payment_source),
                                                operation_id=operation_id)
@@ -184,7 +192,7 @@ def pay_complete(request):
                         Payment.objects.create(order=order,
                                                user_id=user_id,
                                                amount=amount,
-                                               withdraw_amount=withdraw_amount,
+                                               withdraw_amount=order.fullPrice,
                                                sender=sender,
                                                type='{} {}'.format(payment_type_name, payment_source),
                                                operation_id=operation_id)

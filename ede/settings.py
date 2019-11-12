@@ -10,6 +10,7 @@ CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
 INSTALLED_APPS = [
+    'django.contrib.sitemaps',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -23,7 +24,8 @@ INSTALLED_APPS = [
     'callback.apps.CallbackConfig',
     'order.apps.OrderConfig',
     'comments.apps.CommentsConfig',
-    'mathfilters'
+    'mathfilters',
+    'subdomain.apps.SubdomainConfig'
 
 ]
 
@@ -35,6 +37,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'subdomain.middleware.check_domain.MyMiddleware'
 ]
 
 ROOT_URLCONF = 'ede.urls'

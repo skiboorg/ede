@@ -11,7 +11,7 @@ class Order(models.Model):
     about = models.CharField('Тема', max_length=255, blank=False)
     volume = models.IntegerField('Объем', blank=True, null=True)
     deadLine = models.CharField('Срок', max_length=255, blank=True, default='Пользователь не указал')
-    file = models.FileField('Загруженный файл', upload_to='new_order_files', blank=True)
+
     fullPrice = models.IntegerField('Полная стоимость', default=0)
     prePay = models.IntegerField('Предоплата', default=0)
     status = models.CharField('Статус заказа', max_length=255, blank=True, default='Поступил в обработку. Идет расчет цены')
@@ -56,12 +56,22 @@ class OrderFile(models.Model):
     file = models.FileField('Файл', upload_to='order_files', blank=False, null=True)
 
     def __str__(self):
-        return 'Файл к заказу №{} '.format(self.order.id)
+        return 'Выполненная работа к заказу №{} '.format(self.order.id)
 
     class Meta:
-        verbose_name = "Файл к заказу"
-        verbose_name_plural = "Файлы к заказам"
+        verbose_name = "Файл выполненной работы"
+        verbose_name_plural = "Выполненные работы"
 
+class OrderFiles(models.Model):
+    order = models.ForeignKey(Order,blank=False,null=False,on_delete=models.CASCADE)
+    file = models.FileField('Загруженный файл', upload_to='new_order_files', blank=True)
+
+    def __str__(self):
+        return 'Прикрепленный файл к заказу {} '.format(self.order.id)
+
+    class Meta:
+        verbose_name = "Прикрепленный файл к заказу"
+        verbose_name_plural = "Прикрепленные файлы к заказу"
 
 class Messages(models.Model):
     order = models.ForeignKey(Order, blank=False, on_delete=models.CASCADE, verbose_name='Сообщение к заказу', related_name='ordermessages')

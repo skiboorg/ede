@@ -28,6 +28,9 @@ class BlogPost(models.Model):
         self.name_lower = self.name.lower()
         super(BlogPost, self).save(*args, **kwargs)
 
+    def get_absolute_url(self):
+        return f'/post/{self.name_slug}/'
+
     def __str__(self):
         return 'Статья : %s ' % self.name
 

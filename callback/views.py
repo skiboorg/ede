@@ -4,6 +4,7 @@ import settings
 import time
 
 from .forms import *
+from .models import CallbackFiles
 
 
 def createSession():
@@ -124,43 +125,59 @@ def createLead(session,userid,lead_type,workType,subject,volume,deadline,about):
 def createCallbackForm(request):
     print(request.POST)
     return_dict = {}
-    if request.POST:
-        form = CallbackForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            name = request.POST.get('name')
-            phone = request.POST.get('phone')
-            workName = request.POST.get('workName')
-            subject = request.POST.get('subject')
-            about = request.POST.get('about')
-            email = request.POST.get('email')
-            volume = request.POST.get('volume')
-            deadLine = request.POST.get('deadLine')
+    if '_' in request.POST.get('phone'):
+        return_dict['result'] = 'error'
+        return_dict['errors'] = 'phone'
+        print(request.FILES.getlist('file'))
+    else:
+        if request.POST:
+            form = CallbackForm(request.POST, request.FILES)
+            if form.is_valid():
+                callbackID = form.save()
+                print(callbackID.id)
+                name = request.POST.get('name')
+                phone = request.POST.get('phone')
+                workName = request.POST.get('workName')
+                subject = request.POST.get('subject')
+                about = request.POST.get('about')
+                email = request.POST.get('email')
+                volume = request.POST.get('volume')
+                deadLine = request.POST.get('deadLine')
+                if request.FILES:
 
-            return_dict['result'] = 'ok'
-            createLead(createSession(), createContact(createSession(), name, phone, email, 'расчет цены'),
-                       'Расчет стоимости', workName, subject, volume, deadLine, about)
-        else:
-            return_dict['result'] = 'error'
-            return_dict['errors'] = form.errors
-            print(form.errors)
+                    for f in request.FILES.getlist('file'):
+                        CallbackFiles.objects.create(callback=callbackID, file=f)
+
+
+                return_dict['result'] = 'ok'
+                createLead(createSession(), createContact(createSession(), name, phone, email, 'расчет цены'),
+                           'Расчет стоимости', workName, subject, volume, deadLine, about)
+            else:
+                return_dict['result'] = 'error'
+                return_dict['errors'] = form.errors
+                print(form.errors)
 
     return JsonResponse(return_dict)
 
 
 def createCallbackOrderForm(request):
     return_dict = {}
-    if request.POST:
-        form = CallbackOrderForm(request.POST)
-        if form.is_valid():
-            name = request.POST.get('userName')
-            phone = request.POST.get('userPhone')
-            form.save()
-            return_dict['result'] = 'ok'
-            createLead(createSession(),createContact(createSession(),name,phone,'Не указан','обратный звонок'),
-                       'Обратный звонок','Не указан','Не указан','Не указан','Не указан','Не указан')
-        else:
-            return_dict['result'] = 'error'
-            return_dict['errors'] = form.errors
-            print(form.errors)
+    if '_' in request.POST.get('userPhone'):
+        return_dict['result'] = 'error'
+        return_dict['errors'] = 'phone'
+        print(request.FILES.getlist('file'))
+    else:
+        if request.POST:
+            form = CallbackOrderForm(request.POST)
+            if form.is_valid():
+                name = request.POST.get('userName')
+                phone = request.POST.get('userPhone')
+                form.save()
+                return_dict['result'] = 'ok'
+                createLead(createSession(),createContact(createSession(),name,phone,'Не указан','обратный звонок'),
+                           'Обратный звонок','Не указан','Не указан','Не указан','Не указан','Не указан')
+            else:
+                return_dict['result'] = 'error'
+                return_dict['errors'] = form.errors
+                print(form.errors)
     return JsonResponse(return_dict)

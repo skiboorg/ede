@@ -27,6 +27,7 @@
 {% endif %}
 {% include 'callback_order_modal.html' %}
 {% block js %}
+    <script src="{% static 'js/phone-mask.min.js' %}"></script>
     <script>
         function toggleModal(type) {
             console.log(type)
@@ -64,6 +65,9 @@
                 }
                 else{
                     error_label.style.display = 'block'
+                    if (JSON.parse(this.response)['errors'] === 'phone'){
+                    phone.classList.add("error");
+                }
                     btn.removeAttribute('disabled')
                     btn.firstChild.data = 'Жду звонка'
                     console.log(JSON.parse(this.response)['errors'])

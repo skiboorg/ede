@@ -15,7 +15,7 @@ class CallbackForm(ModelForm):
             'name',
             'phone',
             'email',
-            'file',
+
         )
 
 class CallbackOrderForm(ModelForm):

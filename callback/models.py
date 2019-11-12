@@ -11,7 +11,6 @@ class Callback(models.Model):
     name = models.CharField('Имя', max_length=255, blank=False, default='Нет данных')
     phone = models.CharField('Телефон', max_length=255, blank=False, default='Нет данных')
     email = models.EmailField('Email', max_length=255, blank=False, default='Нет данных')
-    file = models.FileField('Загруженный файл', upload_to='callback_files', blank=True)
     created_at = models.DateTimeField('Дата заполнения', auto_now_add=True)
 
     def __str__(self):
@@ -23,6 +22,16 @@ class Callback(models.Model):
         verbose_name = "Форма обратной связи"
         verbose_name_plural = "Формы обратной связи"
 
+class CallbackFiles(models.Model):
+    callback = models.ForeignKey(Callback,blank=False,null=False,on_delete=models.CASCADE)
+    file = models.FileField('Загруженный файл', upload_to='callback_files', blank=True)
+
+    def __str__(self):
+        return 'Прикрепленный файл к форме {} '.format(self.callback.id)
+
+    class Meta:
+        verbose_name = "Прикрепленный файл к форме"
+        verbose_name_plural = "Прикрепленные файлы к форме"
 
 class CallbackOrder(models.Model):
     userName = models.CharField('Имя',max_length=255, blank=False, default='Нет данных')
