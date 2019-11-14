@@ -34,7 +34,7 @@ class MyMiddleware(MiddlewareMixin):
                 subDomain = Domain.objects.get(name=subdomain)
                 homeDomain = False
             except:
-                return HttpResponseRedirect(settings.PROTOCOL + settings.MAIN_DOMAIN)
+                return HttpResponseRedirect(settings.PROTOCOL + settings.MAIN_DOMAIN + '.ru')
 
         request.subdomain = subDomain
         request.homedomain = homeDomain
