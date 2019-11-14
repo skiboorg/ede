@@ -10,12 +10,12 @@
                 <img src="{% static 'images/header_books.png' %}" alt="">
                 <p>47,470<span>работ выполнено</span></p>
             </div>
-            <a href="{% url 'prices' %}">посмотреть работы</a>
+            <a href="{% url 'services' %}">посмотреть работы</a>
         </div>
         <div class="grid-item header-phones">
             <div class="header-phones-inner">
                 <p>Есть вопрос? Звоните</p>
-                <span>+7 (351) 230 80 40</span>
+                <span>{{ subdomain.contactPhone }}</span>
                 <a class="btn btn-callback" onclick="toggleModal('callback-order-modal')">перезвоните мне</a>
             </div>
         </div>
@@ -23,7 +23,7 @@
     <div class="container mobile-menu-wrapper">
         <div class="mobile-toggle"></div>
         <div class="mobile-menu-phohe">
-            <a href="tel:+73512308040">+7 (351) 230 80 40</a>
+            <a href="tel:{{ subdomain.contactPhone }}">{{ subdomain.contactPhone }}</a>
         </div>
     </div>
     <div class="mobile-menu-panel">
@@ -38,7 +38,7 @@
             </div>
             <ul class="mobile-nav">
                 <li class="active"><a href="/">Главная</a></li>
-                <li><a href="{% url 'prices' %}">Цены и сроки</a></li>
+                <li><a href="{% url 'services' %}">Цены и сроки</a></li>
                 <li><a href="{% url 'allposts' %}">Статьи</a></li>
                 <li><a href="#reviews" class="not-visible-sm">Отзывы</a></li>
                 <li><a href="#about" class="not-visible-sm">О нас</a></li>
@@ -50,7 +50,7 @@
         <img src="{% static 'images/icons/EDE.png' %}" alt="">
         <ul class="nav">
             <li class="active"><a href="/">Главная</a></li>
-            <li><a href="{% url 'prices' %}">Цены и сроки</a></li>
+            <li><a href="{% url 'services' %}">Цены и сроки</a></li>
             <li><a href="{% url 'allposts' %}">Статьи</a></li>
             <li><a href="#reviews" class="not-visible-sm">Отзывы</a></li>
             <li><a href="#about" class="not-visible-sm">О нас</a></li>

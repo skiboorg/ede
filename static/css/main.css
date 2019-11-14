@@ -1401,6 +1401,7 @@ select {
   -webkit-transition: background-color 0.3s ease-in;
   -o-transition: background-color 0.3s ease-in;
   transition: background-color 0.3s ease-in;
+  cursor: pointer;
 }
 
 .how-it-works-step span {
@@ -2900,6 +2901,12 @@ input[type='radio']#register_button:checked ~ #register-form-button {
   }
 }
 
+@media (max-width: 1000px) {
+  .header-inner h1 {
+    max-width: 50%;
+  }
+}
+
 @media (max-width: 991px) {
   .grid-offset2 {
     grid-column-start: 2;
@@ -3058,6 +3065,7 @@ input[type='radio']#register_button:checked ~ #register-form-button {
 
   .header-inner h1 {
     font-size: 24px;
+    max-width: 100%;
   }
 
   .how-it-works {
@@ -3221,6 +3229,7 @@ input[type='radio']#register_button:checked ~ #register-form-button {
 
   .form-row {
     max-width: 360px;
+    margin: 0 auto;
   }
 
   .about-man {

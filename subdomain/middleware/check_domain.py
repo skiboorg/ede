@@ -1,4 +1,6 @@
+from django.http import HttpResponseRedirect
 from django.utils.deprecation import MiddlewareMixin
+from subdomain.models import Domain
 import settings
 
 class MyMiddleware(MiddlewareMixin):
@@ -23,7 +25,19 @@ class MyMiddleware(MiddlewareMixin):
             else:
                 subdomain = None
 
-        request.subdomain = subdomain
+        subDomain = None
+        if not subdomain:
+            subDomain = Domain.objects.first()
+            homeDomain = True
+        else:
+            try:
+                subDomain = Domain.objects.get(name=subdomain)
+                homeDomain = False
+            except:
+                return HttpResponseRedirect(settings.PROTOCOL + settings.MAIN_DOMAIN)
+
+        request.subdomain = subDomain
+        request.homedomain = homeDomain
 
 
         print(subdomain)

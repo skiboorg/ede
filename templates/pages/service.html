@@ -2,48 +2,44 @@
 {% load static %}
 
 {% block title %}
-    {{ block.super }} - Главная
+    {{ block.super }} - {{ pageTitle }}
 {% endblock %}
 
 {% block keywords %}
-    {{ block.super }}
+    {{ pageKeywords }}
 {% endblock %}
 
 {% block description %}
-    {{ block.super }}
+    {{ pageDescription }}
 {% endblock %}
 
 {% block css %}
-    <link rel="stylesheet" href="{% static 'css/tiny-slider.css' %}">
-    <link rel="stylesheet" href="{% static 'css/prism.css' %} ">
     {{ block.super }}
 {% endblock %}
 
 
 
 {% block content %}
-    {% include 'header_index.html' %}
-    <div class="features" >
-        <div class="container grid-col3">
-            <div class="feature-item text-center">
-                <p>35</p>
-                <span>Практиков с кандидатской или докторской степенью, работающих в команде более 10-ти лет</span>
-            </div>
-            <div class="feature-item text-center">
-                <p>15 лет</p>
-                <span>Существует наша компания. И с самого начала официально, мы платим налоги и отчисления</span>
-            </div>
-            <div class="feature-item text-center">
-                <p>4,9</p>
-                <span>Средний балл выполненных работ и защищенных при поддержке нашей команды</span>
-            </div>
-
+    {% include 'header.html' %}
+    <div class="main mt50">
+    <div class="container">
+        <div class="breadcrumbs">
+            <ul>
+                <li><a href="/">Главная</a></li>
+                <li><a href="{% url 'services' %}">Все услуги</a></li>
+                <li class="active">{{ currenService.name }}</li>
+            </ul>
         </div>
-    </div>
-    <section id="callback_form" class="calculation-form">
-        <div style="margin-top: 140px" class="container-sm">
-            <h3 class="text-center">Узнайте стоимость своей работы</h3>
-            <h4 class="text-center">Мы пришлём точный ответ на Вашу почту</h4>
+    </div><!--// breadcrumbs-->
+
+
+
+
+
+         <section id="callback_form" class="calculation-form" style="background: none; height: auto; ">
+        <div  class="container-sm">
+            <h1 class="text-center">{{ pageH1 }}</h1>
+
             <form onsubmit="return false;" enctype="multipart/form-data" method="post" >{% csrf_token %}
                 <div class="calculation-form-wrapper">
                     <div class="calculation-form-inner">
@@ -52,7 +48,11 @@
                                 <select class="form-control" name="{{ callbackForm.workName.name }}">
                                     <option selected="selected"  value="">Вид работы</option>
                                     {% for service in allService %}
-                                        <option value="{{ service.name }}">{{ service.name }}</option>
+                                        {% if service.name == currenService.name %}
+                                        <option value="{{ service.name }}" selected>{{ service.name }}</option>
+                                        {% else %}
+                                         <option value="{{ service.name }}">{{ service.name }}</option>
+                                        {% endif %}
                                     {% endfor %}
                                 </select>
                             </div>
@@ -91,7 +91,8 @@
             </form>
         </div>
     </section><!-- // calculation-form -->
-    <section class="about-man">
+
+      <section class="about-man">
         <div class="container">
             <h3 class="mb50">Работу выполнит человек, <span>специализирующийся</span><br>на Вашей специальности</h3>
             <p class="text-block not-visible-sm">
@@ -102,34 +103,7 @@
             </p>
         </div>
     </section><!-- // about-man -->
-    <section class="prices">
-        <div class="container">
-            <h3 class="text-center">Цены на основные услуги</h3>
-            <div class="prices-wrapper">
-                <div class="price-item bg-1">
-                    <h5>Дипломая работа</h5>
-                    <p class="mb20">Стоимость:<span>от 7900 руб</span></p>
-                    <p class="mb20">Сроки:<span>от 7 дней</span></p>
-                    <p>Работ выполнено:<span>23,783</span></p>
-                </div>
-                <div class="price-item bg-2">
-                    <h5>Дипломая работа</h5>
-                    <p class="mb20">Стоимость:<span>от 7900 руб</span></p>
-                    <p class="mb20">Сроки:<span>от 7 дней</span></p>
-                    <p>Работ выполнено:<span>23,783</span></p>
-                </div>
-                <div class="price-item bg-3">
-                    <h5>Дипломая работа</h5>
-                    <p class="mb20">Стоимость:<span>от 7900 руб</span></p>
-                    <p class="mb20">Сроки:<span>от 7 дней</span></p>
-                    <p>Работ выполнено:<span>23,783</span></p>
-
-                </div>
-            </div>
-            <a href="{% url 'services' %}" class="btn btn-md m-a">Посмотреть цены на все услуги</a>
-        </div>
-    </section><!-- // prices -->
-    <section class="how-it-works">
+     <section class="how-it-works">
         <div class="container">
             <h3 class="text-center">Как происходит ход работы</h3>
             <h4 class="text-center not-visible-sm">Узнайте, что будет, после того как Вы обратитесь к нам за помощью</h4>
@@ -201,24 +175,7 @@
             </div>
         </div>
     </section><!-- // how-it-works -->
-    <section id="about" class="lets-meet not-visible-md">
-        <div class="container">
-            <div class="lets-meet-inner">
-                <h3>Давайте познакомимся<br/> с Вами лично</h3>
-                <div class="quote">
-                    <p>Несколько лет ушло на отбор настоящих профессионалов, которые не просто видят в этом способ заработка, а действительно любят свое дело</p>
-                </div>
-                <p class="info-text mb35">Ещё учась в университете, у меня возник огромный интерес к выполнению различных работ, сначала свои работы, а после, когда их стало мало, начала брать работы одногруппников и учеников из других групп.</p>
-                <p class="info-text mb35">После окончания университета интерес не утих, ведь каждая работа творчески интересна, зачастую предполагает наличие кропотливых расчетов.</p>
-                <p class="info-text mb35">Таким образом, в 2003 году начала зарабатывать этим на жизнь, выполняя работы под заказ от других фирм. А уже в 2004 нашла единомышленников и основала свою компанию.</p>
-                <p class="info-text">И вот, уже на протяжении семи лет наш состав остается неизменным. Каждый сотрудник — настоящий практик в своей специальности, который живет ею.</p>
-            </div>
-            <div class="lets-meet-about">
-                <p><span>Основательница</span><br/>компании "Эдельвейс"<br/><span>Алёна Шарлова</span></p>
-            </div>
-        </div>
-    </section><!-- // lets-meet -->
-    <section id="reviews" class="our-help not-visible-md">
+      <section id="reviews" class="our-help not-visible-md">
         <div class="container ">
             <h3>Посмотрите, как мы уже помогли другим клиентам</h3>
             <h4 class="text-center mb50">Несколько примеров нашей работы и реальные отзывы о ней</h4>
@@ -268,7 +225,7 @@
         </div>
 
     </section><!-- // our-help -->
-      <section class="why-our-work">
+     <section class="why-our-work">
         <div class="container">
             <h3>Почему работу лучше купить,<br>чем делать самому?</h3>
             <p class="with-bullet mb40">Дипломная работа - это самое сложное и ответственное <span>задание за весь учебный срок</span></p>
@@ -277,27 +234,28 @@
             <p class="with-bullet mb40">Написание дипломных работ – практически всегда <span>нервотрепка и стресс</span></p>
         </div>
     </section>
-     <section class="container page-info mb40">
+      <section class="container page-info mb40">
           {{ seoText | safe }}
     </section>
+</div><!-- // main -->
+    {% include 'callback_form.html' %}
 {% endblock %}
 
 {% block js %}
-    {{ block.super }}
-    <script src="{% static 'js/tiny-slider.js' %}"></script>
-    <script src="{% static 'js/slider.js' %}"></script>
-    <script>
-     window.addEventListener('scroll', function() {
-            console.log(window.innerWidth)
-            if (window.innerWidth >991 && pageYOffset > 200){
-                document.getElementsByClassName('header-dropdown')[0].style.display = 'flex'
-                document.getElementsByClassName('header-dropdown')[0].classList.add('header-slide-bottom')
-                document.getElementsByClassName('header-dropdown')[0].classList.remove('header-slide-top')
 
-            }else{
-                document.getElementsByClassName('header-dropdown')[0].classList.remove('header-slide-bottom')
-                document.getElementsByClassName('header-dropdown')[0].classList.add('header-slide-top')
-            }
-        });
-    </script>
+    {{ block.super }}
+ <script src="{% static 'js/tiny-slider.js' %}"></script>
+    <script src="{% static 'js/slider.js' %}"></script>
+  <script>
+    let mobile_button = document.getElementsByClassName('mobile-toggle')[0]
+    let mobile_menu_panel = document.getElementsByClassName('mobile-menu-panel')[0]
+    let mobile_menu = document.getElementsByClassName('mobile-menu-panel-inner')[0]
+
+      mobile_button.onclick = function () {
+        this.classList.toggle('mobile-toggle-active')
+        mobile_menu_panel.classList.toggle('mobile-menu-panel-active')
+        mobile_menu.classList.toggle('mobile-menu-panel-inner-active')
+    }
+</script>
+
 {% endblock %}

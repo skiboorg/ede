@@ -311,12 +311,19 @@
         content: none
     span
       font-family: "MuseoSansCyrl-700",sans-serif
+@media (max-width: 1000px)
+  .header-inner
+    h1
+      max-width: 50%
+
 @media (max-width: 575px)
   .header-features-grid
     grid-gap: 100px !important
   .header-inner
     h1
       font-size: 24px
+      max-width: 100%
+
 
 .header-feature-icon
   position: absolute
@@ -420,6 +427,7 @@
     max-width: 360px
   .form-row
     max-width: 360px
+    margin: 0 auto
 
 .form-row
   display: grid
@@ -529,6 +537,7 @@
   padding: 4px
   box-sizing: border-box
   transition: background-color 0.3s ease-in
+  cursor: pointer
 
   span
     background: #ffffff

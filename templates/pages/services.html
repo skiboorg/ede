@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    {{ block.super }} - Цены и услуги
+    {{ block.super }} - {{ pageTitle }}
 {% endblock %}
 
 {% block keywords %}
@@ -66,10 +66,10 @@
                 {% for service in allService %}
                 <div data-name="{{ service.name_lower }}" id="tab_{{ service.id }}" class="prices-item mb20">
                     <div class="prices-item-inner">
-                        <p class="price-item-name">{{ service.name }}</p>
+                        <p class="price-item-name"><a style="border-bottom: 1px solid #ffdc84; color: #151515" href="{% url 'service' service.name_slug %}">{{ service.name }}</a></p>
                         <p class="price-item-cost not-visible-sm">от {{ service.price }} р</p>
                         <p class="price-item-time not-visible-sm">от {{ service.time }} дня</p>
-                        <a href="#" data-tab_id="{{ service.id }}" class="price-toggle"><span ></span></a>
+                        <a href="{% url 'service' service.name_slug %}" data-tab_id="{{ service.id }}" class="price-toggle"><span ></span></a>
 
                     </div>
                     <div  class="price-item dropdown-prices ">
@@ -89,19 +89,15 @@
 
 
     </section><!--// all-prices-->
-    <section class="why-our-work">
+     <section class="why-our-work">
         <div class="container">
             <h3>Почему работу лучше купить,<br>чем делать самому?</h3>
-            <p class="mb40">Дипломная работа - это самое сложное и ответственное <span>задание за весь учебный срок</span></p>
-            <p class="mb40"><span>Риск получить низкий балл</span> из-за преподавателей и сложности оформления</p>
-            <p class="mb40">Лучше <span>положиться на профессионалов,</span> чем ошибиться самому</p>
-            <p>Написание дипломных работ – практически всегда <span>нервотрепка и стресс</span></p>
-
-
-
+            <p class="with-bullet mb40">Дипломная работа - это самое сложное и ответственное <span>задание за весь учебный срок</span></p>
+            <p class="with-bullet mb40"><span>Риск получить низкий балл</span> из-за преподавателей и сложности оформления</p>
+            <p class="with-bullet mb40">Лучше <span>положиться на профессионалов,</span> чем ошибиться самому</p>
+            <p class="with-bullet mb40">Написание дипломных работ – практически всегда <span>нервотрепка и стресс</span></p>
         </div>
-
-    </section><!--// why-our-work-->
+    </section>
 </div><!-- // main -->
     {% include 'callback_form.html' %}
 {% endblock %}
