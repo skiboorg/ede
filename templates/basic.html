@@ -61,7 +61,7 @@
             xhr.open('POST', '/callback/callback/', true);
             xhr.onload = function () {
                 if (JSON.parse(this.response)['result'] === 'ok'){
-                    div.innerText='Спасибо за обращение, с вами обязательно свяжутся'
+                    div.innerText='Спасибо за обращение, с Вами обязательно свяжутся'
                 }
                 else{
                     error_label.style.display = 'block'
