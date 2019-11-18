@@ -2087,6 +2087,8 @@ select {
 
 .prices-item-inner p {
   display: inline-block;
+  -ms-flex-preferred-size: 10%;
+  flex-basis: 10%;
 }
 
 .prices-item-inner p:first-child {
