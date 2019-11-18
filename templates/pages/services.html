@@ -68,12 +68,12 @@
                     <div class="prices-item-inner">
                         <p class="price-item-name"><a style="border-bottom: 1px solid #ffdc84; color: #151515" href="{% url 'service' service.name_slug %}">{{ service.name }}</a></p>
                         <p class="price-item-cost not-visible-sm">от {{ service.price }} р</p>
-                        <p class="price-item-time not-visible-sm">от {{ service.time }} дня</p>
+                        <p class="price-item-time not-visible-sm">от {{ service.time }} </p>
                         <a href="{% url 'service' service.name_slug %}" data-tab_id="{{ service.id }}" class="price-toggle"><span ></span></a>
 
                     </div>
                     <div  class="price-item dropdown-prices ">
-                        <p class="mb20">Сроки:<span>от {{ service.time }} дня</span></p>
+                        <p class="mb20">Сроки:<span>от {{ service.time }} </span></p>
                         <p class="mb20">Цена:<span>от {{ service.price }} р</span></p>
                         <a class="btn" onclick="toggleModal('order-modal')" >заказать</a>
 

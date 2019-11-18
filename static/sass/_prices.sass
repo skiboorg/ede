@@ -40,11 +40,16 @@
     display: inline-block
   p:first-child
     font-family: 'MuseoSansCyrl-500', sans-serif
+    flex-basis: 30%
   &:hover
     background: $bg-grey
     transition: background-color .3s ease-in
 
-
+@media (max-width: 575px)
+  .prices-item-inner
+    padding: 2px 30px
+    p:first-child
+      flex-basis: 100%
 .dropdown-prices
   height: 170px
   border: 1px solid #bebebe
