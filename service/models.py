@@ -8,7 +8,7 @@ class ServiceName(models.Model):
     name_lower = models.CharField(max_length=255, blank=True, null=True, db_index=True)
     name_slug = models.CharField(max_length=255, blank=True, null=True, unique=True, db_index=True)
     price = models.IntegerField('Цена на услугу', blank=False)
-    time = models.IntegerField('Срок в днях', blank=False)
+    time = models.CharField('Срок выполнения, например 14 дней',max_length=20, blank=False)
     tagH1 = models.CharField('Тег Н1 для страницы с услугой. Для вставки города используйте выражение %TOWN%,'
                              ' для склонения города %TOWN_ALIAS%. Например: Заказать в городе %TOWN% курсовую работу ',
                            max_length=255,
