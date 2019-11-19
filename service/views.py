@@ -21,7 +21,7 @@ def index(request):
     allComments = Comment.objects.all()
     print('request.subdomain', request.subdomain)
     subdomain = request.subdomain
-    pageTitle = f'Помощь студентам в написании работ в {subdomain.nameAlias} - написание дипломов, курсовые и контрольные работы, рефераты'
+    pageTitle = f'Помощь студентам в написании работ в {subdomain.townAlias} - написание дипломов, курсовые и контрольные работы, рефераты'
     pageDescription =''
     pageKeywords = ''
     try:
