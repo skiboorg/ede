@@ -1,5 +1,6 @@
 from django.db import models
 from pytils.translit import slugify
+from ckeditor_uploader.fields import RichTextUploadingField
 from random import choices
 import string
 
@@ -22,7 +23,7 @@ class ServiceName(models.Model):
     keywords = models.TextField('Тег KEYWORDS для страницы с услугой. Для вставки города используйте выражение %TOWN%, для склонения города %TOWN_ALIAS%',
                              max_length=255,
                              blank=False, null=True)
-
+    defaultText = RichTextUploadingField('Текст для вставки на страницу услуги, если не указан иной', blank=True, null=True, default='Заполните это поле')
     def save(self, *args, **kwargs):
         slug = slugify(self.name)
         if self.name_slug != slug:
@@ -45,3 +46,27 @@ class ServiceName(models.Model):
         verbose_name_plural = "Виды работ"
 
 
+class SeoTag(models.Model):
+    indexTitle = models.CharField('Тег Title для главной', max_length=255, blank=True, null=True)
+    indexDescription = models.CharField('Тег Description для главной', max_length=255, blank=True, null=True)
+    indexKeywords = models.TextField('Тег Keywords для главной',  blank=True, null=True)
+    servicesTitle = models.CharField('Тег Title для страницы со всеми услугами', max_length=255, blank=True, null=True)
+    servicesDescription = models.CharField('Тег Description для страницы со всеми услугам', max_length=255, blank=True, null=True)
+    servicesKeywords = models.TextField('Тег Keywords для страницы со всеми услугам', blank=True, null=True)
+    postsTitle = models.CharField('Тег Title для страницы со всеми статьями', max_length=255, blank=True, null=True)
+    postsDescription = models.CharField('Тег Description для страницы со всеми статьями', max_length=255, blank=True,
+                                           null=True)
+    postsKeywords = models.TextField('Тег Keywords для страницы со всеми статьями', blank=True, null=True)
+    contactTitle = models.CharField('Тег Title для страницы контакты', max_length=255, blank=True, null=True)
+    contactDescription = models.CharField('Тег Description для страницы контакты', max_length=255, blank=True,
+                                        null=True)
+    contactKeywords = models.TextField('Тег Keywords для страницы контакты', blank=True, null=True)
+
+    homeDefaultText = RichTextUploadingField('Текст для главной страницы, если не указан иной', blank=True, null=True, default='Заполните это поле')
+
+    def __str__(self):
+        return 'Теги для статических страниц'
+
+    class Meta:
+        verbose_name = "Теги для статических страниц"
+        verbose_name_plural = "Теги для статических страниц"

@@ -10,3 +10,16 @@ class ServiceNameAdmin(admin.ModelAdmin):
         model = ServiceName
 
 admin.site.register(ServiceName,ServiceNameAdmin)
+
+class SeoTagAdmin(admin.ModelAdmin):
+    fieldsets = (
+        (None, {
+            'fields': ('indexTitle',),
+            'description': "This is a set of fields group into a fieldset."
+        }),
+    )
+    class Meta:
+        model = SeoTag
+
+
+admin.site.register(SeoTag)

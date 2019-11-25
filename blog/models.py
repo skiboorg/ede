@@ -20,11 +20,12 @@ class BlogPost(models.Model):
 
     def save(self, *args, **kwargs):
         slug = slugify(self.name)
-        testSlug = BlogPost.objects.filter(name_slug=slug)
-        slugRandom = ''
-        if testSlug:
-            slugRandom = '-' + ''.join(choices(string.ascii_lowercase + string.digits, k=2))
-        self.name_slug = slug + slugRandom
+        if self.name_slug != slug:
+            testSlug = BlogPost.objects.filter(name_slug=slug)
+            slugRandom = ''
+            if testSlug:
+                slugRandom = '-' + ''.join(choices(string.ascii_lowercase + string.digits, k=2))
+            self.name_slug = slug + slugRandom
         self.name_lower = self.name.lower()
         super(BlogPost, self).save(*args, **kwargs)
 

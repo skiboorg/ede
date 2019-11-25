@@ -21,13 +21,22 @@ def index(request):
     allComments = Comment.objects.all()
     print('request.subdomain', request.subdomain)
     subdomain = request.subdomain
-    pageTitle = f'Помощь студентам в написании работ в {subdomain.townAlias} - написание дипломов, курсовые и контрольные работы, рефераты'
-    pageDescription =''
-    pageKeywords = ''
+
+    try:
+        seotag = SeoTag.objects.first()
+        pageTitle = seotag.indexTitle.replace('%TOWN%',subdomain.town).replace('%TOWN_ALIAS%', subdomain.townAlias)
+        pageDescription = seotag.indexDescription.replace('%TOWN%',subdomain.town).replace('%TOWN_ALIAS%', subdomain.townAlias)
+        pageKeywords = seotag.indexKeywords.replace('%TOWN%',subdomain.town).replace('%TOWN_ALIAS%', subdomain.townAlias)
+    except:
+        pageTitle = 'НЕ ЗАПОЛНЕНА ТАБЛИЦА СЕО ТЕГИ'
+        pageDescription = 'НЕ ЗАПОЛНЕНА ТАБЛИЦА СЕО ТЕГИ'
+        pageKeywords = 'НЕ ЗАПОЛНЕНА ТАБЛИЦА СЕО ТЕГИ'
+
     try:
         seoText = HomePageText.objects.get(domain=subdomain).fullText.replace('%TOWN%',subdomain.town).replace('%TOWN_ALIAS%', subdomain.townAlias)
     except:
-        seoText = ''
+        seotag = SeoTag.objects.first()
+        seoText = seotag.homeDefaultText.replace('%TOWN%',subdomain.town).replace('%TOWN_ALIAS%', subdomain.townAlias)
     return render(request, 'pages/index.html', locals())
 
 def robots(request):
@@ -45,6 +54,19 @@ def services(request):
     callbackForm = CallbackForm()
     callbackOrderForm = CallbackOrderForm()
     allService = ServiceName.objects.all()
+    subdomain = request.subdomain
+    try:
+        seotag = SeoTag.objects.first()
+        pageTitle = seotag.servicesTitle.replace('%TOWN%', subdomain.town).replace('%TOWN_ALIAS%', subdomain.townAlias)
+        pageDescription = seotag.servicesDescription.replace('%TOWN%', subdomain.town).replace('%TOWN_ALIAS%',
+                                                                                            subdomain.townAlias)
+        pageKeywords = seotag.servicesKeywords.replace('%TOWN%', subdomain.town).replace('%TOWN_ALIAS%',
+                                                                                      subdomain.townAlias)
+    except:
+        pageTitle = 'НЕ ЗАПОЛНЕНА ТАБЛИЦА СЕО ТЕГИ'
+        pageDescription = 'НЕ ЗАПОЛНЕНА ТАБЛИЦА СЕО ТЕГИ'
+        pageKeywords = 'НЕ ЗАПОЛНЕНА ТАБЛИЦА СЕО ТЕГИ'
+
     return render(request, 'pages/services.html', locals())
 
 def service(request,name_slug):
@@ -57,15 +79,38 @@ def service(request,name_slug):
     pageTitle = currenService.title.replace('%TOWN%',subdomain.town).replace('%TOWN_ALIAS%',subdomain.townAlias)
     pageDescription = currenService.description.replace('%TOWN%', subdomain.town).replace('%TOWN_ALIAS%', subdomain.townAlias)
     pageKeywords = currenService.keywords.replace('%TOWN%', subdomain.town).replace('%TOWN_ALIAS%', subdomain.townAlias)
+    text = None
+
     try:
-        seoText = ServicePageText.objects.get(domain=subdomain,service=currenService).fullText.replace('%TOWN%', subdomain.town).replace('%TOWN_ALIAS%', subdomain.townAlias)
+        text = ServicePageText.objects.get(domain=subdomain,service=currenService)
     except:
-        seoText = ''
+        pass
+
+    if text:
+         seoText = text.fullText.replace('%TOWN%', subdomain.town).replace('%TOWN_ALIAS%', subdomain.townAlias)
+    else:
+         seoText = currenService.defaultText.replace('%TOWN%', subdomain.town).replace('%TOWN_ALIAS%',
+                                                                                       subdomain.townAlias)
+
     return render(request, 'pages/service.html', locals())
 
 def contacts(request):
     n1 = random.randint(0, 9)
     n2 = random.randint(0, 9)
+
+    subdomain = request.subdomain
+    try:
+        seotag = SeoTag.objects.first()
+        pageTitle = seotag.contactTitle.replace('%TOWN%', subdomain.town).replace('%TOWN_ALIAS%', subdomain.townAlias)
+        pageDescription = seotag.contactDescription.replace('%TOWN%', subdomain.town).replace('%TOWN_ALIAS%',
+                                                                                               subdomain.townAlias)
+        pageKeywords = seotag.contactKeywords.replace('%TOWN%', subdomain.town).replace('%TOWN_ALIAS%',
+                                                                                         subdomain.townAlias)
+    except:
+        pageTitle = 'НЕ ЗАПОЛНЕНА ТАБЛИЦА СЕО ТЕГИ'
+        pageDescription = 'НЕ ЗАПОЛНЕНА ТАБЛИЦА СЕО ТЕГИ'
+        pageKeywords = 'НЕ ЗАПОЛНЕНА ТАБЛИЦА СЕО ТЕГИ'
+
     callbackForm = CallbackForm()
     callbackOrderForm = CallbackOrderForm()
     return render(request, 'pages/contacts.html', locals())
@@ -73,10 +118,25 @@ def contacts(request):
 
 def allPosts(request):
     allPost = BlogPost.objects.filter(is_active=True)
+    subdomain = request.subdomain
+    try:
+        seotag = SeoTag.objects.first()
+        pageTitle = seotag.postsTitle.replace('%TOWN%', subdomain.town).replace('%TOWN_ALIAS%', subdomain.townAlias)
+        pageDescription = seotag.postsDescription.replace('%TOWN%', subdomain.town).replace('%TOWN_ALIAS%',
+                                                                                              subdomain.townAlias)
+        pageKeywords = seotag.postsKeywords.replace('%TOWN%', subdomain.town).replace('%TOWN_ALIAS%',
+                                                                                        subdomain.townAlias)
+    except:
+        pageTitle = 'НЕ ЗАПОЛНЕНА ТАБЛИЦА СЕО ТЕГИ'
+        pageDescription = 'НЕ ЗАПОЛНЕНА ТАБЛИЦА СЕО ТЕГИ'
+        pageKeywords = 'НЕ ЗАПОЛНЕНА ТАБЛИЦА СЕО ТЕГИ'
     return render(request, 'pages/posts.html', locals())
 
 def showPost(request,slug):
     post = get_object_or_404(BlogPost, name_slug=slug)
+    pageTitle = post.page_title
+    pageDescription = post.page_description
+    pageKeywords = post.page_keywords
     return render(request, 'pages/post.html', locals())
 
 def lk(request):
