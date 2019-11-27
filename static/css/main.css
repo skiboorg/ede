@@ -463,6 +463,17 @@ button:hover {
   padding-top: 30px;
 }
 
+.page-info h2 {
+  font-family: 'MuseoSansCyrl-700', sans-serif;
+  font-size: 20px;
+  color: #151515;
+  margin-bottom: 15px;
+}
+
+.page-info p {
+  margin-bottom: 10px;
+}
+
 [type="date"] {
   background: #f9f4f8 url(../images/icons/calendar.svg) 86% 50% no-repeat !important;
   color: transparent !important;
