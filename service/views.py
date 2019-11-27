@@ -115,6 +115,8 @@ def contacts(request):
     callbackOrderForm = CallbackOrderForm()
     return render(request, 'pages/contacts.html', locals())
 
+def policy(request):
+    return render(request, 'pages/policy.html', locals())
 
 def allPosts(request):
     allPost = BlogPost.objects.filter(is_active=True)
