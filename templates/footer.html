@@ -50,10 +50,10 @@
 </footer>
 <!-- Yandex.Metrika counter -->
 {% if seotag.yandexMetrika %}
-{{ seotag.yandexMetrika }}
+{{ seotag.yandexMetrika | safe }}
 {% endif %}
 {% if seotag.fbPixel %}
-{{ seotag.fbPixel }}
+{{ seotag.fbPixel | safe }}
 {% endif %}
 
 
