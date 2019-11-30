@@ -14,6 +14,8 @@ class Domain(models.Model):
     contactPhone = models.CharField('Номер телефона', max_length=100,
                                      blank=False,
                                      null=True)
+    yandexTAG = models.CharField('Код подтверждения Яндекс', max_length=255, blank=True, null=True)
+    googleTAG = models.CharField('Код подтверждения google', max_length=255, blank=True, null=True)
 
 
     def __str__(self):

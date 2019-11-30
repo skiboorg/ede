@@ -64,6 +64,11 @@ class SeoTag(models.Model):
 
     homeDefaultText = RichTextUploadingField('Текст для главной страницы, если не указан иной', blank=True, null=True, default='Заполните это поле')
 
+    yandexMetrika = models.TextField('Код Яндекс метрики', blank=True, null=True)
+    fbPixel = models.TextField('Код пикселя', blank=True, null=True)
+
+
+
     def __str__(self):
         return 'Теги для статических страниц'
 

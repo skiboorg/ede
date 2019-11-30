@@ -21,6 +21,7 @@ def index(request):
     allComments = Comment.objects.all()
     print('request.subdomain', request.subdomain)
     subdomain = request.subdomain
+    homeactive = 'active'
 
     try:
         seotag = SeoTag.objects.first()
@@ -37,6 +38,7 @@ def index(request):
     except:
         seotag = SeoTag.objects.first()
         seoText = seotag.homeDefaultText.replace('%TOWN%',subdomain.town).replace('%TOWN_ALIAS%', subdomain.townAlias)
+
     return render(request, 'pages/index.html', locals())
 
 def robots(request):
@@ -55,6 +57,7 @@ def services(request):
     callbackOrderForm = CallbackOrderForm()
     allService = ServiceName.objects.all()
     subdomain = request.subdomain
+    priceactive = 'active'
     try:
         seotag = SeoTag.objects.first()
         pageTitle = seotag.servicesTitle.replace('%TOWN%', subdomain.town).replace('%TOWN_ALIAS%', subdomain.townAlias)
@@ -70,11 +73,13 @@ def services(request):
     return render(request, 'pages/services.html', locals())
 
 def service(request,name_slug):
+    priceactive = 'active'
     currenService = get_object_or_404(ServiceName, name_slug=name_slug)
     allService = ServiceName.objects.all()
     callbackForm = CallbackForm()
     callbackOrderForm = CallbackOrderForm()
     subdomain = request.subdomain
+    allComments = Comment.objects.all()
     pageH1 = currenService.tagH1.replace('%TOWN%',subdomain.town).replace('%TOWN_ALIAS%',subdomain.townAlias)
     pageTitle = currenService.title.replace('%TOWN%',subdomain.town).replace('%TOWN_ALIAS%',subdomain.townAlias)
     pageDescription = currenService.description.replace('%TOWN%', subdomain.town).replace('%TOWN_ALIAS%', subdomain.townAlias)
@@ -97,6 +102,7 @@ def service(request,name_slug):
 def contacts(request):
     n1 = random.randint(0, 9)
     n2 = random.randint(0, 9)
+    contactactive = 'active'
 
     subdomain = request.subdomain
     try:
@@ -119,6 +125,7 @@ def policy(request):
     return render(request, 'pages/policy.html', locals())
 
 def allPosts(request):
+    postsactive = 'active'
     allPost = BlogPost.objects.filter(is_active=True)
     subdomain = request.subdomain
     try:
@@ -135,6 +142,7 @@ def allPosts(request):
     return render(request, 'pages/posts.html', locals())
 
 def showPost(request,slug):
+    postsactive = 'active'
     post = get_object_or_404(BlogPost, name_slug=slug)
     pageTitle = post.page_title
     pageDescription = post.page_description

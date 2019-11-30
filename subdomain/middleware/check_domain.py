@@ -29,6 +29,7 @@ class MyMiddleware(MiddlewareMixin):
         if not subdomain:
             subDomain = Domain.objects.first()
             homeDomain = True
+
         else:
             try:
                 subDomain = Domain.objects.get(name=subdomain)
@@ -38,6 +39,9 @@ class MyMiddleware(MiddlewareMixin):
 
         request.subdomain = subDomain
         request.homedomain = homeDomain
+        request.yandexTAG = subDomain.yandexTAG
+        request.googleTAG = subDomain.googleTAG
+
 
 
         print(subdomain)
