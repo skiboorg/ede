@@ -1,8 +1,8 @@
 from django.db import models
 from django.db.models.signals import post_save, post_delete
-
 from customuser.models import User
-
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
 
 class Order(models.Model):
     user = models.ForeignKey(User, blank=False, on_delete=models.CASCADE, verbose_name='Пользователь')
@@ -98,6 +98,9 @@ def Order_post_save(sender,instance,**kwargs):
     print(instance.order.complete)
     print(instance.order.status)
     print(instance.order.is_complete)
+    msg_html = render_to_string('email/register.html', {'user': instance.order.user.name, 'order': instance.order.id})
+    send_mail('Регистрация на сайте ede74.ru', None, 'no-reply@ede74.ru', [instance.order.user.email],
+              fail_silently=False, html_message=msg_html)
 
 def Order_post_delete(sender, instance, **kwargs):
     print('Order_post_del')

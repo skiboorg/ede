@@ -73,6 +73,8 @@ def services(request):
     return render(request, 'pages/services.html', locals())
 
 def service(request,name_slug):
+    n1 = random.randint(0, 9)
+    n2 = random.randint(0, 9)
     priceactive = 'active'
     currenService = get_object_or_404(ServiceName, name_slug=name_slug)
     allService = ServiceName.objects.all()
@@ -126,9 +128,13 @@ def contacts(request):
     return render(request, 'pages/contacts.html', locals())
 
 def policy(request):
+    n1 = random.randint(0, 9)
+    n2 = random.randint(0, 9)
     return render(request, 'pages/policy.html', locals())
 
 def allPosts(request):
+    n1 = random.randint(0, 9)
+    n2 = random.randint(0, 9)
     postsactive = 'active'
     allPost = BlogPost.objects.filter(is_active=True)
     subdomain = request.subdomain
@@ -146,6 +152,8 @@ def allPosts(request):
     return render(request, 'pages/posts.html', locals())
 
 def showPost(request,slug):
+    n1 = random.randint(0, 9)
+    n2 = random.randint(0, 9)
     postsactive = 'active'
     post = get_object_or_404(BlogPost, name_slug=slug)
     pageTitle = post.page_title

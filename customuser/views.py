@@ -96,10 +96,9 @@ def signup(request):
                 user.is_active = True
                 user.save()
                 print('User registred')
-                # msg_html = render_to_string('email/register.html', {'login': email, 'password': password1})
-                # send_mail('Регистрация на сайте LAKSHMI888', None, 'info@lakshmi888.ru', [email],
-                #           fail_silently=False, html_message=msg_html)
-                # print('Email sent to {} with pass {}'.format(email,password1))
+                msg_html = render_to_string('email/register.html', {'login': email, 'password': password1})
+                send_mail('Регистрация на сайте ede74.ru', None, 'no-reply@ede74.ru', [email],
+                          fail_silently=False, html_message=msg_html)
                 login(request, user)
 
 
