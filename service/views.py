@@ -79,12 +79,16 @@ def service(request,name_slug):
     callbackForm = CallbackForm()
     callbackOrderForm = CallbackOrderForm()
     subdomain = request.subdomain
-    allComments = Comment.objects.all()
+    allComments = Comment.objects.filter(service=currenService)
     pageH1 = currenService.tagH1.replace('%TOWN%',subdomain.town).replace('%TOWN_ALIAS%',subdomain.townAlias)
     pageTitle = currenService.title.replace('%TOWN%',subdomain.town).replace('%TOWN_ALIAS%',subdomain.townAlias)
     pageDescription = currenService.description.replace('%TOWN%', subdomain.town).replace('%TOWN_ALIAS%', subdomain.townAlias)
     pageKeywords = currenService.keywords.replace('%TOWN%', subdomain.town).replace('%TOWN_ALIAS%', subdomain.townAlias)
     text = None
+    try:
+        seotag = SeoTag.objects.first()
+    except:
+        pass
 
     try:
         text = ServicePageText.objects.get(domain=subdomain,service=currenService)

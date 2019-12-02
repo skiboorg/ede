@@ -15,6 +15,8 @@
 
 {% block css %}
     {{ block.super }}
+     <link rel="stylesheet" href="{% static 'css/tiny-slider.css' %}">
+    <link rel="stylesheet" href="{% static 'css/prism.css' %} ">
 {% endblock %}
 
 
@@ -207,7 +209,7 @@
                      data-fullreview="{{ comment.fullReview }}"
                      onclick="changeReview(this)">
                     <div class="our-help-media-slide-image">
-                        <img src="{{ comment.image_small.url }}" alt="">
+                        <img width="245" src="{{ comment.image_small.url }}" alt="">
                     </div>
                     <h5>{{ comment.writtenBy }}</h5>
                     <p>{{ comment.description }}</p>
@@ -244,18 +246,8 @@
 {% block js %}
 
     {{ block.super }}
- <script src="{% static 'js/tiny-slider.js' %}"></script>
+    <script src="{% static 'js/tiny-slider.js' %}"></script>
     <script src="{% static 'js/slider.js' %}"></script>
-  <script>
-    let mobile_button = document.getElementsByClassName('mobile-toggle')[0]
-    let mobile_menu_panel = document.getElementsByClassName('mobile-menu-panel')[0]
-    let mobile_menu = document.getElementsByClassName('mobile-menu-panel-inner')[0]
 
-      mobile_button.onclick = function () {
-        this.classList.toggle('mobile-toggle-active')
-        mobile_menu_panel.classList.toggle('mobile-menu-panel-active')
-        mobile_menu.classList.toggle('mobile-menu-panel-inner-active')
-    }
-</script>
 
 {% endblock %}
