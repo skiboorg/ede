@@ -44,9 +44,9 @@ def index(request):
 def robots(request):
     subdomain = request.subdomain
     if subdomain and not request.homedomain:
-        robotsTxt = f"User-agent: *\nDisallow: /admin/\nHost: {settings.PROTOCOL}{subdomain.name}.{settings.MAIN_DOMAIN}.ru/\nSitemap:{settings.PROTOCOL}{subdomain.name}.{settings.MAIN_DOMAIN}.ru/sitemap.xml"
+        robotsTxt = f"User-agent: *\nDisallow: /admin/\nUser-Agent: Googlebot\nDisallow: /\nHost: {settings.PROTOCOL}{subdomain.name}.{settings.MAIN_DOMAIN}.ru/\nSitemap:{settings.PROTOCOL}{subdomain.name}.{settings.MAIN_DOMAIN}.ru/sitemap.xml"
     else:
-        robotsTxt = f"User-agent: *\nDisallow: /admin/\nUser-Agent: Googlebot\nDisallow: /\nHost: {settings.PROTOCOL}{settings.MAIN_DOMAIN}.ru/\nSitemap: {settings.PROTOCOL}{settings.MAIN_DOMAIN}.ru/sitemap.xml"
+        robotsTxt = f"User-agent: *\nDisallow: /admin/\nHost: {settings.PROTOCOL}{settings.MAIN_DOMAIN}.ru/\nSitemap: {settings.PROTOCOL}{settings.MAIN_DOMAIN}.ru/sitemap.xml"
 
     return HttpResponse(robotsTxt, content_type="text/plain")
 
