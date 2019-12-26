@@ -26,7 +26,7 @@ class ServiceName(models.Model):
     defaultText = RichTextUploadingField('Текст для вставки на страницу услуги, если не указан иной', blank=True, null=True, default='Заполните это поле')
     def save(self, *args, **kwargs):
         slug = slugify(self.name)
-        if self.name_slug != slug:
+        if not self.name_slug:
             testSlug = ServiceName.objects.filter(name_slug=slug)
             slugRandom = ''
             if testSlug:

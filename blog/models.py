@@ -20,7 +20,7 @@ class BlogPost(models.Model):
 
     def save(self, *args, **kwargs):
         slug = slugify(self.name)
-        if self.name_slug != slug:
+        if not self.name_slug:
             testSlug = BlogPost.objects.filter(name_slug=slug)
             slugRandom = ''
             if testSlug:
