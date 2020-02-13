@@ -41,7 +41,3 @@ class MyMiddleware(MiddlewareMixin):
         request.homedomain = homeDomain
         request.yandexTAG = subDomain.yandexTAG
         request.googleTAG = subDomain.googleTAG
-
-
-
-        print(subdomain)

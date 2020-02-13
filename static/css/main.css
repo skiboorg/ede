@@ -1898,7 +1898,19 @@ select {
   color: #737995;
   margin-bottom: 50px;
 }
+.blog-post-text h2 {
+  font-family: 'MuseoSansCyrl-700',sans-serif;
+  font-size: 21px;
+  color: #737995;
+  margin: 20px 0;
+}
 
+.blog-post-text h3 {
+  font-family: 'MuseoSansCyrl-700',sans-serif;
+  font-size: 18px;
+  color: #737995;
+  margin: 20px 0;
+}
 .blog-post-text p {
   line-height: 30px;
 }

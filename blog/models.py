@@ -5,13 +5,13 @@ from random import choices
 import string
 
 class BlogPost(models.Model):
-    name = models.CharField('Название (40 символов)', max_length=40, blank=False, null=True)
+    name = models.CharField('Название ', max_length=255, blank=False, null=True)
     name_slug = models.CharField(max_length=255, blank=True, null=True)
-    image = models.ImageField('Изображение превью (555 x 390)', upload_to='blog_img/', blank=True)
+    image = models.ImageField('Изображение превью (555 x 390)', upload_to='blog_img/', blank=False)
     page_title = models.CharField('Название страницы SEO', max_length=255, blank=True, null=True)
     page_description = models.CharField('Описание страницы SEO', max_length=255, blank=True, null=True)
     page_keywords = models.TextField('Keywords SEO', blank=True, null=True)
-    short_description = models.CharField('Краткое описание (100 символов)', max_length=100, blank=False)
+    short_description = models.CharField('Краткое описание ', max_length=255, blank=False)
     description = RichTextUploadingField('Статья', blank=True, null=True)
     views = models.IntegerField('Просмотров', default=0)
     is_active = models.BooleanField('Отображать статью ?', default=True, db_index=True)
@@ -30,7 +30,7 @@ class BlogPost(models.Model):
         super(BlogPost, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return f'/post/{self.name_slug}/'
+        return f'/posts/{self.name_slug}/'
 
     def __str__(self):
         return 'Статья : %s ' % self.name
