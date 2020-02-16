@@ -29,6 +29,7 @@
             <ul>
                 <li><a href="/">Главная</a></li>
                 <li><a href="{% url 'services' %}">Все услуги</a></li>
+                <li><a href="{% url 'service' currenService.service.name_slug %}">{{ currenService.service.name }}</a></li>
                 <li class="active">{{ currenService.name }}</li>
             </ul>
         </div>
@@ -309,25 +310,7 @@
       <section class="container page-info mb40">
           {{ seoText | safe }}
     </section>
-    {% if allSubService %}
 
-        <section>
-            <div class="container">
-                <div class="prices-wrapper">
-                    {% for subservice in allSubService %}
-                        <div class="price-item bg-grey">
-                        <h5>{{ subservice.name }}</h5>
-                        <p class="mb20">Стоимость:<span>от {{ subservice.price }} руб</span></p>
-                        <p class="mb20">Сроки:<span>от {{ subservice.time }} дней</span></p>
-{#                        <p class="mb20">Работ выполнено:<span>27 700</span></p>#}
-                        <a class="btn" href="{% url 'subservice' currenService.name_slug subservice.name_slug%}">подробнее</a>
-                    </div>
-                    {% endfor %}
-                </div><!--//prices-wrapper -->
-            </div>
-        </section>
-
-    {% endif %}
 </div><!-- // main -->
     {% include 'callback_form.html' %}
 {% endblock %}

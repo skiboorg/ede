@@ -1,10 +1,15 @@
 from django.contrib import admin
 from .models import *
 
+class SubServiceInline (admin.TabularInline):
+    model = SubServiceName
+    extra = 0
+
 class ServiceNameAdmin(admin.ModelAdmin):
     list_display = ['name', 'price', 'time']
     search_fields = ('name_lower',)
     exclude = ['name_slug', 'name_lower']
+    inlines = (SubServiceInline,)
 
     class Meta:
         model = ServiceName
@@ -20,6 +25,7 @@ class SeoTagAdmin(admin.ModelAdmin):
     )
     class Meta:
         model = SeoTag
-
-
+admin.site.register(SubServiceName)
+admin.site.register(ServiceFeature)
+admin.site.register(ServiceFaq)
 admin.site.register(SeoTag)

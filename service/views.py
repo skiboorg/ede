@@ -77,6 +77,12 @@ def service(request,name_slug):
     n2 = random.randint(0, 9)
     priceactive = 'active'
     currenService = get_object_or_404(ServiceName, name_slug=name_slug)
+    allSubService = SubServiceName.objects.filter(service=currenService)
+    faqTitle = currenService.faqTitle
+    featuresTitle = currenService.featuresTitle
+    compareTitle = currenService.compareTitle
+    allFaq = ServiceFaq.objects.filter(service=currenService)
+    allFeature = ServiceFeature.objects.filter(service=currenService)
     allService = ServiceName.objects.all()
     callbackForm = CallbackForm()
     callbackOrderForm = CallbackOrderForm()
@@ -104,6 +110,45 @@ def service(request,name_slug):
                                                                                        subdomain.townAlias)
 
     return render(request, 'pages/service.html', locals())
+
+def subservice(request,name_slug,subservice):
+    n1 = random.randint(0, 9)
+    n2 = random.randint(0, 9)
+    priceactive = 'active'
+    currenService = get_object_or_404(SubServiceName, name_slug=subservice)
+    faqTitle = currenService.faqTitle
+    featuresTitle = currenService.featuresTitle
+    compareTitle = currenService.compareTitle
+    allFaq = ServiceFaq.objects.filter(subService=currenService)
+    allFeature = ServiceFeature.objects.filter(subService=currenService)
+    allService = ServiceName.objects.all()
+    callbackForm = CallbackForm()
+    callbackOrderForm = CallbackOrderForm()
+    subdomain = request.subdomain
+    allComments = Comment.objects.filter(service=currenService.service)
+    pageH1 = currenService.tagH1.replace('%TOWN%', subdomain.town).replace('%TOWN_ALIAS%', subdomain.townAlias)
+    pageTitle = currenService.title.replace('%TOWN%', subdomain.town).replace('%TOWN_ALIAS%', subdomain.townAlias)
+    pageDescription = currenService.description.replace('%TOWN%', subdomain.town).replace('%TOWN_ALIAS%',
+                                                                                          subdomain.townAlias)
+    pageKeywords = currenService.keywords.replace('%TOWN%', subdomain.town).replace('%TOWN_ALIAS%', subdomain.townAlias)
+    text = None
+    try:
+        seotag = SeoTag.objects.first()
+    except:
+        pass
+
+    try:
+        text = ServicePageText.objects.get(domain=subdomain, service=currenService.service)
+    except:
+        pass
+
+    if text:
+        seoText = text.fullText.replace('%TOWN%', subdomain.town).replace('%TOWN_ALIAS%', subdomain.townAlias)
+    else:
+        seoText = currenService.defaultText.replace('%TOWN%', subdomain.town).replace('%TOWN_ALIAS%',
+                                                                                      subdomain.townAlias)
+
+    return render(request, 'pages/subservice.html', locals())
 
 def contacts(request):
     n1 = random.randint(0, 9)
